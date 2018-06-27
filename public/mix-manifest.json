@@ -1,0 +1,20 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/js/translate-team.js": "/js/translate-team.js",
+    "/js/translate-team-create.js": "/js/translate-team-create.js",
+    "/js/role-edit.js": "/js/role-edit.js",
+    "/js/role-create.js": "/js/role-create.js",
+    "/js/profile.js": "/js/profile.js",
+    "/js/permission.js": "/js/permission.js",
+    "/js/permission-edit.js": "/js/permission-edit.js",
+    "/js/permission-create.js": "/js/permission-create.js",
+    "/js/manga-edit.js": "/js/manga-edit.js",
+    "/js/manga-create.js": "/js/manga-create.js",
+    "/js/manga-chap-create.js": "/js/manga-chap-create.js",
+    "/js/genre.js": "/js/genre.js",
+    "/js/genre-edit.js": "/js/genre-edit.js",
+    "/js/genre-create.js": "/js/genre-create.js",
+    "/js/chap-edit.js": "/js/chap-edit.js",
+    "/js/chap-create.js": "/js/chap-create.js",
+    "/js/author-create.js": "/js/author-create.js"
+}
