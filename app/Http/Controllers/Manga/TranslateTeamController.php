@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manga;
 
 use App\Models\TranslateTeam;
+use foo\bar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -83,7 +84,9 @@ class TranslateTeamController extends Controller
      */
     public function show($id)
     {
-        //
+        if(!Auth::user()->hasPermission('read-teams')) return redirect()-back()->withErrors(['mess'=>'Bạn không có quyền xem nhóm dịch']);
+        $team = TranslateTeam::find($id);
+        return view('admin.teams.show')->withTeam($team);
     }
 
     /**
