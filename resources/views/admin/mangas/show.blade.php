@@ -50,10 +50,10 @@
                                     <td>
                                         @for($i = 0; $i< count($manga->authors);$i++)
                                             @if($i == count($manga->authors)-1)
-                                            <b><span class="text-@random">{{ $manga->authors[$i]->name }}</span></b>
-                                                @break
+                                                <b><span class="text-@random">{{ $manga->authors[$i]->name }}</span></b>
+                                            @else
+                                                <b><span class="text-@random">{{ $manga->authors[$i]->name }}</span></b> |
                                             @endif
-                                            <b><span class="text-@random">{{ $manga->authors[$i]->name }}</span></b> |
                                         @endfor
                                     </td>
                                 </tr>
@@ -62,10 +62,10 @@
                                     <td>
                                         @for($i = 0; $i< count($manga->genres);$i++)
                                             @if($i == count($manga->genres)-1)
-                                            <b><span class="text-@random">{{ $manga->genres[$i]->name }}</span></b>
-                                                @break
+                                                <b><span class="text-@random">{{ $manga->genres[$i]->name }}</span></b>
+                                            @else
+                                                <b><span class="text-@random">{{ $manga->genres[$i]->name }}</span></b> |
                                             @endif
-                                            <b><span class="text-@random">{{ $manga->genres[$i]->name }}</span></b> |
                                         @endfor
                                     </td>
                                 </tr>
@@ -73,11 +73,11 @@
                                     <th>Nhóm dịch</th>
                                     <td>
                                         @for($i = 0; $i< count($manga->teams);$i++)
-                                            @if($i == count($manga->genres)-1)
+                                            @if($i == count($manga->teams)-1)
                                                 <b><span class="text-@random">{{ $manga->teams[$i]->name }}</span></b>
-                                                @break
+                                            @else
+                                                <b><span class="text-@random">{{ $manga->teams[$i]->name }}</span></b> |
                                             @endif
-                                            <b><span class="text-@random">{{ $manga->teams[$i]->name }}</span></b> |
                                         @endfor
                                     </td>
                                 </tr>

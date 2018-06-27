@@ -55,6 +55,7 @@ Route::prefix('/manga')->group(function (){
         Route::get('/axios/chap-images/{id}','Manga\AxiosController@chapImages');
         Route::get('/axios/authors-notin/{id}','Manga\AxiosController@authorsNotIn');
         Route::get('/axios/genres-notin/{id}','Manga\AxiosController@genresNotIn');
+        Route::get('/axios/teams-notin/{id}','Manga\AxiosController@teamsNotIn');
         Route::post('/axios/search-genres','Manga\AxiosController@searchGenre');
         Route::post('/axios/search-permission','Manga\AxiosController@searchPermission');
         Route::post('/axios/chap-image-edit','Manga\AxiosController@chapImageEdit');

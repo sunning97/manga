@@ -192,7 +192,7 @@ class MangaController extends Controller
     public function update(Request $request, $id)
     {
         $manga = Manga::find($id);
-        $all = $request->only(['name','other_name','slug_name','description','origin','authors','genres']);
+        $all = $request->only(['name','other_name','slug_name','description','origin','authors','genres','teams']);
         $notice = Validator::make($all,[
             'name' =>'required|min:5',
             'other_name' =>'required|min:10',
@@ -211,10 +211,12 @@ class MangaController extends Controller
         if($notice->fails()) return redirect()->back()->withErrors($notice);
 
         $all = collect($all);
-        if($all->get('authors') && $all->get('genres')){
+        if($all->get('authors') && $all->get('genres') && $all->get('teams')){
             $authors = $all->get('authors');
             $genres = $all->get('genres');
-            $all = $all->except(['authors','genres']);
+            $teams = $all->get('teams');
+
+            $all = $all->except(['authors','genres','teams']);
             $all = $all->toArray();
 
             if($request->file('cover')){
@@ -227,7 +229,7 @@ class MangaController extends Controller
 
             DB::table('manga_author')->where('manga_id',$id)->delete();
             DB::table('manga_genre')->where('manga_id',$id)->delete();
-
+            Db::table('manga_translate_team')->where('manga_id',$id)->delete();
 
             foreach ($authors as $author){
                 DB::table('manga_author')->insert([
@@ -238,6 +240,12 @@ class MangaController extends Controller
             foreach ($genres as $genre){
                 DB::table('manga_genre')->insert([
                     ['manga_id' => $manga->id,'genre_id' => $genre]
+                ]);
+            }
+
+            foreach ($teams as $team){
+                DB::table('manga_translate_team')->insert([
+                    ['manga_id' => $manga->id,'team_id' => $team]
                 ]);
             }
 
@@ -256,7 +264,7 @@ class MangaController extends Controller
 
             return redirect()->route('mangas.show',$manga->id)->withSuccess(['mess'=>'Cập nhật Mnaga '.$manga->name.' thành công!']);
         } else {
-            return redirect()->back()->withErrors(['mess'=>'Thể loại / tác giả không được để trống!']);
+            return redirect()->back()->withErrors(['mess'=>'Thể loại / tác giả / nhóm dịch không được để trống!']);
         }
     }
 

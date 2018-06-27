@@ -83,7 +83,8 @@ var app = new Vue({
         name: $('.page-title').data('name'),
         isCoverChecked: false,
         authors: [],
-        genres: []
+        genres: [],
+        teams: []
     },
     watch: {
         name: function name(str) {
@@ -107,15 +108,27 @@ var app = new Vue({
             axios.get('/manga/axios/genres-notin/' + id).then(function (rs) {
                 _this2.genres = rs.data;
             }).catch(function (e) {});
+        },
+        getTeams: function getTeams() {
+            var _this3 = this;
+
+            axios.get('/manga/axios/teams-notin/' + id).then(function (rs) {
+                _this3.teams = rs.data;
+            }).catch(function (e) {});
         }
     },
     mounted: function mounted() {
         this.getAuthors();
         this.getGenres();
+        this.getTeams();
     }
 });
 $('#input-file-now').dropify();
 $(".select2").select2();
+$('.summernote').summernote({
+    height: 250,
+    focus: false
+});
 
 /***/ })
 

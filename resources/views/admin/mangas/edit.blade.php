@@ -9,6 +9,7 @@
     <link href="{{ asset('assets/admin/plugin/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/admin/plugin/multiselect/css/multi-select.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/admin/plugin/dropify/dist/css/dropify.min.css') }}">
+    <link href="{{ asset('assets/admin/plugin/summernote/dist/summernote.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -62,19 +63,28 @@
                             <div class="form-group">
                                 <label class="col-md-12">Mô tả</label>
                                 <div class="col-md-12">
-                                    <textarea class="form-control" rows="5" name="description">{{ $manga->description }}</textarea>
+                                    <textarea class="form-control summernote" rows="5" name="description">{{ $manga->description }}</textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label class="col-md-12">Nguồn truyện</label>
                                 <div class="col-md-12">
                                     <input type="text" class="form-control" name="origin" value="{{ $manga->origin }}">
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-6">
+                            <label class="col-md-12">Nhóm dịch</label>
+                            <select class="select2 m-b-10 select2-multiple" multiple="multiple" data-placeholder="Chọn tác giả" name="teams[]">
+                                @foreach($manga->teams as $team)
+                                    <option value="{{ $team->id }}" selected>{{ $team->name }}</option>
+                                @endforeach
+                                <option v-for="team in teams" :value="team.id">@{{ team.name }}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row">
@@ -130,6 +140,7 @@
     <script src="{{ asset('assets/admin/plugin/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/admin/plugin/multiselect/js/jquery.multi-select.js') }}"></script>
     <script src="{{ asset('assets/admin/plugin/dropify/dist/js/dropify.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugin/summernote/dist/summernote.min.js') }}"></script>
 @endsection
 
 @section('custom_js')

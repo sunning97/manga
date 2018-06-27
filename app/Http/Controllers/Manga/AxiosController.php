@@ -169,4 +169,18 @@ class AxiosController extends Controller
         return response()->json($teams,200);
     }
 
+    public function teamsNotIn($id)
+    {
+        $manga = Manga::find($id);
+        $sql = '';
+        foreach ($manga->teams as $team){
+            $sql .='id != '.$team->id.' AND ';
+        }
+        $sql= trim($sql,' AND ');
+
+        $teams = DB::table('translate_teams')->whereRaw($sql)->get();
+
+        return response()->json($teams,'200');
+    }
+
 }
