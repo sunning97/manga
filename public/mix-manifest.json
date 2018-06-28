@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/translate-team.js": "/js/translate-team.js",
+    "/js/translate-team-edit.js": "/js/translate-team-edit.js",
     "/js/translate-team-create.js": "/js/translate-team-create.js",
     "/js/role-edit.js": "/js/role-edit.js",
     "/js/role-create.js": "/js/role-create.js",

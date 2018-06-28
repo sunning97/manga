@@ -55,7 +55,7 @@
                             </tr>
                         </div>
                         <tr v-if="searchResult.length == 0 && name.length > 0">
-                            <td colspan="4" class="text-center"><b>Không có dữ liệu</b></td>
+                            <td colspan="4" class="text-center"><b>Không tìm thấy dữ liệu phù hợp</b></td>
                         </tr>
                         @forelse($permissions as $permission)
                             <tr v-if="searchResult.length == 0 && name.length == 0">

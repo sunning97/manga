@@ -55,7 +55,7 @@
                             </tr>
                         </div>
                         <tr class="text-center">
-                            <td colspan="4" v-if="name.length > 0 && searchResult.length == 0"><b>Không có dữ liệu</b></td>
+                            <td colspan="4" v-if="name.length > 0 && searchResult.length == 0"><b>Không tìm thấy dữ liệu phù hợp</b></td>
                         </tr>
                         @forelse($teams as $team)
                             <tr v-if="name.length == 0 && searchResult.length == 0">
@@ -65,7 +65,7 @@
                                 <td class="text-center">
                                     <div class="btn-group m-b-20">
                                         <a href="{{ route('translate-teams.show',$team->id) }}" class="btn btn-success btn-sm text-sm-center">Xem <i class="ti-eye"></i></a>
-                                        <a href="" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>
+                                        <a href="{{ route('translate-teams.edit',$team->id) }}" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>
                                         <button type="button" class="btn btn-danger btn-sm" @click="showDelete" data-href="">Xóa <i class="ti-trash" data-href=""></i></button>
                                     </div>
                                 </td>

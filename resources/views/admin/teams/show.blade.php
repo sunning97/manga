@@ -12,7 +12,7 @@
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
                 <li><a href="{{ route('manga.dashboard') }}">Bảng điều khiển</a></li>
-                <li><a href="{{ route('permissions.index') }}">Nhóm dịch</a></li>
+                <li><a href="{{ route('translate-teams.index') }}">Nhóm dịch</a></li>
                 <li class="active">{{ $team->name }}</li>
             </ol>
         </div>
@@ -29,6 +29,10 @@
                                     <tr>
                                         <th>Mô tả</th>
                                         <td>{{ $team->description }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Trạng thái</th>
+                                        <td>@if($team->state=='ACTIVATE')<b class="text-success">Hoạt động</b>@else<b class="text-danger">Không hoạt động</b>@endif</td>
                                     </tr>
                                     <tr>
                                         <th>Ngày tạo</th>

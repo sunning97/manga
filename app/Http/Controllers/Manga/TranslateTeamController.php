@@ -7,6 +7,7 @@ use foo\bar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class TranslateTeamController extends Controller
@@ -97,7 +98,9 @@ class TranslateTeamController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(!Auth::user()->hasPermission('update-teams')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền cập nhật nhóm dịch']);
+        $team = TranslateTeam::find($id);
+        return view('admin.teams.edit')->withTeam($team);
     }
 
     /**
@@ -109,7 +112,37 @@ class TranslateTeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $team = TranslateTeam::find($id);
+
+        $all = $request-> only(['name','slug_name','description','state']);
+
+        $notice = Validator::make($all,[
+            'name' => 'required|min:5',
+            'description' => 'required|min:5'
+        ],[
+            'name.required' =>'Tên nhóm dich không được để trống',
+            'name.min' => 'Tên không được ít hơn 5 kí tự',
+            'description.required' => 'Mô tả không được để trống',
+            'description.min' => 'Mô tả không được ít hơn 5 kí tự'
+        ]);
+
+        if($notice->fails()) return redirect()->back()->withErrors($notice);
+
+        if($request->isChangeAvatar){
+            $image = $request->file('avatar');
+            $new_name = $all['slug_name'].'-'.time().'.'.$image->getClientOriginalExtension();
+            if($team->avatar != 'team-avatar-default.jpg') {
+                File::delete(public_path('uploads/team-avatars' . $team->avatar));
+            }
+
+            $image->move(public_path('uploads/team-avatars'),$new_name);
+
+            $all['avatar'] = $new_name;
+        }
+
+        $team->update($all);
+
+        return redirect()->route('translate-teams.show',$team->id)->withSuccess(['mess' => 'Cập nhật nhóm dịch '.$team->name.' thành công']);
     }
 
     /**

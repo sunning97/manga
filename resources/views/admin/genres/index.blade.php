@@ -40,7 +40,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <div v-if="searchResult.lenght > 0 ">
+                        <tr class="text-center" v-if="searchResult.length == 0 && name.length  > 0">
+                            <td colspan="5"><b>Không tìm thấy dữ liệu phù hợp</b></td>
+                        </tr>
+                        <div v-if="searchResult.lenght > 0 && name.length  > 0">
                             <tr v-for="(genre,index) in searchResult">
                                 <td>@{{ index+1 }}</td>
                                 <td><b>@{{ genre.name }}</b></td>
