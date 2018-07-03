@@ -63,7 +63,6 @@ class AdminController extends Controller
         if (!Auth::user()->hasPermission('read-admins')) return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền xem quản trị viên']);
         if ($id == Auth::user()->id) return redirect()->route('admin.profile');
         $admin = Admin::find($id);
-
         return view('admin.admins.show')->withAdmin($admin);
 
     }
@@ -115,6 +114,8 @@ class AdminController extends Controller
         if ($notice->fails()) return redirect()->back()->withErrors($notice);
 
         if ($request->province) {
+            if(!$request->street) return redirect()->back()->withErrors(['mess' => 'Số nhà / tên đường không được để trống!']);
+
             $address = $request->street . ', ' . Ward::find($request->ward)->type . ' ' . Ward::find($request->ward)->name . ', ' . District::find($request->district)->type . ' ' . District::find($request->district)->name . ', ' . Province::find($request->province)->type . ' ' . Province::find($request->province)->name;
 
             $all = collect($all);
