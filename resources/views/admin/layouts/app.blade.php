@@ -105,6 +105,32 @@
                             <li><a href="javascript:void(0)" theme="purple-dark" class="purple-dark-theme">11</a></li>
                             <li><a href="javascript:void(0)" theme="megna-dark" class="megna-dark-theme">12</a></li>
                         </ul>
+                        <ul class="m-t-20 chatonline">
+                            <li><b>Chat option</b></li>
+                            @foreach($all_admin as $admin)
+                                @if($admin->id != \Illuminate\Support\Facades\Auth::user()->id)
+                                    <li>
+                                        <a href="javascript:void(0)"><img src="{{ asset('uploads/admins-avatar/'.$admin->avatar) }}" alt="user-img" class="img-circle"> <span>{{ $admin->f_name }} {{ $admin->l_name }}
+                                            @switch($admin->state)
+                                                @case('ONLINE')
+                                                    <small class="text-success">online</small></span>
+                                                @break
+
+                                                @case('BUSY')
+                                                    <small class="text-danger">Busy</small>
+                                                @break
+
+                                                @case('OFFLINE')
+                                                    <small class="text-muted">Offline</small>
+                                                @break
+
+                                                @default
+                                            @endswitch
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -147,5 +173,4 @@
 @include('admin.notice.error')
 @include('admin.notice.success')
 </body>
-
 </html>

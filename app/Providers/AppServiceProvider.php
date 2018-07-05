@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -21,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
             $colors = ['info','default','primary','success','danger','warning'];
            return '<?php echo "'.$colors[array_rand($colors)].'" ?>';
         });
+
+        $admins = Admin::all();
+        View::share('all_admin', $admins);
 
     }
 
