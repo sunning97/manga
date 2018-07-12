@@ -128,6 +128,5 @@ class GenreController extends Controller
         } else {
             return response('error',404);
         }
-
     }
 }

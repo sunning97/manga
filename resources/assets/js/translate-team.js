@@ -18,12 +18,13 @@ var app = new Vue({
                 axios.delete($(event.path[0]).data('href')).then(rs => {
                     swal("Đã xóa!", rs.data +" đã được xóa bỏ", "success");
                     location.reload();
-                }).catch(e =>{});
+                }).catch(e =>{
+                    swal("Xóa không thành công!<br>Có lỗi trong quá trình xử lý");
+                });
             });
         },
         getSearch: function () {
             var app = this;
-
             axios.post('/manga/axios/search-teams',{
                 name:app.name
             }).then(rs => {
