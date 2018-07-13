@@ -79,7 +79,9 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(!Auth::user()->hasPermission('update-authors')) return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền cập nhật tác giả']);
+        $author = Author::find($id);
+        return view('admin.authors.edit')->withAuthor($author);
     }
 
     /**
@@ -102,6 +104,12 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $author = Author::find($id);
+        if($author){
+            $author->delete();
+            return response($author->name,200);
+        } else {
+            return response('error',404);
+        }
     }
 }

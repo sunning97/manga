@@ -18,9 +18,13 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $genres = Genre::paginate(10);
         if(!Auth::user()->hasPermission('read-genres')) return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền xem thể loại']);
-        return view('admin.genres.index')->withGenres($genres);
+        $genres = Genre::paginate(10);
+        if (preg_match('/\=\b/',url()->full()))
+            $page = explode('=',url()->full())[1];
+        else
+            $page = 1;
+        return view('admin.genres.index')->withGenres($genres)->withPage($page);
     }
 
     /**

@@ -183,4 +183,15 @@ class AxiosController extends Controller
         return response()->json($teams,'200');
     }
 
+    public function searchAuthor(Request $request){
+        $name = str_slug($request->name);
+        $result = DB::table('authors')->where('slug_name','like','%'.$name.'%')->get();
+
+        if($result->all()){
+            return response()->json($result,200);
+        }else {
+            return response('error',404);
+        }
+    }
+
 }

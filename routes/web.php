@@ -62,7 +62,6 @@ Route::prefix('/manga')->group(function (){
         Route::get('/axios/users','Manga\AxiosController@users');
         Route::post('/axios/search-teams','Manga\AxiosController@searchTeams');
         Route::get('/axios/translate-teams','Manga\AxiosController@teams');
+        Route::post('/axios/search-author','Manga\AxiosController@searchAuthor');
     });
-
-
 });

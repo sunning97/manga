@@ -3,6 +3,8 @@
 @section('title','Quản Lý Tác giả')
 
 @section('plugin_css')
+    <link href="{{ asset('assets/admin/plugin/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/admin/plugin/alertifyjs/css/alertify.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')
@@ -16,9 +18,12 @@
             </ol>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="app">
         <div class="col-md-12">
             <div class="white-box">
+                <div class="row">
+                    <input type="text" class="form-control" name="name" placeholder="Nhập tên tác giả..." v-model="name">
+                </div>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -34,7 +39,7 @@
                             </b>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody v-if="searchResult.length == 0 && name.length == 0">
                         @forelse($authors as $author)
                             <tr>
                                 <td>{{ $author->id }}</td>
@@ -45,10 +50,10 @@
                                 <td class="text-center">
                                     <div class="btn-group m-b-20">
                                         @can('update-authors')
-                                            <a href="" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>
+                                            <a href="{{ route('authors.edit',$author->id) }}" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>
                                         @endcan
                                         @can('delete-authors')
-                                            <button type="button" class="btn btn-danger btn-sm">Xóa <i class="ti-trash"></i></button>
+                                            <button type="button" class="btn btn-danger btn-sm" @click="showDelete" data-url="{{ url('/manga') }}" data-id="{{ $author->id }}">Xóa <i class="ti-trash" data-url="{{ url('/manga') }}" data-id="{{ $author->id }}"></i></button>
                                         @endcan
                                     </div>
                                 </td>
@@ -58,6 +63,29 @@
                             <td colspan="5" class="text-center"><h4>Không có dữ liệu</h4></td>
                         @endforelse
                         </tbody>
+                        <tbody v-if="searchResult.length > 0 && name.length > 0">
+                            <tr v-for="(author,index) in searchResult">
+                                <td>@{{ index+1 }}</td>
+                                <td>@{{ author.name }}</td>
+                                <td>@{{ author.description }}</td>
+                                <td>@{{ date_format(author.created_at) }}</td>
+                                @if(\Illuminate\Support\Facades\Auth::user()->hasPermission('update-authors') || \Illuminate\Support\Facades\Auth::user()->hasPermission('delete-authors'))
+                                    <td class="text-center">
+                                        <div class="btn-group m-b-20">
+                                            @can('update-authors')
+                                                <a href="" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>
+                                            @endcan
+                                            @can('delete-authors')
+                                                <button type="button" class="btn btn-danger btn-sm">Xóa <i class="ti-trash"></i></button>
+                                            @endcan
+                                        </div>
+                                    </td>
+                                @endif
+                            </tr>
+                        </tbody>
+                        <tr class="text-center" v-if="searchResult.length == 0 && name.length > 0">
+                            <td colspan="5"><b>Không tìm thấy dữ liệu phù hợp</b></td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -66,7 +94,10 @@
 @endsection
 
 @section('plugin_js')
+    <script src="{{ asset('assets/admin/plugin/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugin/alertifyjs/alertify.js') }}"></script>
 @endsection
 
 @section('custom_js')
+    <script src="{{ asset('js/author.js') }}"></script>
 @endsection

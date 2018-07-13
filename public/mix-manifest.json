@@ -17,5 +17,6 @@
     "/js/genre-create.js": "/js/genre-create.js",
     "/js/chap-edit.js": "/js/chap-edit.js",
     "/js/chap-create.js": "/js/chap-create.js",
+    "/js/author.js": "/js/author.js",
     "/js/author-create.js": "/js/author-create.js"
 }

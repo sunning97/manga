@@ -57,9 +57,12 @@
                         <tr v-if="searchResult.length == 0 && name.length > 0">
                             <td colspan="4" class="text-center"><b>Không tìm thấy dữ liệu phù hợp</b></td>
                         </tr>
+                        @php
+                            $i = ($page-1)*10+1
+                        @endphp
                         @forelse($permissions as $permission)
                             <tr v-if="searchResult.length == 0 && name.length == 0">
-                                <td>{{ $permission->id }}</td>
+                                <td>{{ $i }}</td>
                                 <td><b>{{ $permission->name }}</b></td>
                                 <td>{{ $permission->description }}</td>
                                 <td class="text-center">
@@ -70,6 +73,9 @@
                                     </div>
                                 </td>
                             </tr>
+                            @php
+                                $i++;
+                            @endphp
                         @empty
                             <td colspan="4" class="text-center"><b>Không có dữ liệu</b></td>
                         @endforelse

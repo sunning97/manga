@@ -19,7 +19,11 @@ class PermissionController extends Controller
     {
         if(!Auth::user()->hasPermission('read-acl')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền xem Permission']);
         $permissions = Permission::paginate(10);
-        return view('admin.permissions.index')->withPermissions($permissions);
+        if (preg_match('/\=\b/',url()->full()))
+            $page = explode('=',url()->full())[1];
+        else
+            $page = 1;
+        return view('admin.permissions.index')->withPermissions($permissions)->withPage($page);
     }
     
     /**

@@ -63,9 +63,12 @@
                                 @endif
                             </tr>
                         </div>
+                        @php
+                            $i = ($page-1)*10 +1;
+                        @endphp
                         @forelse($genres as $genre)
                             <tr v-if="searchResult.length == 0 && name.length == 0">
-                                <td>{{ $genre->id }}</td>
+                                <td>{{ $i }}</td>
                                 <td><b>{{ $genre->name }}</b></td>
                                 <td>{{ $genre->description }}</td>
                                 <td class="text-center">{{ $genre->created_at->format('d-m-Y') }}</td>
@@ -82,6 +85,9 @@
                                 </td>
                                 @endif
                             </tr>
+                            @php
+                                $i++;
+                            @endphp
                         @empty
                             <td colspan="4" class="text-center">Không có dữ liệu</td>
                         @endforelse
