@@ -13,7 +13,7 @@
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
                 <li><a href="{{ route('manga.dashboard') }}">Bảng điều khiển</a></li>
-                <li class="active">nhóm dịch</li>
+                <li class="active">Nhóm dịch</li>
             </ol>
         </div>
     </div>
@@ -71,7 +71,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <td colspan="4" class="text-center">Không có dữ liệu</td>
+                            <td colspan="4" class="text-center"><h4>Không có dữ liệu</h4></td>
                         @endforelse
                         </tbody>
                     </table>
