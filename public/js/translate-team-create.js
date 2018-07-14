@@ -79,9 +79,10 @@ module.exports = __webpack_require__(65);
 var app = new Vue({
     el: '#app',
     data: {
-        name: '',
+        name: $('#team-name').data('name') ? $('#team-name').data('name') : '',
         isUseDefault: true,
-        users: []
+        users: [],
+        a: $('#leader').data('leader') ? $('#leader').data('leader') : ''
     },
     watch: {
         name: function name(str) {
@@ -98,6 +99,9 @@ var app = new Vue({
             axios.get('/manga/axios/users').then(function (rs) {
                 _this.users = rs.data;
             }).catch(function (e) {});
+        },
+        qwe: function qwe(a) {
+            return true;
         }
     },
     mounted: function mounted() {

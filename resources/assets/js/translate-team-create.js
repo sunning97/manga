@@ -1,9 +1,10 @@
 var app = new Vue({
     el: '#app',
     data: {
-        name:'',
+        name: $('#team-name').data('name') ? $('#team-name').data('name') : '',
         isUseDefault: true,
-        users:[]
+        users:[],
+        a: $('#leader').data('leader') ? $('#leader').data('leader') : '',
     },
     watch: {
         name: function (str) {
@@ -18,6 +19,9 @@ var app = new Vue({
             axios.get('/manga/axios/users').then(rs => {
                 this.users = rs.data;
             }).catch(e =>{});
+        },
+        qwe: function (a){
+            return true;
         }
     },
     mounted: function () {

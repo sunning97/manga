@@ -79,7 +79,7 @@ module.exports = __webpack_require__(47);
 var app = new Vue({
     el: '#app',
     data: {
-        name: name
+        name: $('#genre-name').data('name') ? $('#genre-name').data('name') : ''
     },
     watch: {
         name: function name(str) {

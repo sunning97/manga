@@ -57,7 +57,7 @@ class GenreController extends Controller
             'description.min' =>'Mô tả phải có ít nhất 2 kí tự!',
         ]);
 
-        if($notice->fails()) return redirect()->back()->withErrors($notice);
+        if($notice->fails()) return redirect()->back()->with('data',$all)->withErrors($notice);
 
         $genre = Genre::create($all);
 

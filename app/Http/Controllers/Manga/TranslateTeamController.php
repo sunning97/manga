@@ -43,7 +43,7 @@ class TranslateTeamController extends Controller
      */
     public function store(Request $request)
     {
-        $all = $request-> only(['name','slug_name','description']);
+        $all = $request-> only(['name','slug_name','description','leader']);
 
         $notice = Validator::make($all,[
             'name' => 'required|min:5',
@@ -55,7 +55,7 @@ class TranslateTeamController extends Controller
             'description.min' => 'Mô tả không được ít hơn 5 kí tự'
         ]);
 
-        if($notice->fails()) return redirect()->back()->withErrors($notice);
+        if($notice->fails()) return redirect()->back()->with('data',$all)->withErrors($notice);
 
         if($request->leader == 'Không có'){
             $all['leader_id'] = null;

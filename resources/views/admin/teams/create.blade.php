@@ -32,7 +32,7 @@
                     <div class="row mt-5">
                         <div class="col-6">
                             <div class="form-group">
-                                <label class="col-md-12">Tên nhóm dich</label>
+                                <label class="col-md-12" id="team-name" data-name="@if(session()->has('data')){{ session('data')['name'] }}@endif">Tên nhóm dich</label>
                                 <div class="col-md-12">
                                     <input type="text" class="form-control" name="name" v-model="name">
                                 </div>
@@ -52,17 +52,17 @@
                         <div class="col-12">
                             <div class="form-group">Mô tả</label>
                                 <div class="col-md-12">
-                                    <textarea class="form-control" rows="5" name="description"></textarea>
+                                    <textarea class="form-control" rows="5" name="description">@if(session()->has('data')){{ session('data')['description'] }}@endif</textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <label class="col-md-12">Trưởng nhóm</label>
+                            <label class="col-md-12" id="leader" data-leader="@if(session()->has('data')){{ session('data')['leader'] }}@endif">Trưởng nhóm</label>
                             <select class="form-control select2" name="leader" required>
                                 <option>Không có</option>
-                                <option v-for="user in users" :value="user.id">@{{ user.f_name + ' ' + user.l_name}}</option>
+                                <option v-for="user in users" :value="user.id" selected>@{{ user.f_name + ' ' + user.l_name}}</option>
                             </select>
                         </div>
                     </div>

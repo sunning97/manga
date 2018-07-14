@@ -53,7 +53,7 @@ class AuthorController extends Controller
             'description.min' => 'Mô tả không được ít hơn 5 kí tự!',
         ]);
 
-        if($notice->fails()) return redirect()->back()->withErrors($notice);
+        if($notice->fails()) return redirect()->back()->with('data',$all)->withErrors($notice);
 
         $author = Author::create($all);
 

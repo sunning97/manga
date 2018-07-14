@@ -1,7 +1,7 @@
 var app = new Vue({
     el: '#app',
     data: {
-        name:name
+        name: $('#genre-name').data('name') ? $('#genre-name').data('name') : ''
     },
     watch: {
         name: function (str) {
