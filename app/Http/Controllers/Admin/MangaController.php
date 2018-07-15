@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Manga;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin;
 use App\Models\Author;

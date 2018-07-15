@@ -102,7 +102,7 @@ var app = new Vue({
         },
         getSearch: function getSearch() {
             var app = this;
-            axios.post('/manga/axios/search-permission', {
+            axios.post('/admin/axios/search-permission', {
                 name: app.name
             }).then(function (rs) {
                 if (app.name.length > 0) {

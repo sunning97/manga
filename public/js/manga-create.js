@@ -96,21 +96,21 @@ var app = new Vue({
         getAuthors: function getAuthors() {
             var _this = this;
 
-            axios.get('/manga/axios/authors').then(function (rs) {
+            axios.get('/admin/axios/authors').then(function (rs) {
                 _this.authors = rs.data;
             }).catch(function (e) {});
         },
         getGenres: function getGenres() {
             var _this2 = this;
 
-            axios.get('/manga/axios/genres').then(function (rs) {
+            axios.get('/admin/axios/genres').then(function (rs) {
                 _this2.genres = rs.data;
             }).catch(function (e) {});
         },
         getTeams: function getTeams() {
             var _this3 = this;
 
-            axios.get('/manga/axios/translate-teams').then(function (rs) {
+            axios.get('/admin/axios/translate-teams').then(function (rs) {
                 _this3.teams = rs.data;
             }).catch(function (e) {});
         }

@@ -16,7 +16,7 @@
             <h4 class="page-title" data-name="{{ $role->name }}" data-id="{{ $role->id }}">{{ $role->name }}</h4></div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
-                <li><a href="{{ route('manga.dashboard') }}">Bảng điều khiển</a></li>
+                <li><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a></li>
                 <li><a href="{{ route('roles.index') }}">Roles</a></li>
                 <li class="active">Cập nhật: {{ $role->name }}</li>
             </ol>
@@ -90,7 +90,7 @@
                             @endforelse
                         </div>
                         <h4 class="text-left mt-5"><b>Thay đổi quyền</b></h4>
-                        <form class="form-horizontal mt-5" method="post" action="{{ route('manga.update.role.permission',$role->id) }}">
+                        <form class="form-horizontal mt-5" method="post" action="{{ route('admin.update.role.permission',$role->id) }}">
                             @csrf
                             @method('post')
                             <div class="row">

@@ -91,7 +91,7 @@ var app = new Vue({
         getSearch: function getSearch() {
             var app = this;
             if (app.name.length > 0) {
-                axios.post('/manga/axios/search-genres', {
+                axios.post('/admin/axios/search-genres', {
                     name: app.name
                 }).then(function (rs) {
                     if (rs.data.length == 0) {

@@ -16,7 +16,7 @@ var app = new Vue({
             return str_slug(str);
         },
         getPermission: function(){
-            axios.get('/manga/axios/permissions/'+id).then(rs => {
+            axios.get('/admin/axios/permissions/'+id).then(rs => {
                 this.perSelected = rs.data;
             }).catch(e =>{});
         }

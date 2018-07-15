@@ -16,17 +16,17 @@ var app = new Vue({
             return str_slug(str);
         },
         getAuthors: function () {
-            axios.get('/manga/axios/authors').then(rs => {
+            axios.get('/admin/axios/authors').then(rs => {
                 this.authors = rs.data;
             }).catch(e =>{});
         },
         getGenres: function () {
-            axios.get('/manga/axios/genres').then(rs => {
+            axios.get('/admin/axios/genres').then(rs => {
                 this.genres = rs.data;
             }).catch(e =>{});
         },
         getTeams: function () {
-            axios.get('/manga/axios/translate-teams').then(rs => {
+            axios.get('/admin/axios/translate-teams').then(rs => {
                 this.teams = rs.data;
             }).catch(e =>{});
         }

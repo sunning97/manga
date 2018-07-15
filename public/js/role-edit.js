@@ -96,7 +96,7 @@ var app = new Vue({
         getPermission: function getPermission() {
             var _this = this;
 
-            axios.get('/manga/axios/permissions/' + id).then(function (rs) {
+            axios.get('/admin/axios/permissions/' + id).then(function (rs) {
                 _this.perSelected = rs.data;
             }).catch(function (e) {});
         }

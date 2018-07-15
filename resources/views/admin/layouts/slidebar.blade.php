@@ -14,7 +14,7 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li><a href="{{ route('admin.profile') }}"><i class="ti-user"></i> Trang cá nhân</a></li>
-                    <li><a href="{{ route('manga.logout') }}"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+                    <li><a href="{{ route('admin.logout') }}"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
                 </ul>
             </li>
             @can('read-admins')

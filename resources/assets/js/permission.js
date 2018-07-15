@@ -24,7 +24,7 @@ var app = new Vue({
         },
         getSearch: function () {
             var app = this;
-            axios.post('/manga/axios/search-permission',{
+            axios.post('/admin/axios/search-permission',{
                 name:app.name
             }).then(rs => {
                 if(app.name.length > 0) {

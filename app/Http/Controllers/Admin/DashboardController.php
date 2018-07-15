@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Manga;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ChapImageController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ChapImageController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.dashboard.index');
     }
 
     /**

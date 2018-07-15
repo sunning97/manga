@@ -11,7 +11,7 @@
             <h4 class="page-title">{{ $admin->f_name }} {{ $admin->l_name }}</h4> </div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
-                <li><a href="{{ route('manga.dashboard') }}">Bảng điều khiển</a></li>
+                <li><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a></li>
                 <li><a href="{{ route('admins.index') }}">Admin</a></li>
                 <li class="active">{{ $admin->f_name }} {{ $admin->l_name }}</li>
             </ol>

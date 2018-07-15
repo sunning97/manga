@@ -13,7 +13,7 @@ var app = new Vue({
         getSearch: function () {
             let app = this;
             if(app.name.length > 0){
-                axios.post('/manga/axios/search-author',{
+                axios.post('/admin/axios/search-author',{
                     name: app.name
                 }).then(rs => {
                     app.searchResult = rs.data;

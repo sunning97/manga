@@ -12,7 +12,7 @@
             <h4 class="page-title">Permission</h4> </div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
-                <li><a href="{{ route('manga.dashboard') }}">Bảng điều khiển</a></li>
+                <li><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a></li>
                 <li class="active">Permission</li>
             </ol>
         </div>

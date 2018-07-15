@@ -103,7 +103,7 @@ var app = new Vue({
         },
         getSearch: function getSearch() {
             var app = this;
-            axios.post('/manga/axios/search-teams', {
+            axios.post('/admin/axios/search-teams', {
                 name: app.name
             }).then(function (rs) {
                 if (app.name.length > 0) {

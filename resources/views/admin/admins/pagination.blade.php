@@ -4,7 +4,7 @@
     {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
             @else
-            <li> <a href="{{ route('manga.admins') }}"><<</a></li>
+            <li> <a href="{{ route('admin.admins') }}"><<</a></li>
             <li> <a href="{{ $paginator->previousPageUrl() }}"><i class="fa fa-angle-left"></i></a> </li>
             @endif
 

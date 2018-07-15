@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Manga;
+namespace App\Http\Controllers\Admin;
 
 use App\District;
 use App\Models\Admin;

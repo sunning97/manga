@@ -98,21 +98,21 @@ var app = new Vue({
         getAuthors: function getAuthors() {
             var _this = this;
 
-            axios.get('/manga/axios/authors-notin/' + id).then(function (rs) {
+            axios.get('/admin/axios/authors-notin/' + id).then(function (rs) {
                 _this.authors = rs.data;
             }).catch(function (e) {});
         },
         getGenres: function getGenres() {
             var _this2 = this;
 
-            axios.get('/manga/axios/genres-notin/' + id).then(function (rs) {
+            axios.get('/admin/axios/genres-notin/' + id).then(function (rs) {
                 _this2.genres = rs.data;
             }).catch(function (e) {});
         },
         getTeams: function getTeams() {
             var _this3 = this;
 
-            axios.get('/manga/axios/teams-notin/' + id).then(function (rs) {
+            axios.get('/admin/axios/teams-notin/' + id).then(function (rs) {
                 _this3.teams = rs.data;
             }).catch(function (e) {});
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Manga;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,7 +17,7 @@ class LoginController extends Controller
     public function index()
     {
         if(Auth::check()){
-            return redirect()->route('manga.dashboard');
+            return redirect()->route('admin.dashboard');
         }
         return view('admin.auth.login');
     }
@@ -44,7 +44,7 @@ class LoginController extends Controller
         if(Auth::attempt(['email' => $request->email,'password' => $request->password],$remember_me)){
             Auth::user()->state = 'ONLINE';
             Auth::user()->save();
-            return redirect()->route('manga.dashboard')->withSuccess(['mess'=>'Đăng nhập thành công']);
+            return redirect()->route('admin.dashboard')->withSuccess(['mess'=>'Đăng nhập thành công']);
         } else {
             return redirect()->back()->withErrors(['mess'=>'Email/mật khẩu không đúng!']);
         }
@@ -55,7 +55,7 @@ class LoginController extends Controller
         Auth::user()->state = 'OFFLINE';
         Auth::user()->save();
         Auth::logout();
-        return redirect()->route('manga.login');
+        return redirect()->route('admin.login');
     }
 
 }

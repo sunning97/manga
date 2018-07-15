@@ -36,7 +36,7 @@
 <section id="wrapper" class="login-register">
     <div class="login-box">
         <div class="white-box">
-            <form method="post" class="form-horizontal form-material" id="loginform" action="{{ route('manga.login.process') }}">
+            <form method="post" class="form-horizontal form-material" id="loginform" action="{{ route('admin.login.process') }}">
                 @csrf
                 @method('post')
                 <h3 class="box-title m-b-20">Đăng nhập</h3>

@@ -1,7 +1,7 @@
 <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
     <!-- Logo -->
     <div class="top-left-part">
-        <a class="logo" href="{{ route('manga.dashboard') }}">
+        <a class="logo" href="{{ route('admin.dashboard') }}">
             <b><img src="{{ asset('assets/admin/images/eliteadmin-logo.png') }}" alt="home" /></b>
             <span class="hidden-xs"><img src="{{ asset('assets/admin/images/eliteadmin-text.png') }}" alt="home" /></span> </a>
     </div>
