@@ -12,6 +12,7 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
+    .js('resources/assets/js/login.js', 'public/js')
     .js('resources/assets/js/role-create.js', 'public/js')
     .js('resources/assets/js/role-edit.js', 'public/js')
     .js('resources/assets/js/permission-create.js', 'public/js')

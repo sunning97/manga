@@ -19,6 +19,7 @@ Route::prefix('/admin')->group(function (){
     Route::get('/login','Admin\LoginController@index')->name('admin.login');
     Route::post('/login-process','Admin\LoginController@login_process')->name('admin.login.process');
     Route::get('/logout','Admin\LoginController@logout')->name('admin.logout');
+    Route::post('/password/reset','Admin\ForgotPasswordController@sendResetLink')->name('admin.password.email');
 
     Route::middleware('login')->group(function (){
         Route::get('/','Admin\DashboardController@index')->name('admin.dashboard');

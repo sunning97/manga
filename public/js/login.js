@@ -60,52 +60,49 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 38);
+/******/ 	return __webpack_require__(__webpack_require__.s = 34);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 38:
+/***/ 34:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(39);
+module.exports = __webpack_require__(35);
 
 
 /***/ }),
 
-/***/ 39:
+/***/ 35:
 /***/ (function(module, exports) {
 
-var name = $('.page-title').data('name');
-var id = $('.page-title').data('id');
 var app = new Vue({
-    el: '#app',
-    data: {
-        name: name,
-        perSelected: []
-    },
-    watch: {
-        name: function name(str) {
-            this.getSlug(str);
-        }
-    },
+    el: '#wrapper',
     methods: {
-        getSlug: function getSlug(str) {
-            return str_slug(str);
-        },
-        getPermission: function getPermission() {
-            var _this = this;
-
-            axios.get('/admin/axios/permissions/' + id).then(function (rs) {
-                _this.perSelected = rs.data;
-            }).catch(function (e) {});
+        sendEmail: function sendEmail(event) {
+            event.preventDefault();
+            var email = $('#email').val();
+            if (email.length == 0) {
+                $('#notice').html('<div class="text-danger ml-2"><b>Vui lòng nhập email!</b></div>');
+            } else {
+                axios.post($(event.path[0]).data('url'), {
+                    email: $('#email').val()
+                }).then(function (rs) {
+                    if (rs.data == 'ok') {
+                        $('#notice').html('<div class="text-success ml-2"><b>Mail đã được gửi! Vui lòng kiểm tra hòm thư của bạn</b></div>');
+                        $('#input').remove();
+                    } else {
+                        var html = '';
+                        $.each(rs.data, function (k, i) {
+                            html += '<div class="text-danger ml-2"><b>' + i + '</b></div>';
+                        });
+                        $('#notice').html(html);
+                    }
+                }).catch(function (e) {});
+            }
         }
-    }, mounted: function mounted() {
-        this.getPermission();
     }
 });
-
-$(".select2").select2();
 
 /***/ })
 

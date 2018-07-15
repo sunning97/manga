@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/admin/plugin/images/favicon.png') }}">
     <title>Đăng nhập</title>
     <!-- Bootstrap Core CSS -->
@@ -76,21 +77,26 @@
                     </div>
                 </div>
             </form>
-            <form class="form-horizontal" id="recoverform" action="index.html">
+            <form class="form-horizontal" id="recoverform" method="post">
                 <div class="form-group ">
                     <div class="col-xs-12">
-                        <h3>Recover Password</h3>
-                        <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
+                        <h3>Đặt lại mật khẩu</h3>
+                        <p class="text-muted">Nhập địa chỉ mail và yêu cầu đặt lại mật khẩu sẽ được gửi đến email của bạn</p>
                     </div>
                 </div>
-                <div class="form-group ">
-                    <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="Email">
-                    </div>
+                <div class="form-group" id="notice">
+
                 </div>
-                <div class="form-group text-center m-t-20">
-                    <div class="col-xs-12">
-                        <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
+                <div id="input">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required="" placeholder="Email" id="email">
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" data-url="{{ route('admin.password.email') }}" type="submit" @click="sendEmail">Gửi</button>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -114,6 +120,9 @@
 <!-- Custom Theme JavaScript -->
 <script src="{{ asset('assets/admin/js/custom.min.js') }}"></script>
 <!--Style Switcher -->
+<script src="{{ asset('js/app.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('js/login.js') }}"></script>
 {{--<script src="{{ asset('assets/admin/plugin/styleswitcher/jQuery.style.switcher.js') }}"></script>--}}
 @include('admin.notice.error')
 </body>

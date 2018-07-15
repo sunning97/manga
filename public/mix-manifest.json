@@ -12,6 +12,7 @@
     "/js/manga-edit.js": "/js/manga-edit.js",
     "/js/manga-create.js": "/js/manga-create.js",
     "/js/manga-chap-create.js": "/js/manga-chap-create.js",
+    "/js/login.js": "/js/login.js",
     "/js/genre.js": "/js/genre.js",
     "/js/genre-edit.js": "/js/genre-edit.js",
     "/js/genre-create.js": "/js/genre-create.js",
