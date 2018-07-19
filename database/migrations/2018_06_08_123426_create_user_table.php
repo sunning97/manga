@@ -17,13 +17,18 @@ class CreateUserTable extends Migration
             $table->increments('id');
             $table->string('f_name');
             $table->string('l_name');
-            $table->string('email')->unique();
-            $table->date('birth_date')->nullable();
-            $table->string('phone',20)->nullable();
-            $table->text('address')->nullable();
-            $table->string('password','255');
-            $table->text('avatar');
+            $table->string('email');
+            $table->unique('email');
             $table->enum('gender',['MALE','FEMALE']);
+            $table->date('birth_date')->nullable()->nullable();
+            $table->string('phone',20)->nullable();
+            $table->string('job')->nullable();
+            $table->string('address')->nullable();
+            $table->text('phone',20)->nullable();
+            $table->string('skypeId','255')->nullable();
+            $table->string('website','255')->nullable();
+            $table->string('password','255');
+            $table->text('avatar')->default('admin-default.png');
             $table->timestamps();
         });
     }
