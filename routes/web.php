@@ -10,20 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route for public site
+Route::get('/login','Site\LoginController@showloginForm')->name('login');
+Route::post('/login','Site\LoginController@login')->name('login.submit');
+Route::get('/logout','Site\LoginController@logout')->name('logout');
+Route::get('/','Site\HomeController@index')->name('home');
 
-Route::get('/',function (){
-    return redirect()->route('admin.login');
-});
 
+// Route for admin controll panel
 Route::prefix('/admin')->group(function (){
-    Route::get('/login','Admin\LoginController@index')->name('admin.login');
-    Route::post('/login-process','Admin\LoginController@login_process')->name('admin.login.process');
+    Route::get('/login','Admin\LoginController@showLoginForm')->name('admin.login');
+    Route::post('/login','Admin\LoginController@login')->name('admin.login.submit');
     Route::get('/logout','Admin\LoginController@logout')->name('admin.logout');
     Route::post('/password/reset','Admin\ForgotPasswordController@sendResetLink')->name('admin.password.email');
 
     Route::middleware('login')->group(function (){
         Route::get('/','Admin\DashboardController@index')->name('admin.dashboard');
-
         Route::get('/admins/profile','Admin\AdminController@profile')->name('admin.profile');
         Route::resource('/admins','Admin\AdminController');
         Route::post('/admins/update-avatar','Admin\AdminController@updateAvatar')->name('admin.update-avatar');

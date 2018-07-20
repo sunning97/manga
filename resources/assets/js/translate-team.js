@@ -17,9 +17,9 @@ var app = new Vue({
             }, function(){
                 axios.delete($(event.path[0]).data('href')).then(rs => {
                     swal("Đã xóa!", rs.data +" đã được xóa bỏ", "success");
-                    location.reload();
+                    // location.reload();
                 }).catch(e =>{
-                    swal("Xóa không thành công!<br>Có lỗi trong quá trình xử lý");
+                    swal("Xóa không thành công! Có lỗi trong quá trình xử lý");
                 });
             });
         },

@@ -24,11 +24,11 @@ class CreateUserTable extends Migration
             $table->string('phone',20)->nullable();
             $table->string('job')->nullable();
             $table->string('address')->nullable();
-            $table->text('phone',20)->nullable();
             $table->string('skypeId','255')->nullable();
             $table->string('website','255')->nullable();
             $table->string('password','255');
-            $table->text('avatar')->default('admin-default.png');
+            $table->text('avatar');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

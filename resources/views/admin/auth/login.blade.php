@@ -37,13 +37,13 @@
 <section id="wrapper" class="login-register">
     <div class="login-box">
         <div class="white-box">
-            <form method="post" class="form-horizontal form-material" id="loginform" action="{{ route('admin.login.process') }}">
+            <form method="post" class="form-horizontal form-material" id="loginform" action="{{ route('admin.login.submit') }}">
                 @csrf
                 @method('post')
-                <h3 class="box-title m-b-20">Đăng nhập</h3>
+                <h3 class="box-title m-b-20">Đăng nhập trang quản trị</h3>
                 <div class="form-group ">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="Username" name="email">
+                        <input class="form-control" type="text" required="" placeholder="Username" name="email" value="{{ old('email') }}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -54,7 +54,7 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <div class="checkbox checkbox-primary pull-left p-t-0">
-                            <input id="checkbox-signup" type="checkbox" name="remember_me" checked>
+                            <input id="checkbox-signup" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
                             <label for="checkbox-signup"> Nhớ mật khẩu </label>
                         </div>
                         <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Quên mật khẩu?</a> </div>

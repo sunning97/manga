@@ -14,20 +14,24 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function __construct()
     {
-        if(Auth::check()){
-            return redirect()->route('admin.dashboard');
-        }
+        $this->middleware('guest:admin',['except' => ['logout']]);
+    }
+
+    public function showLoginForm()
+    {
         return view('admin.auth.login');
     }
 
-    public function login_process(Request $request){
-        $all = $request->only(['email','password']);
-        $remember_me = false;
+    public function login(Request $request){
+        $all = $request->only(['email','password','remember']);
 
-        if($request->remember_me){
-            $remember_me = true;
+        $remember = false;
+
+        if($request->remember){
+            $remember = true;
         }
         $noite = Validator::make($all,[
             'email'=>'required|email',
@@ -39,22 +43,18 @@ class LoginController extends Controller
             'password.min'=>'Password không được ngắn hơn 6 kí tự'
         ]);
 
-        if($noite->fails()) return redirect()->back()->withErrors($noite);
+        if($noite->fails()) return redirect()->back()->withErrors($noite)->withInput($request->only(['email','remember']));
 
-        if(Auth::attempt(['email' => $request->email,'password' => $request->password],$remember_me)){
-            Auth::user()->state = 'ONLINE';
-            Auth::user()->save();
+        if(Auth::guard('admin')->attempt(['email' => $request->email,'password' => $request->password],$remember)){
             return redirect()->route('admin.dashboard')->withSuccess(['mess'=>'Đăng nhập thành công']);
         } else {
-            return redirect()->back()->withErrors(['mess'=>'Email/mật khẩu không đúng!']);
+            return redirect()->back()->withErrors(['mess'=>'Email/mật khẩu không đúng!'])->withInput($request->only(['email','remember']));
         }
     }
 
     public function logout()
     {
-        Auth::user()->state = 'OFFLINE';
-        Auth::user()->save();
-        Auth::logout();
+        Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
     }
 

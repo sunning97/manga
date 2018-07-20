@@ -16,10 +16,10 @@ class LoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check()){
+        if(Auth::guard('admin')->check()){
             return $next($request);
         } else {
-            return redirect()->route('manga.login')->withErrors(['mess'=>'Vui lòng đăng nhập!']);
+            return redirect()->route('admin.login')->withErrors(['mess'=>'Vui lòng đăng nhập!']);
         }
     }
 }

@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Validator;
 
 class TranslateTeamController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -153,6 +158,13 @@ class TranslateTeamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $team = TranslateTeam::find($id);
+        if($team)
+        {
+            $team->delete();
+            return response()->json($team->name,200);
+        } else {
+            return response('error',401);
+        }
     }
 }

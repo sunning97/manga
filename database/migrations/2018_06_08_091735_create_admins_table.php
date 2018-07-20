@@ -24,7 +24,7 @@ class CreateAdminsTable extends Migration
             $table->string('password');
             $table->enum('gender',['MALE','FEMALE']);
             $table->text('address')->nullable();
-            $table->string('avatar')->default('admin-default.png');
+            $table->string('avatar');
             $table->enum('state',['ONLINE','OFFLINE','BUSY'])->default('OFFLINE');
             $table->rememberToken();
             $table->timestamps();

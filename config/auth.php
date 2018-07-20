@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'public',
+        'guard' => 'site',
         'passwords' => 'password',
     ],
 
@@ -36,7 +36,7 @@ return [
     */
 
     'guards' => [
-        'public' => [
+        'site' => [
             'driver' => 'session',
             'provider' => 'users',
         ],

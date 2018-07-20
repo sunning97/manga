@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
+    use Notifiable;
+
+    protected $guard = 'site';
     protected $table='users';
     protected $fillable=['f_name','l_name','email','birth_date','phone','address','avatar','gender','created_at','updated_at'];
     public $timestamps=true;
 
     protected $hidden = [
-        'password'
+        'remember_token','password'
     ];
 }
