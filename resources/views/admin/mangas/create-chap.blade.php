@@ -20,7 +20,7 @@
     <div class="row" id="app">
         <div class="col-md-12">
             <div class="white-box">
-                <form class="form-horizontal" method="post" action="{{ route('manga.chap.store',$manga->id) }}">
+                <form class="form-horizontal" method="post" action="{{ route('admin.chap.store',$manga->id) }}">
                     @csrf
                     @method('post')
                     <div class="row">

@@ -123,7 +123,7 @@
                 </div>
                 <div class="row">
                     <div class="col-10">
-                        <h4 class="text-left mt-5"><b>Tất Cả Các Chap: {{ $manga->name }}</b> <a href="{{ route('manga.chap.create',$manga->id) }}" class="btn btn-success btn-sm waves-effect ml-5">Thêm chap</a></h4>
+                        <h4 class="text-left mt-5"><b>Tất Cả Các Chap: {{ $manga->name }}</b> <a href="{{ route('admin.chap.create',$manga->id) }}" class="btn btn-success btn-sm waves-effect ml-5">Thêm chap</a></h4>
                     </div>
                 </div>
                 <div class="row mt-5">
