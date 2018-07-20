@@ -92,10 +92,7 @@ var app = new Vue({
                         $('#notice').html('<div class="text-success ml-2"><b>Mail đã được gửi! Vui lòng kiểm tra hòm thư của bạn</b></div>');
                         $('#input').remove();
                     } else {
-                        var html = '';
-                        $.each(rs.data, function (k, i) {
-                            html += '<div class="text-danger ml-2"><b>' + i + '</b></div>';
-                        });
+                        var html = '<div class="text-danger ml-2"><b>' + rs.data + '</b></div>';
                         $('#notice').html(html);
                     }
                 }).catch(function (e) {});
