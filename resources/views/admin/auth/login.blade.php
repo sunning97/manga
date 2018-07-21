@@ -123,7 +123,6 @@
 <script src="{{ asset('js/app.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('js/login.js') }}"></script>
-{{--<script src="{{ asset('assets/admin/plugin/styleswitcher/jQuery.style.switcher.js') }}"></script>--}}
 @include('admin.notice.error')
 </body>
 

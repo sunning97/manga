@@ -96,14 +96,14 @@ var app = new Vue({
         getMangas: function getMangas() {
             var _this = this;
 
-            axios.get('/manga/axios/mangas').then(function (rs) {
+            axios.get('/admin/axios/mangas').then(function (rs) {
                 _this.mangas = rs.data;
             }).catch(function (e) {});
         },
         getChapImages: function getChapImages() {
             var _this2 = this;
 
-            axios.get('/manga/axios/chap-images/' + $('.page-title').data('id')).then(function (rs) {
+            axios.get('/admin/axios/chap-images/' + $('.page-title').data('id')).then(function (rs) {
                 _this2.chapImage = rs.data;
             }).catch(function (e) {});
         },
@@ -119,7 +119,7 @@ var app = new Vue({
                 confirmButtonText: "Xóa",
                 closeOnConfirm: true
             }, function () {
-                axios.get('/manga/axios/delete-chap-image/' + id).then(function (rs) {
+                axios.get('/admin/axios/delete-chap-image/' + id).then(function (rs) {
                     app.getChapImages();
                     swal("Thành công!", "Đã xóa " + rs.data, "success");
                 }).catch(function (e) {});
@@ -136,7 +136,7 @@ var app = new Vue({
             formData.append("image", el[0].files[0]);
             formData.append("id", this.imageEdit.id);
 
-            axios.post('/manga/axios/chap-image-edit', formData, {
+            axios.post('/admin/axios/chap-image-edit', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

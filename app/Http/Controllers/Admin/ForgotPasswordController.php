@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ForgotPasswordController extends Controller
 {
-    use SendsPasswordResetEmails;
-
     /**
      * Create a new controller instance.
      *
@@ -23,10 +21,16 @@ class ForgotPasswordController extends Controller
     {
         $this->middleware('guest:admin');
     }
+    protected function guard()
+    {
+        return Auth::guard('admin');
+    }
     protected function broker(){
         return Password::broker('admins');
     }
-    public function sendResetLink(Request $request){
+
+    public function sendResetLinkEmail(Request $request)
+    {
         $email = $request->only('email');
         $notice = Validator::make($email,[
             'email' => 'email'
@@ -40,8 +44,30 @@ class ForgotPasswordController extends Controller
         }
         else
         {
+            $response = $this->broker()->sendResetLink(
+                $request->only('email')
+            );
 
-            return response()->json('ok',200);
+            return $response == Password::RESET_LINK_SENT
+                ? response()->json('ok',200)
+                : response()->json('error',401);
         }
+    }
+
+    protected function validateEmail(Request $request)
+    {
+        $this->validate($request, ['email' => 'required|email']);
+    }
+
+    protected function sendResetLinkResponse($response)
+    {
+        return back()->with('status', trans($response));
+    }
+
+    protected function sendResetLinkFailedResponse(Request $request, $response)
+    {
+        return back()->withErrors(
+            ['email' => trans($response)]
+        );
     }
 }

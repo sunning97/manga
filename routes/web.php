@@ -22,7 +22,10 @@ Route::prefix('/admin')->group(function (){
     Route::get('/login','Admin\LoginController@showLoginForm')->name('admin.login');
     Route::post('/login','Admin\LoginController@login')->name('admin.login.submit');
     Route::get('/logout','Admin\LoginController@logout')->name('admin.logout');
-    Route::post('/password/reset','Admin\ForgotPasswordController@sendResetLink')->name('admin.password.email');
+
+    Route::post('/password/email','Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+    Route::post('/password/reset','Admin\ResetPasswordController@reset')->name('admin.password.reset');
+    Route::get('/password/reset/{token}','Admin\ResetPasswordController@showResetForm')->name('admin.password.reset.request');
 
     Route::middleware('login')->group(function (){
         Route::get('/','Admin\DashboardController@index')->name('admin.dashboard');

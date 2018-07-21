@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\AdminResetPassword;
 
 class Admin extends Authenticatable
 {
@@ -24,4 +25,10 @@ class Admin extends Authenticatable
     public function hasPermission($name){
         return !! optional(optional($this->role())->first()->permission())->whereSlug_name($name)->first();
     }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new AdminResetPassword($token));
+    }
+
 }
