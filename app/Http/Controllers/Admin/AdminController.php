@@ -100,11 +100,10 @@ class AdminController extends Controller
     public function updateProfile(Request $request)
     {
 
-        $all = $request->only(['f_name', 'l_name', 'email', 'phone', 'gender', 'birth_date']);
+        $all = $request->only(['f_name', 'l_name', 'phone', 'gender', 'birth_date']);
         $notice = Validator::make($all, [
             'f_name' => 'required|min:2',
             'l_name' => 'required|min:2',
-            'email' => 'required|email',
             'phone' => 'required',
             'birth_date' => 'required'
         ], [
@@ -112,8 +111,6 @@ class AdminController extends Controller
             'f_name.min' => 'Họ không được ít hơn 2 kí tự!',
             'l_name.required' => 'Tên không được để trống!',
             'l_name.min' => 'Tên không được ít hơn 2 kí tự!',
-            'email.required' => 'Email không được để trống!',
-            'email.email' => 'Email không đúng định dạng!',
             'phone.required' => 'Số điện thoại không được để trống!',
             'birth_date.required' => 'Ngày/tháng/năm sinh không được để trống'
         ]);
