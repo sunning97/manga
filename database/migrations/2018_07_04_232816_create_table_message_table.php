@@ -15,9 +15,12 @@ class CreateTableMessageTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('admin_id');
+            $table->unsignedInteger('sent_from');
+            $table->unsignedInteger('sent_to');
             $table->text('content');
-            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
+            $table->enum('readed',['T','F'])->default('F');
+            $table->foreign('sent_from')->references('id')->on('admins')->onDelete('cascade');
+            $table->foreign('sent_to')->references('id')->on('admins')->onDelete('cascade');
             $table->timestamps();
         });
     }

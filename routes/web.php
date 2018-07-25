@@ -46,6 +46,7 @@ Route::prefix('/admin')->group(function (){
         Route::post('/mangas/store-chap/{id}','Admin\MangaController@storeChap')->name('admin.chap.store');
         Route::post('/roles/update-permission/{id}','Admin\RoleController@update_permission')->name('admin.update.role.permission');
         Route::post('/chaps-images/{id}','Admin\ChapController@image')->name('chaps.image');
+        Route::get('/message','Admin\MessageController@index')->name('admin.messages');
 
         // Axios
 
