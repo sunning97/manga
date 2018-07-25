@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\District;
+use App\Models\Admin;
 use App\Models\Author;
 use App\Models\Chap;
 use App\Models\ChapImage;
@@ -16,6 +17,7 @@ use App\Province;
 use App\Ward;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -192,6 +194,16 @@ class AxiosController extends Controller
         }else {
             return response('error',404);
         }
+    }
+
+    public function getAllContacts(){
+        $contacts = Admin::where('id','!=',Auth::guard('admin')->user()->id)->get();
+        return response()->json(['contacts' => $contacts,'path' => asset('uploads/admins-avatar')],200);
+    }
+
+    public function getConversation(Request $request)
+    {
+        return response()->json(DB::select(DB::raw('SELECT * FROM `messages` WHERE `sent_from` = '.Auth::guard('admin')->user()->id.' AND `sent_to` = '.$request->contact_id.' OR `sent_from` = '.$request->contact_id.' AND `sent_to` = '.Auth::guard('admin')->user()->id)),200);
     }
 
 }

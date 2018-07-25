@@ -69,7 +69,7 @@ class TranslateTeamController extends Controller
 
         }
 
-        if($request->isUseDefault) $all['avatar'] = 'team-avatar-default.jpg';
+        if($request->isUseDefault) $all['avatar'] = 'team-avatar-default.png';
         else{
             $image = $request->file('avatar');
             $new_name = $all['slug_name'].'-'.time().'.'.$image->getClientOriginalExtension();
@@ -136,7 +136,7 @@ class TranslateTeamController extends Controller
         if($request->isChangeAvatar){
             $image = $request->file('avatar');
             $new_name = $all['slug_name'].'-'.time().'.'.$image->getClientOriginalExtension();
-            if($team->avatar != 'team-avatar-default.jpg') {
+            if($team->avatar != 'team-avatar-default.png') {
                 File::delete(public_path('uploads/team-avatars' . $team->avatar));
             }
 

@@ -70,5 +70,7 @@ Route::prefix('/admin')->group(function (){
         Route::post('/axios/search-teams','Admin\AxiosController@searchTeams');
         Route::get('/axios/translate-teams','Admin\AxiosController@teams');
         Route::post('/axios/search-author','Admin\AxiosController@searchAuthor');
+        Route::post('/axios/all-contacts','Admin\AxiosController@getAllContacts');
+        Route::post('/axios/get-conversation','Admin\AxiosController@getConversation');
     });
 });
