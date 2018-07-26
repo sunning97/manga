@@ -41,6 +41,13 @@
                 }).then(response=>{
                     this.messages = response.data;
                 });
+
+                Echo.private(`message.${this.user.id}`)
+                    .listen('SendMessage', (e) => {
+                        if(this.contact && e.message.sent_from == this.contact.id){
+                            this.messages.push(e.message);
+                        }
+                    });
             }
         },
         components:{

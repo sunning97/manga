@@ -47,7 +47,7 @@ Route::prefix('/admin')->group(function (){
         Route::post('/roles/update-permission/{id}','Admin\RoleController@update_permission')->name('admin.update.role.permission');
         Route::post('/chaps-images/{id}','Admin\ChapController@image')->name('chaps.image');
         Route::get('/message','Admin\MessageController@index')->name('admin.messages');
-
+        Route::post('/message/send','Admin\MessageController@send');
         // Axios
 
         Route::get('/axios/permissions/{id}','Admin\AxiosController@permissions');

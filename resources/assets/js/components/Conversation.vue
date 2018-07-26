@@ -36,7 +36,12 @@
         },
         methods:{
             message:function (content) {
-                console.log(content);
+                axios.post('/admin/message/send',{
+                    id:this.contact.id,
+                    text:content
+                }).then(res=>{
+                    this.messages.push(res.data);
+                });
             }  
         },
         components:{

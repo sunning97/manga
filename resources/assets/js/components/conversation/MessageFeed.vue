@@ -4,7 +4,6 @@
             <div class="chat-image"> <img :src="message.sent_from == contact.id ? (path+'/'+contact.avatar) : (path+'/'+user.avatar)"> </div>
             <div class="chat-body">
                 <div class="chat-text">
-                    <!--<h4>{{ message.sent_from == contact.id ? contact.avatar : user.avatar }}</h4>-->
                     <p> {{ message.content }} </p> <b>{{ date_format(message.created_at) }}</b> </div>
             </div>
         </li>
