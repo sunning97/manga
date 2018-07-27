@@ -61,6 +61,7 @@ Route::prefix('/admin')->group(function (){
         Route::get('/axios/delete-chap-image/{id}','Admin\AxiosController@deleteChapImage');
         Route::get('/axios/chap-images/{id}','Admin\AxiosController@chapImages');
         Route::get('/axios/authors-notin/{id}','Admin\AxiosController@authorsNotIn');
+        Route::post('/axios/author/get','Admin\AxiosController@getAuthor');
         Route::get('/axios/genres-notin/{id}','Admin\AxiosController@genresNotIn');
         Route::get('/axios/teams-notin/{id}','Admin\AxiosController@teamsNotIn');
         Route::post('/axios/search-genres','Admin\AxiosController@searchGenre');

@@ -33,32 +33,38 @@
                                 <th style="width: 200px;">Tên</th>
                                 <th>Mô tả</th>
                                 <th>Create at</th>
-                                @if(\Illuminate\Support\Facades\Auth::user()->hasPermission('update-authors') || \Illuminate\Support\Facades\Auth::user()->hasPermission('delete-authors'))
+                                @if(auth()->guard('admin')->user()->hasPermission('update-authors') || auth()->guard('admin')->user()->hasPermission('delete-authors'))
                                     <th class="text-center">Action</th>
                                 @endif
                             </b>
                         </tr>
                         </thead>
                         <tbody v-if="searchResult.length == 0 && name.length == 0">
+                        @php
+                            $i = $page+1;
+                        @endphp
                         @forelse($authors as $author)
                             <tr>
-                                <td>{{ $author->id }}</td>
+                                <td>{{ $i }}</td>
                                 <td>{{ $author->name }}</td>
                                 <td>{{ $author->description }}</td>
                                 <td>{{ $author->created_at->format('d-m-Y') }}</td>
-                                @if(\Illuminate\Support\Facades\Auth::user()->hasPermission('update-authors') || \Illuminate\Support\Facades\Auth::user()->hasPermission('delete-authors'))
+                                @if(auth()->guard('admin')->user()->hasPermission('update-authors') || auth()->guard('admin')->user()->hasPermission('delete-authors'))
                                 <td class="text-center">
                                     <div class="btn-group m-b-20">
                                         @can('update-authors')
                                             <a href="{{ route('authors.edit',$author->id) }}" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>
                                         @endcan
                                         @can('delete-authors')
-                                            <button type="button" class="btn btn-danger btn-sm" @click="showDelete" data-url="{{ url('/manga') }}" data-id="{{ $author->id }}">Xóa <i class="ti-trash" data-url="{{ url('/manga') }}" data-id="{{ $author->id }}"></i></button>
+                                            <button type="button" class="btn btn-danger btn-sm" @click="showDelete" data-url="{{ url('/admin') }}" data-id="{{ $author->id }}">Xóa <i class="ti-trash" data-url="{{ url('/admin') }}" data-id="{{ $author->id }}"></i></button>
                                         @endcan
                                     </div>
                                 </td>
                                 @endif
                             </tr>
+                            @php
+                                $i++;
+                            @endphp
                         @empty
                             <td colspan="5" class="text-center"><h4>Không có dữ liệu</h4></td>
                         @endforelse
@@ -69,7 +75,7 @@
                                 <td>@{{ author.name }}</td>
                                 <td>@{{ author.description }}</td>
                                 <td>@{{ date_format(author.created_at) }}</td>
-                                @if(\Illuminate\Support\Facades\Auth::user()->hasPermission('update-authors') || \Illuminate\Support\Facades\Auth::user()->hasPermission('delete-authors'))
+                                @if(auth()->guard('admin')->user()->hasPermission('update-authors') || auth()->guard('admin')->user()->hasPermission('delete-authors'))
                                     <td class="text-center">
                                         <div class="btn-group m-b-20">
                                             @can('update-authors')

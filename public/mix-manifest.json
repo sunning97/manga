@@ -20,5 +20,6 @@
     "/js/chap-edit.js": "/js/chap-edit.js",
     "/js/chap-create.js": "/js/chap-create.js",
     "/js/author.js": "/js/author.js",
+    "/js/author-edit.js": "/js/author-edit.js",
     "/js/author-create.js": "/js/author-create.js"
 }

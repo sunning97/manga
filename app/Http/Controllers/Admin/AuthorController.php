@@ -24,7 +24,11 @@ class AuthorController extends Controller
     {
         if(!Auth::user()->hasPermission('read-authors')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền xem tác giả!']);
         $authors = Author::paginate(10);
-        return view('admin.authors.index')->withAuthors($authors);
+        if(preg_match('/\=\b/',url()->full()))
+        {
+            $page = explode('=',url()->full())[1];
+        } else $page = 0;
+        return view('admin.authors.index')->withAuthors($authors)->withPage($page);
     }
 
     /**
@@ -98,7 +102,28 @@ class AuthorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $all = $request->only(['name','description','slug_name']);
+
+        $notice = Validator::make($all,[
+            'name' => 'required|min:3',
+            'description' => 'required|min:5'
+        ],[
+            'name.required' => 'Tên không được để trống!',
+            'name.min' => 'Tên không được ít hơn 3 kí tự',
+            'description.required'=>'Mô tả không được dể trống',
+            'description.min' => 'Mô tả không được ít hơn 5 kí tự'
+        ]);
+
+        if($notice->fails()) return redirect()->back()->withErrors($notice)->withInput($all);
+
+        $author = Author::find($id);
+
+        $author->name = $all['name'];
+        $author->slug_name = $all['slug_name'];
+        $author->description = $all['description'];
+        $author->save();
+
+        return redirect()->route('authors.index')->withSuccess(['mess' => 'Cập nhật tác giả '.$author->name.' thành công!']);
     }
 
     /**

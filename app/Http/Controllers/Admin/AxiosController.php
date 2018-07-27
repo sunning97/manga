@@ -206,4 +206,13 @@ class AxiosController extends Controller
         return response()->json(DB::select(DB::raw('SELECT * FROM `messages` WHERE `sent_from` = '.Auth::guard('admin')->user()->id.' AND `sent_to` = '.$request->contact_id.' OR `sent_from` = '.$request->contact_id.' AND `sent_to` = '.Auth::guard('admin')->user()->id)),200);
     }
 
+    public function getAuthor(Request $request)
+    {
+        $author = Author::find($request->id)->first();
+        if($author){
+            return response()->json($author,200);
+        }
+        return response('',404);
+    }
+
 }
