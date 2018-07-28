@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Events\SendMessage;
+use App\Models\Admin;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,6 +21,15 @@ class MessageController extends Controller
         return view('admin.messages.index');
     }
 
+
+    public function chatWith($id)
+    {
+        $admin = Admin::find($id);
+        if(!$admin){
+            return 'k co';
+        }
+        return view('admin.messages.index')->withAdmin($admin);
+    }
     public function send(Request $request)
     {
         $message = new Message();

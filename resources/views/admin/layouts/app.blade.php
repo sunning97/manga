@@ -108,27 +108,11 @@
                         <ul class="m-t-20 chatonline">
                             <li><b>Chat option</b></li>
                             @foreach($all_admin as $admin)
-                                @if($admin->id != \Illuminate\Support\Facades\Auth::user()->id)
-                                    <li>
-                                        <a href="javascript:void(0)"><img src="{{ asset('uploads/admins-avatar/'.$admin->avatar) }}" alt="user-img" class="img-circle"> <span>{{ $admin->f_name }} {{ $admin->l_name }}
-                                            @switch($admin->state)
-                                                @case('ONLINE')
-                                                    <small class="text-success">online</small></span>
-                                                @break
-
-                                                @case('BUSY')
-                                                    <small class="text-danger">Busy</small>
-                                                @break
-
-                                                @case('OFFLINE')
-                                                    <small class="text-muted">Offline</small>
-                                                @break
-
-                                                @default
-                                            @endswitch
-                                        </a>
-                                    </li>
-                                @endif
+                                <li>
+                                    <a href="{{ route('admin.messages.with',$admin->id) }}"><img src="{{ asset('uploads/admins-avatar/'.$admin->avatar) }}" alt="user-img" class="img-circle"> <span>{{ $admin->f_name }} {{ $admin->l_name }}
+                                        {!! $admin->isOnline() ? '<small class="text-success">Online</small></span>' : '<small class="text-danger">Offline</small></span>' !!}
+                                    </a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>

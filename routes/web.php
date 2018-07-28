@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Admin;
+use \Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +30,13 @@ Route::prefix('/admin')->group(function (){
     Route::get('/password/reset/{token}','Admin\ResetPasswordController@showResetForm')->name('admin.password.reset.request');
 
     Route::middleware('login')->group(function (){
+        View::composer(['*'],function ($view){
+            if(Auth::guard('admin')->check()){
+                $admins = Admin::where('id','!=',Auth::guard('admin')->user()->id)->get();
+                $view->with('all_admin',$admins);
+            }
+        });
+
         Route::get('/','Admin\DashboardController@index')->name('admin.dashboard');
         Route::get('/admins/profile','Admin\AdminController@profile')->name('admin.profile');
         Route::resource('/admins','Admin\AdminController');
@@ -47,6 +56,7 @@ Route::prefix('/admin')->group(function (){
         Route::post('/roles/update-permission/{id}','Admin\RoleController@update_permission')->name('admin.update.role.permission');
         Route::post('/chaps-images/{id}','Admin\ChapController@image')->name('chaps.image');
         Route::get('/message','Admin\MessageController@index')->name('admin.messages');
+        Route::get('/message/{id}','Admin\MessageController@chatWith')->name('admin.messages.with');
         Route::post('/message/send','Admin\MessageController@send');
         // Axios
 

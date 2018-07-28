@@ -20,7 +20,11 @@
     <!-- .row -->
     <!-- .chat-row -->
     <div class="chat-main-box" id="app">
-        <message-box :user="{{ auth()->guard('admin')->user() }}"></message-box>
+        @if(empty($admin))
+            <message-box :user="{{ auth()->guard('admin')->user() }}"></message-box>
+        @else
+            <message-box :user="{{ auth()->guard('admin')->user() }}" :contact="{{ $admin }}"></message-box>
+        @endif
     </div>
     <!-- /.chat-row -->
 @endsection

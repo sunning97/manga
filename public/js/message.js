@@ -268,14 +268,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             type: Object,
             default: null,
             require: true
+        },
+        contact: {
+            type: Object,
+            default: null
         }
     },
     data: function data() {
         return {
             contacts: [],
             messages: [],
-            path: '',
-            contact: null
+            path: ''
         };
     },
     mounted: function mounted() {
@@ -290,6 +293,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.contacts = response.data.contacts;
                 _this.path = response.data.path;
             });
+            if (this.contact) {
+                axios.post('/admin/axios/get-conversation', {
+                    'contact_id': this.contact.id
+                }).then(function (response) {
+                    _this.messages = response.data;
+                });
+
+                Echo.private('message.' + this.user.id).listen('SendMessage', function (e) {
+                    if (_this.contact && e.message.sent_from == _this.contact.id) {
+                        _this.messages.push(e.message);
+                    }
+                });
+            }
         },
         getSelectedContact: function getSelectedContact(contact) {
             var _this2 = this;
