@@ -416,7 +416,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            selectedContact: null
+            selectedContact: null,
+            name: ''
         };
     },
     mounted: function mounted() {
@@ -435,6 +436,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.selectedContact = contact;
             this.$emit('contact', contact);
         }
+    },
+    watch: {
+        name: function name() {
+            $.each(this.contacts, function (index, contact) {
+                if (this.name == '') return;
+
+                if (str_slug(this.name) == str_slug(contact.f_name + ' ' + contact.l_name)) {
+                    console.log(contact);
+                }
+            });
+        }
     }
 });
 
@@ -451,7 +463,29 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "chat-left-inner" }, [
-      _vm._m(1),
+      _c("div", { staticClass: "form-material" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.name,
+              expression: "name"
+            }
+          ],
+          staticClass: "form-control p-20",
+          attrs: { type: "text", placeholder: "Tìm kiếm..." },
+          domProps: { value: _vm.name },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.name = $event.target.value
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
       _c(
         "ul",
@@ -502,17 +536,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "open-panel" }, [
       _c("i", { staticClass: "ti-angle-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-material" }, [
-      _c("input", {
-        staticClass: "form-control p-20",
-        attrs: { type: "text", placeholder: "Tìm kiếm..." }
-      })
     ])
   }
 ]

@@ -3,7 +3,7 @@
         <div class="open-panel"><i class="ti-angle-right"></i></div>
         <div class="chat-left-inner">
             <div class="form-material">
-                <input class="form-control p-20" type="text" placeholder="Tìm kiếm..."></div>
+                <input class="form-control p-20" type="text" placeholder="Tìm kiếm..." v-model="name"></div>
             <ul class="chatonline style-none" >
                 <li v-for="contact in contacts" @click="selectContact(contact)">
                     <a href="javascript:void(0)"><img :src="`${path}/${contact.avatar}`" :alt="`${contact.f_name} ${contact.l_name}`" class="img-circle"> <span>{{ `${contact.f_name} ${contact.l_name}` }} <small class="text-success">online</small></span></a>
@@ -30,6 +30,7 @@
         data(){
             return{
                 selectedContact:null,
+                name:''
             }
         },
         mounted(){
@@ -46,6 +47,18 @@
             selectContact:function (contact) {
                 this.selectedContact = contact;
                 this.$emit('contact',contact);
+            },
+        },
+        watch:{
+            name:function(){
+                $.each(this.contacts,function(index,contact){
+                    if(this.name == '') return;
+
+                    if(str_slug(this.name) == str_slug(contact.f_name +' '+ contact.l_name))
+                    {
+                        console.log(contact);
+                    }
+                });
             }
         }
     }
