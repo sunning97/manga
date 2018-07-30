@@ -28,7 +28,9 @@
                                 <th style="width: 200px;">Tiêu đề</th>
                                 <th>Trạng thái</th>
                                 <th class="text-center">Cover</th>
+                                @if(auth()->guard('admin')->user()->hasPermission('read-mangas') || auth()->guard('admin')->user()->hasPermission('update-mangas') || auth()->guard('admin')->user()->hasPermission('delete-mangas'))
                                 <th class="text-center">Action</th>
+                                @endif
                             </b>
                         </tr>
                         </thead>
@@ -47,6 +49,7 @@
                                 @endif
                                 </td>
                                 <td class="text-center"><img src="{{ asset('uploads/manga-covers/'.$manga->cover) }}" alt="" class="img-responsive" style="width: 100px;"></td>
+                                @if(auth()->guard('admin')->user()->hasPermission('read-mangas') || auth()->guard('admin')->user()->hasPermission('update-mangas') || auth()->guard('admin')->user()->hasPermission('delete-mangas'))
                                 <td class="text-center">
                                     <div class="btn-group m-b-20">
                                         <a href="{{ route('mangas.show',$manga->id) }}" class="btn btn-success btn-sm text-sm-center">Xem <i class="ti-eye"></i></a>
@@ -58,6 +61,7 @@
                                         @endcan
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                         @empty
                             <td colspan="5" class="text-center"><h4>Không có dữ liệu</h4></td>

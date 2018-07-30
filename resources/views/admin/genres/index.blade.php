@@ -33,7 +33,7 @@
                                 <th>Tên</th>
                                 <th style="width: 500px">Mô tả</th>
                                 <th class="text-center">Ngày tạo</th>
-                                @if(\Illuminate\Support\Facades\Auth::user()->hasPermission('update-genres') || \Illuminate\Support\Facades\Auth::user()->hasPermission('delete-genres'))
+                                @if(auth()->guard('admin')->user()->hasPermission('update-genres') || auth()->guard('admin')->user()->hasPermission('delete-genres'))
                                     <th class="text-center">Action</th>
                                 @endif
                             </b>
@@ -49,8 +49,8 @@
                                 <td><b>@{{ genre.name }}</b></td>
                                 <td>@{{ genre.description }}</td>
                                 <td class="text-center">@{{ date_format(genre.created_at) }}</td>
-                                @if(\Illuminate\Support\Facades\Auth::user()->hasPermission('update-genres') || \Illuminate\Support\Facades\Auth::user()->hasPermission('delete-genres'))
-                                    <td class="text-center">
+                                @if(auth()->guard('admin')->user()->hasPermission('update-genres') || auth()->guard('admin')->user()->hasPermission('delete-genres'))
+                                <td class="text-center">
                                         <div class="btn-group m-b-20">
                                             @can('update-genres')
                                                 <a :href="'{{ route('genres.index') }}'+'/'+genre.id+'/edit'" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>
@@ -72,7 +72,7 @@
                                 <td><b>{{ $genre->name }}</b></td>
                                 <td>{{ $genre->description }}</td>
                                 <td class="text-center">{{ $genre->created_at->format('d-m-Y') }}</td>
-                                @if(\Illuminate\Support\Facades\Auth::user()->hasPermission('update-genres') || \Illuminate\Support\Facades\Auth::user()->hasPermission('delete-genres'))
+                                @if(auth()->guard('admin')->user()->hasPermission('update-genres') || auth()->guard('admin')->user()->hasPermission('delete-genres'))
                                 <td class="text-center">
                                     <div class="btn-group m-b-20">
                                         @can('update-genres')

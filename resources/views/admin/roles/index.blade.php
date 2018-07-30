@@ -28,7 +28,9 @@
                                 <th style="width: 200px;">Name</th>
                                 <th>Description</th>
                                 <th style="width: 100px">Create at</th>
+                                @if(auth()->guard('admin')->user()->hasPermission('read-acl') || auth()->guard('admin')->user()->hasPermission('delete-acl') ||auth()->guard('admin')->user()->hasPermission('update-acl'))
                                 <th class="text-center">Action</th>
+                                @endif
                             </b>
                         </tr>
                         </thead>
@@ -39,6 +41,7 @@
                                 <td>{{ $role->name }}</td>
                                 <td>{{ $role->description }}</td>
                                 <td>{{ $role->created_at->format('d-m-Y') }}</td>
+                                @if(auth()->guard('admin')->user()->hasPermission('read-acl') || auth()->guard('admin')->user()->hasPermission('delete-acl') ||auth()->guard('admin')->user()->hasPermission('update-acl'))
                                 <td class="text-center">
                                     <div class="btn-group m-b-20">
                                         @can('read-acl')
@@ -52,6 +55,7 @@
                                         @endcan
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                         @empty
                             <td colspan="4" class="text-center">Không có dữ liệu</td>

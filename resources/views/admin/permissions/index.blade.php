@@ -35,7 +35,9 @@
                                 <th>#</th>
                                 <th>Tên</th>
                                 <th>Mô tả</th>
+                                @if(auth()->guard('admin')->user()->hasPermission('read-acl') || auth()->guard('admin')->user()->hasPermission('update-acl') || auth()->guard('admin')->user()->hasPermission('delete-acl'))
                                 <th class="text-center">Action</th>
+                                @endif
                             </b>
                         </tr>
                         </thead>
@@ -45,13 +47,15 @@
                                 <td>@{{ index+1 }}</td>
                                 <td><b>@{{ permission.name }}</b></td>
                                 <td>@{{ permission.description }}</td>
+                                @if(auth()->guard('admin')->user()->hasPermission('read-acl') || auth()->guard('admin')->user()->hasPermission('update-acl') || auth()->guard('admin')->user()->hasPermission('delete-acl'))
                                 <td class="text-center">
                                     <div class="btn-group m-b-20">
-                                        <a :href="'{{ route('permissions.index') }}/'+permission.id" class="btn btn-success btn-sm text-sm-center">Xem <i class="ti-eye"></i></a>
-                                        <a :href="'{{ route('permissions.index') }}/'+permission.id+'/edit'" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>
-                                        <button type="button" class="btn btn-danger btn-sm" @click="showDelete" :data-href="'{{ route('permissions.index') }}/'+permission.id">Xóa <i class="ti-trash" :data-href="'{{ route('permissions.index') }}/'+permission.id"></i></button>
+                                        @can('read-acl')<a :href="'{{ route('permissions.index') }}/'+permission.id" class="btn btn-success btn-sm text-sm-center">Xem <i class="ti-eye"></i></a>@endcan
+                                        @can('update-acl')<a :href="'{{ route('permissions.index') }}/'+permission.id+'/edit'" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>@endcan
+                                        @can('delete-acl')<button type="button" class="btn btn-danger btn-sm" @click="showDelete" :data-href="'{{ route('permissions.index') }}/'+permission.id">Xóa <i class="ti-trash" :data-href="'{{ route('permissions.index') }}/'+permission.id"></i></button>@endcan
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                         </div>
                         <tr v-if="searchResult.length == 0 && name.length > 0">
@@ -65,13 +69,15 @@
                                 <td>{{ $i }}</td>
                                 <td><b>{{ $permission->name }}</b></td>
                                 <td>{{ $permission->description }}</td>
+                                @if(auth()->guard('admin')->user()->hasPermission('read-acl') || auth()->guard('admin')->user()->hasPermission('update-acl') || auth()->guard('admin')->user()->hasPermission('delete-acl'))
                                 <td class="text-center">
                                     <div class="btn-group m-b-20">
-                                        <a href="{{ route('permissions.show',$permission->id) }}" class="btn btn-success btn-sm text-sm-center">Xem <i class="ti-eye"></i></a>
-                                        <a href="{{ route('permissions.edit',$permission->id) }}" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>
-                                        <button type="button" class="btn btn-danger btn-sm" @click="showDelete" data-href="{{ route('permissions.destroy',$permission->id) }}">Xóa <i class="ti-trash" data-href="{{ route('permissions.destroy',$permission->id) }}"></i></button>
+                                        @can('read-acl')<a href="{{ route('permissions.show',$permission->id) }}" class="btn btn-success btn-sm text-sm-center">Xem <i class="ti-eye"></i></a>@endcan
+                                        @can('update-acl')<a href="{{ route('permissions.edit',$permission->id) }}" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>@endcan
+                                        @can('delete-acl')<button type="button" class="btn btn-danger btn-sm" @click="showDelete" data-href="{{ route('permissions.destroy',$permission->id) }}">Xóa <i class="ti-trash" data-href="{{ route('permissions.destroy',$permission->id) }}"></i></button>@endcan
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                             @php
                                 $i++;

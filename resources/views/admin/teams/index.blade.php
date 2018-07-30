@@ -35,7 +35,9 @@
                                 <th>#</th>
                                 <th>Tên</th>
                                 <th>Mô tả</th>
+                                @if(auth()->guard('admin')->user()->hasPermission('update-teams') || auth()->guard('admin')->user()->hasPermission('delete-teams'))
                                 <th class="text-center">Action</th>
+                                @endif
                             </b>
                         </tr>
                         </thead>
@@ -45,13 +47,15 @@
                                 <td>@{{ index+1 }}</td>
                                 <td><b>@{{ team.name }}</b></td>
                                 <td>@{{ team.description }}</td>
+                                @if(auth()->guard('admin')->user()->hasPermission('update-teams') || auth()->guard('admin')->user()->hasPermission('delete-teams') || auth()->guard('admin')->user()->hasPermission('read-teams'))
                                 <td class="text-center">
                                     <div class="btn-group m-b-20">
                                         <a href="" class="btn btn-success btn-sm text-sm-center">Xem <i class="ti-eye"></i></a>
-                                        <a href="" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>
-                                        <button type="button" class="btn btn-danger btn-sm" @click="showDelete" data-href="">Xóa <i class="ti-trash" data-href=""></i></button>
+                                        @can('update-teams')<a href="" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>@endcan
+                                        @can('delete-teams')<button type="button" class="btn btn-danger btn-sm" @click="showDelete" data-href="">Xóa <i class="ti-trash" data-href=""></i></button>@endcan
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                         </div>
                         <tr class="text-center">
@@ -62,13 +66,15 @@
                                 <td>{{ $team->id }}</td>
                                 <td><b>{{ $team->name }}</b></td>
                                 <td>{!! $team->description !!}</td>
+                                @if(auth()->guard('admin')->user()->hasPermission('update-teams') || auth()->guard('admin')->user()->hasPermission('delete-teams')|| auth()->guard('admin')->user()->hasPermission('read-teams'))
                                 <td class="text-center">
                                     <div class="btn-group m-b-20">
                                         <a href="{{ route('translate-teams.show',$team->id) }}" class="btn btn-success btn-sm text-sm-center">Xem <i class="ti-eye"></i></a>
-                                        <a href="{{ route('translate-teams.edit',$team->id) }}" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>
-                                        <button type="button" class="btn btn-danger btn-sm" @click="showDelete" data-href="{{ route('translate-teams.destroy',$team->id) }}">Xóa <i class="ti-trash" data-href=""></i></button>
+                                        @can('update-teams')<a href="{{ route('translate-teams.edit',$team->id) }}" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>@endcan
+                                        @can('delete-teams')<button type="button" class="btn btn-danger btn-sm" @click="showDelete" data-href="{{ route('translate-teams.destroy',$team->id) }}">Xóa <i class="ti-trash" data-href=""></i></button>@endcan
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                         @empty
                             <td colspan="4" class="text-center"><h4>Không có dữ liệu</h4></td>
