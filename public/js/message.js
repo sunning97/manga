@@ -175,35 +175,15 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 80:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(81);
-
-
-/***/ }),
-
-/***/ 81:
-/***/ (function(module, exports, __webpack_require__) {
-
-$(window).load(function () {
-    Vue.component('message-box', __webpack_require__(82));
-    new Vue({
-        el: '#app'
-    });
-});
-
-/***/ }),
-
-/***/ 82:
+/***/ 103:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(83)
+var __vue_script__ = __webpack_require__(104)
 /* template */
-var __vue_template__ = __webpack_require__(96)
+var __vue_template__ = __webpack_require__(117)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -220,7 +200,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\MessageBox.vue"
+Component.options.__file = "resources\\assets\\js\\components\\message\\MessageBox.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -229,9 +209,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-38ffc60a", Component.options)
+    hotAPI.createRecord("data-v-46dbee70", Component.options)
   } else {
-    hotAPI.reload("data-v-38ffc60a", Component.options)
+    hotAPI.reload("data-v-46dbee70", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -243,14 +223,14 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 83:
+/***/ 104:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ListContact__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ListContact__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ListContact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ListContact__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Conversation__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Conversation__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Conversation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Conversation__);
 //
 //
@@ -289,6 +269,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getAllContact: function getAllContact() {
             var _this = this;
 
+            console.log('adsadas');
             axios.post('/admin/axios/all-contacts').then(function (response) {
                 _this.contacts = response.data.contacts;
                 _this.path = response.data.path;
@@ -332,15 +313,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 84:
+/***/ 105:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(85)
+var __vue_script__ = __webpack_require__(106)
 /* template */
-var __vue_template__ = __webpack_require__(86)
+var __vue_template__ = __webpack_require__(107)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -357,7 +338,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\ListContact.vue"
+Component.options.__file = "resources\\assets\\js\\components\\message\\ListContact.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -366,9 +347,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6cfedafb", Component.options)
+    hotAPI.createRecord("data-v-751d3826", Component.options)
   } else {
-    hotAPI.reload("data-v-6cfedafb", Component.options)
+    hotAPI.reload("data-v-751d3826", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -380,7 +361,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 85:
+/***/ 106:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -452,7 +433,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 86:
+/***/ 107:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -544,21 +525,21 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6cfedafb", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-751d3826", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 87:
+/***/ 108:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(88)
+var __vue_script__ = __webpack_require__(109)
 /* template */
-var __vue_template__ = __webpack_require__(95)
+var __vue_template__ = __webpack_require__(116)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -575,7 +556,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Conversation.vue"
+Component.options.__file = "resources\\assets\\js\\components\\message\\Conversation.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -584,9 +565,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4a2b01fa", Component.options)
+    hotAPI.createRecord("data-v-45d84a2f", Component.options)
   } else {
-    hotAPI.reload("data-v-4a2b01fa", Component.options)
+    hotAPI.reload("data-v-45d84a2f", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -598,14 +579,14 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 88:
+/***/ 109:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__conversation_MessageFeed__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__conversation_MessageFeed__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__conversation_MessageFeed___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__conversation_MessageFeed__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__conversation_WriteMessage__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__conversation_WriteMessage__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__conversation_WriteMessage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__conversation_WriteMessage__);
 //
 //
@@ -663,15 +644,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 89:
+/***/ 110:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(90)
+var __vue_script__ = __webpack_require__(111)
 /* template */
-var __vue_template__ = __webpack_require__(91)
+var __vue_template__ = __webpack_require__(112)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -688,7 +669,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\conversation\\MessageFeed.vue"
+Component.options.__file = "resources\\assets\\js\\components\\message\\conversation\\MessageFeed.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -697,9 +678,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c6fe9aba", Component.options)
+    hotAPI.createRecord("data-v-90bb5950", Component.options)
   } else {
-    hotAPI.reload("data-v-c6fe9aba", Component.options)
+    hotAPI.reload("data-v-90bb5950", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -711,7 +692,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 90:
+/***/ 111:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -784,7 +765,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 91:
+/***/ 112:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -828,21 +809,21 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c6fe9aba", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-90bb5950", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 92:
+/***/ 113:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(93)
+var __vue_script__ = __webpack_require__(114)
 /* template */
-var __vue_template__ = __webpack_require__(94)
+var __vue_template__ = __webpack_require__(115)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -859,7 +840,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\conversation\\WriteMessage.vue"
+Component.options.__file = "resources\\assets\\js\\components\\message\\conversation\\WriteMessage.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -868,9 +849,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6196323a", Component.options)
+    hotAPI.createRecord("data-v-aaaeafb6", Component.options)
   } else {
-    hotAPI.reload("data-v-6196323a", Component.options)
+    hotAPI.reload("data-v-aaaeafb6", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -882,7 +863,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 93:
+/***/ 114:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -918,7 +899,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 94:
+/***/ 115:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1010,13 +991,13 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6196323a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-aaaeafb6", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 95:
+/***/ 116:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1064,13 +1045,13 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4a2b01fa", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-45d84a2f", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 96:
+/***/ 117:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1103,9 +1084,27 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-38ffc60a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-46dbee70", module.exports)
   }
 }
+
+/***/ }),
+
+/***/ 80:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(81);
+
+
+/***/ }),
+
+/***/ 81:
+/***/ (function(module, exports, __webpack_require__) {
+
+Vue.component('message-box', __webpack_require__(103));
+new Vue({
+    el: '#app'
+});
 
 /***/ })
 

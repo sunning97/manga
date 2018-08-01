@@ -32,6 +32,7 @@
         },
         methods:{
             getAllContact:function () {
+                console.log('adsadas');
                 axios.post('/admin/axios/all-contacts').then(response=>{
                     this.contacts = response.data.contacts;
                     this.path = response.data.path;
