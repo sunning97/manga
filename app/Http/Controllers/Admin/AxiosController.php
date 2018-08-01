@@ -217,15 +217,21 @@ class AxiosController extends Controller
 
     public function getAdmins(Request $request)
     {
-        if($request->state == 'ACTIVE')
+        if($request->state)
         {
-            $adminsActive = Admin::where('id', '!=', Auth::user()->id)->where('state','=','ACTIVE')->paginate(10);
+            $adminsActive = DB::table('admins')
+            ->leftJoin('admin_role','admins.id','=','admin_role.admin_id')
+            ->where('admins.id','!=',Auth::guard('admin')->user()->id)
+            ->where('admins.state','=',$request->state)
+            ->paginate(5);
             return response()->json($adminsActive,200);
-        }
-        else if($request->state == 'INACTIVE')
-        {
-            $adminsInactive = Admin::where('id', '!=', Auth::user()->id)->where('state','=','INACTIVE')->paginate(10);
-            return response()->json($adminsInactive,200);
+
         } else return response('error',404);
+    }
+
+    public function getRoles()
+    {
+        $roles = Role::all();
+        return response()->json($roles,200);
     }
 }
