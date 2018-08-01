@@ -127,7 +127,7 @@
 </div>
 <!-- /#wrapper -->
 <!-- jQuery -->
-<script src="{{ asset('assets/admin/plugin/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="{{ asset('assets/admin/bootstrap/dist/js/tether.min.js') }}"></script>
 <script src="{{ asset('assets/admin/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -144,7 +144,6 @@
 <!--Added Javascript-->
 <script src="{{ asset('assets/admin/js/added.js') }}"></script>
 <!-- Custom Theme JavaScript -->
-<script src="{{ asset('js/app.js') }}"></script>
 
 @yield('plugin_js')
 

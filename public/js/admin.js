@@ -60,77 +60,39 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 78);
+/******/ 	return __webpack_require__(__webpack_require__.s = 101);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 78:
+/***/ 101:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(79);
+module.exports = __webpack_require__(102);
 
 
 /***/ }),
 
-/***/ 79:
+/***/ 102:
 /***/ (function(module, exports) {
 
 var app = new Vue({
-    el: "#app",
+    el: '#app',
     data: {
-        name: "",
-        searchResult: []
+        adminActive: []
     },
-    watch: {
-        name: function name() {
-            this.getSearch();
-        }
+    mounted: function mounted() {
+        this.getAdmins('ACTIVE');
     },
+
     methods: {
-        getSearch: function getSearch() {
-            var app = this;
-            if (app.name.length > 0) {
-                axios.post('/admin/axios/search-author', {
-                    name: app.name
-                }).then(function (rs) {
-                    app.searchResult = rs.data;
-                }).catch(function (err) {
-                    app.searchResult = [];
-                });
-            } else {
-                app.searchResult = [];
-            }
-        },
-        date_format: function (_date_format) {
-            function date_format(_x) {
-                return _date_format.apply(this, arguments);
-            }
+        getAdmins: function getAdmins(type) {
+            var _this = this;
 
-            date_format.toString = function () {
-                return _date_format.toString();
-            };
-
-            return date_format;
-        }(function (str) {
-            return date_format(str);
-        }),
-        showDelete: function showDelete(event) {
-            swal({
-                title: "Bạn có chắc chắn Xóa?",
-                text: "Bạn sẽ không thể phục hồi lại",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Xóa",
-                closeOnConfirm: true
-            }, function () {
-                axios.delete($(event.path[0]).data('url') + '/authors/' + $(event.path[0]).data('id')).then(function (rs) {
-                    swal("Đã xóa!", rs.data + " đã được xóa bỏ", "success");
-                    location.reload();
-                }).catch(function (e) {
-                    swal("Không thể xóa!", "Kiểm tra lại đường truyền", "error");
-                });
+            axios.post('/admin/axios/get-admins', {
+                state: type
+            }).then(function (respone) {
+                _this.adminActive = respone.data;
             });
         }
     }

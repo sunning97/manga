@@ -29,15 +29,15 @@ class AdminController extends Controller
     public function index()
     {
         if (!Auth::user()->hasPermission('read-admins')) return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền xem quản trị viên']);
-        $admins = Admin::where('id', '!=', Auth::user()->id)->paginate(10);
-        return view('admin.admins.index')->withAdmins($admins);
+        $adminsActive = Admin::where('id', '!=', Auth::user()->id)->paginate(10)->where('state','=','ACTIVE');
+        $adminsInactive = Admin::where('id', '!=', Auth::user()->id)->paginate(10)->where('state','=','INACTIVE');
+        return view('admin.admins.index')->withAdminsActive($adminsActive)->withAdminsInactive($adminsInactive);
     }
 
     public function profile()
     {
         return view('admin.auth.profile')->withAdmin(Auth::user());
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -45,7 +45,9 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        if(!Auth::guard('admin')->user()->hasPermission('create-admins'))
+            return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền tạo mới admin!']);
+        return view('admin.admins.create');
     }
 
     /**
@@ -56,6 +58,40 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+
+        $all = $request->only(['f_name','l_name','email','gender','birth_date','province','district','ward','street','password']);
+        $data = array(
+            'f_name' => $all['f_name'],
+            'l_name' => $all['l_name'],
+            'email' => $all['email'],
+            'gender' => $all['gender'],
+            'avatar' => 'default.png'
+        );
+
+        if($request->province){
+            $ward = Ward::find($all['ward'])->type.' '.Ward::find($all['ward'])->name;
+            $district = District::find($all['district'])->type.' '.District::find($all['district'])->name;
+            $province = Province::find($all['province'])->type.' '.Province::find($all['province'])->name;
+            $address = $all['street'].', '.$ward.', '.$district.', '.$province;
+            $data['address'] = $address;
+        }
+        if($request->password){
+            $password = Hash::make($all['password']);
+        } else $password = Hash::make('password');
+
+        $data['password'] = $password;
+
+        if($request->birth_date){
+            $birth_date = $all['birth_date'];
+            $data['birth_date'] = $birth_date;
+        }
+
+        $admin = new Admin();
+        foreach ($data as $k => $v){
+            $admin->$k = $v;
+        }
+        $admin->save();
+        return redirect()->route('admins.index')->withSuccess(['mess'=>'Tạo admin thành công, chờ xác nhận email']);
     }
 
     /**

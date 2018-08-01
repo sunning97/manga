@@ -60,104 +60,95 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 52);
+/******/ 	return __webpack_require__(__webpack_require__.s = 99);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 52:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(53);
-
-
-/***/ }),
-
-/***/ 53:
+/***/ 100:
 /***/ (function(module, exports) {
 
 var app = new Vue({
     el: '#app',
     data: {
-        name: name,
-        isChangeInfo: false,
-        isChangeAvatar: false,
-        isChangeAddress: false,
-        isChangePassword: false,
-        isProvinceSelected: false,
-        isDistrictSelected: false,
-        provinceId: '',
-        districtId: '',
         provinces: [],
         districts: [],
-        wards: []
+        wards: [],
+        isAddress: false,
+        isProvince: false,
+        isDistrict: false,
+        isPassword: false
     },
-    watch: {
-        name: function name(str) {
-            this.getSlug(str);
-        }
+    mounted: function mounted() {
+        this.getProvinces();
     },
+
     methods: {
-        getSlug: function getSlug(str) {
-            return str_slug(str);
-        },
         getProvinces: function getProvinces() {
             var _this = this;
 
-            axios.get('/manga/axios/provinces').then(function (rs) {
-                _this.provinces = rs.data;
-            }).catch(function (e) {});
+            axios.get('/admin/axios/provinces').then(function (response) {
+                _this.provinces = response.data;
+            });
         },
-        getDistricts: function getDistricts(id) {
+        getDistricts: function getDistricts(e) {
             var _this2 = this;
 
-            axios.get('/manga/axios/districts/' + id).then(function (rs) {
-                _this2.districts = rs.data;
-                _this2.wards = [];
-                _this2.isProvinceSelected = true;
-            }).catch(function (e) {});
+            this.isProvince = true;
+            axios.get('/admin/axios/districts/' + $(e.path[0]).val()).then(function (response) {
+                _this2.districts = response.data;
+            });
         },
-        getWards: function getWards(id) {
+        getWards: function getWards(e) {
             var _this3 = this;
 
-            axios.get('/manga/axios/wards/' + id).then(function (rs) {
-                _this3.wards = rs.data;
-                _this3.isDistrictSelected = true;
-            }).catch(function (e) {});
+            this.isDistrict = true;
+            axios.get('/admin/axios/wards/' + $(e.path[0]).val()).then(function (response) {
+                _this3.wards = response.data;
+            });
         }
-    }, mounted: function mounted() {
-        this.getProvinces();
     }
 });
 
-$('#passForm').validate({
+$("#signupForm").validate({
     rules: {
-        curr_password: {
-            required: true
-        },
+        f_name: "required",
+        l_name: "required",
         password: {
             required: true,
-            minlength: 5
+            minlength: 6
         },
         confirm_password: {
             required: true,
-            minlength: 5,
-            equalTo: "#pass"
+            minlength: 6,
+            equalTo: "#password"
+        },
+        province: "required",
+        district: "required",
+        ward: "required",
+        street: "required",
+        email: {
+            required: true,
+            email: true
         }
     },
     messages: {
-        curr_password: {
-            required: "Vui lòng nhập mật khẩu hiện tại"
-        },
+        f_name: "Họ không được để trống!",
+        l_name: "Tên không được để trống",
         password: {
-            required: "Vui lòng nhập mật khẩu mới",
-            minlength: "Mật khẩu phải dài ít nhất 5 kí tự"
+            required: "Nhập mật khẩu",
+            minlength: "Mật khẩu phải nhiều hơn 5 kí tự"
         },
         confirm_password: {
-            required: "Vui lòng nhập mật khẩu mới",
-            minlength: "Mật khẩu phải dài ít nhất 5 kí tự",
-            equalTo: "Mật khẩu đã nhập không khớp!"
-        }
+            required: "Nhập mật khẩu",
+            minlength: "Mật khẩu phải nhiều hơn 5 kí tự",
+            equalTo: "Mật khẩu không khớp!"
+        },
+        province: "Vui lòng chọn Tỉnh/Thành phố",
+        district: "Vui lòng chọn Quận/Huyện",
+        ward: "Vui lòng chọn Phường/Xã",
+        street: "Vui lòng nhập tên đường, số nhà",
+        email: "Vui lòng nhập email!"
     },
     errorPlacement: function errorPlacement(label, element) {
         label.addClass('mt-2 text-danger');
@@ -169,8 +160,13 @@ $('#passForm').validate({
     }
 });
 
-jQuery('.mydatepicker').datepicker();
-$('#input-file-now').dropify();
+/***/ }),
+
+/***/ 99:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(100);
+
 
 /***/ })
 

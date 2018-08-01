@@ -215,4 +215,17 @@ class AxiosController extends Controller
         return response('',404);
     }
 
+    public function getAdmins(Request $request)
+    {
+        if($request->state == 'ACTIVE')
+        {
+            $adminsActive = Admin::where('id', '!=', Auth::user()->id)->where('state','=','ACTIVE')->paginate(10);
+            return response()->json($adminsActive,200);
+        }
+        else if($request->state == 'INACTIVE')
+        {
+            $adminsInactive = Admin::where('id', '!=', Auth::user()->id)->where('state','=','INACTIVE')->paginate(10);
+            return response()->json($adminsInactive,200);
+        } else return response('error',404);
+    }
 }
