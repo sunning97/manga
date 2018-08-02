@@ -175,15 +175,33 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 103:
+/***/ 80:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(81);
+
+
+/***/ }),
+
+/***/ 81:
+/***/ (function(module, exports, __webpack_require__) {
+
+Vue.component('message-box', __webpack_require__(82));
+new Vue({
+    el: '#app'
+});
+
+/***/ }),
+
+/***/ 82:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(104)
+var __vue_script__ = __webpack_require__(83)
 /* template */
-var __vue_template__ = __webpack_require__(117)
+var __vue_template__ = __webpack_require__(96)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -223,14 +241,14 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 104:
+/***/ 83:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ListContact__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ListContact__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ListContact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ListContact__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Conversation__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Conversation__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Conversation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Conversation__);
 //
 //
@@ -313,15 +331,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 105:
+/***/ 84:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(106)
+var __vue_script__ = __webpack_require__(85)
 /* template */
-var __vue_template__ = __webpack_require__(107)
+var __vue_template__ = __webpack_require__(86)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -361,7 +379,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 106:
+/***/ 85:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -433,7 +451,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 107:
+/***/ 86:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -531,15 +549,15 @@ if (false) {
 
 /***/ }),
 
-/***/ 108:
+/***/ 87:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(109)
+var __vue_script__ = __webpack_require__(88)
 /* template */
-var __vue_template__ = __webpack_require__(116)
+var __vue_template__ = __webpack_require__(95)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -579,14 +597,14 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 109:
+/***/ 88:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__conversation_MessageFeed__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__conversation_MessageFeed__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__conversation_MessageFeed___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__conversation_MessageFeed__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__conversation_WriteMessage__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__conversation_WriteMessage__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__conversation_WriteMessage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__conversation_WriteMessage__);
 //
 //
@@ -644,15 +662,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 110:
+/***/ 89:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(111)
+var __vue_script__ = __webpack_require__(90)
 /* template */
-var __vue_template__ = __webpack_require__(112)
+var __vue_template__ = __webpack_require__(91)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -692,7 +710,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 111:
+/***/ 90:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -765,7 +783,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 112:
+/***/ 91:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -815,15 +833,15 @@ if (false) {
 
 /***/ }),
 
-/***/ 113:
+/***/ 92:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(114)
+var __vue_script__ = __webpack_require__(93)
 /* template */
-var __vue_template__ = __webpack_require__(115)
+var __vue_template__ = __webpack_require__(94)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -863,7 +881,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 114:
+/***/ 93:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -899,7 +917,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 115:
+/***/ 94:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -997,7 +1015,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 116:
+/***/ 95:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1051,7 +1069,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 117:
+/***/ 96:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1087,24 +1105,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-46dbee70", module.exports)
   }
 }
-
-/***/ }),
-
-/***/ 80:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(81);
-
-
-/***/ }),
-
-/***/ 81:
-/***/ (function(module, exports, __webpack_require__) {
-
-Vue.component('message-box', __webpack_require__(103));
-new Vue({
-    el: '#app'
-});
 
 /***/ })
 

@@ -1,10 +1,13 @@
 <template>
     <div>
         <ul class="nav customtab2 nav-tabs" role="tablist">
-            <li role="presentation" class="nav-item" @click="admin('ACTIVE',1)"><a href="#home6" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs">Tài khoản đã kíck hoạt</span></a></li>
-            <li role="presentation" class="nav-item" @click="admin('INACTIVE',1)"><a href="#profile6" class="nav-link" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Tài khoản chưa kích hoạt</span></a></li>
+            <li role="presentation" class="nav-item" @click="admin('ACTIVE',1)"><a href="#home6" class="nav-link active" role="tab" data-toggle="tab"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs">Tài khoản đã kíck hoạt</span></a></li>
+            <li role="presentation" class="nav-item" @click="admin('INACTIVE',1)"><a href="#profile6" class="nav-link" role="tab" data-toggle="tab"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Tài khoản chưa kích hoạt</span></a></li>
         </ul>
         <div class="tab-content">
+            <div class="row">
+                <input class="form-control" type="text" v-model="searchData">
+            </div>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -16,12 +19,25 @@
                         <th class="text-center">Hành động</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody v-if="isSearching">
+                        <tr>
+                            <td colspan="5">đang tìm kiếm..</td>
+                        </tr>
+                    </tbody>
+                    <tbody v-if="searchResult.length == 0 && searchData.length != '' && isSearching == false">
+                        <tr>
+                            <td colspan="5">Không tìm thấy</td>
+                        </tr>
+                    </tbody>
+                    <tbody v-if="searchResult.length == 0 && searchData.length == ''">
                         <admin-row v-for="(admin,index) in admins" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)"></admin-row>
+                    </tbody>
+                    <tbody v-if="searchResult.length > 0 && searchData.length != ''">
+                        <admin-row v-for="(admin,index) in searchResult" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)"></admin-row>
                     </tbody>
                 </table>
             </div>
-            <pagination :pagination="pagination" :offset="offset" @click.native="getAdmins(state,pagination.current_page)"></pagination>
+            <pagination :pagination="pagination" :offset="offset" @click.native="getAdmins(state,pagination.current_page)" v-if="pagination.per_page < pagination.total && searchResult.length == 0 && searchData.length == ''"></pagination>
         </div>
     </div>
 </template>
@@ -36,6 +52,9 @@
         },
         data(){
             return{
+                searchData:'',
+                searchResult:[],
+                isSearching:false,
                 admins:[],
                 pagination:{},
                 offset:3,
@@ -46,6 +65,11 @@
         mounted(){
             this.getRoles();
             this.getAdmins(this.state,1);
+        },
+        watch:{
+            searchData:function () {
+                this.getSearch();
+            }
         },
         methods:{
             getAdmins:function (state,page) {
@@ -74,6 +98,24 @@
             admin:function (state) {
                 this.state = state;
                 this.getAdmins(this.state,1);
+            },
+            getSearch:function () {
+                if(this.searchData == '')
+                {
+                    this.searchResult = [];
+                    return;
+                }
+                this.isSearching = true;
+                axios.post('/admin/axios/search-admin',{
+                    data:this.searchData,
+                    state:this.state
+                }).then(response=>{
+                    this.isSearching = false;
+                    this.searchResult = response.data;
+                }).catch(error=>{
+                    this.isSearching = false;
+                    this.searchResult = [];
+                });
             }
         }
     }

@@ -223,6 +223,7 @@ class AxiosController extends Controller
             ->leftJoin('admin_role','admins.id','=','admin_role.admin_id')
             ->where('admins.id','!=',Auth::guard('admin')->user()->id)
             ->where('admins.state','=',$request->state)
+            ->select('f_name','l_name','email','role_id')
             ->paginate(5);
             return response()->json($adminsActive,200);
 
@@ -233,5 +234,24 @@ class AxiosController extends Controller
     {
         $roles = Role::all();
         return response()->json($roles,200);
+    }
+
+    public function searchAdmin(Request $request)
+    {
+        $result = DB::table('admins')
+            ->leftJoin('admin_role','admins.id','=','admin_role.admin_id')
+            ->where('admins.id','!=',Auth::guard('admin')->user()->id)
+            ->where('admins.state','=',$request->state)
+            ->where(function ($query) use ($request){
+            $query->where('admins.f_name','like','%'.$request->data.'%')
+                ->orWhere('admins.l_name','like','%'.$request->data.'%')
+                ->orWhere('admins.email','=',$request->data)
+                ->orWhere('admins.phone','=',"'$request->data'");
+            })->get();
+        if($result->first()){
+            return response()->json($result,200);
+        } else {
+            return response('No sesult',404);
+        }
     }
 }

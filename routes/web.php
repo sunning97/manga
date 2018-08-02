@@ -85,5 +85,6 @@ Route::prefix('/admin')->group(function (){
         Route::post('/axios/get-conversation','Admin\AxiosController@getConversation');
         Route::post('/axios/get-admins','Admin\AxiosController@getAdmins');
         Route::get('/axios/get-roles','Admin\AxiosController@getRoles');
+        Route::post('/axios/search-admin','Admin\AxiosController@searchAdmin');
     });
 });
