@@ -17,10 +17,12 @@ Route::get('/login','Site\LoginController@showloginForm')->name('login');
 Route::post('/login','Site\LoginController@login')->name('login.submit');
 Route::get('/logout','Site\LoginController@logout')->name('logout');
 Route::get('/','Site\HomeController@index')->name('home');
+Route::get('activation/{token}', 'Site\HomeController@activateUser')->name('site.activate');
 
 
 // Route for admin controll panel
 Route::prefix('/admin')->group(function (){
+    Route::get('activation/{token}', 'Admin\ActivationController@activateUser')->name('admin.activate');
     Route::get('/login','Admin\LoginController@showLoginForm')->name('admin.login');
     Route::post('/login','Admin\LoginController@login')->name('admin.login.submit');
     Route::get('/logout','Admin\LoginController@logout')->name('admin.logout');
@@ -86,5 +88,6 @@ Route::prefix('/admin')->group(function (){
         Route::post('/axios/get-admins','Admin\AxiosController@getAdmins');
         Route::get('/axios/get-roles','Admin\AxiosController@getRoles');
         Route::post('/axios/search-admin','Admin\AxiosController@searchAdmin');
+        Route::post('/axios/admin/check-email','Admin\AxiosController@checkEmailAdmin');
     });
 });

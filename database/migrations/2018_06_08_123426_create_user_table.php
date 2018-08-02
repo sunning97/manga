@@ -28,6 +28,7 @@ class CreateUserTable extends Migration
             $table->string('website','255')->nullable();
             $table->string('password','255');
             $table->text('avatar');
+            $table->enum('state',['ACTIVE','INACTIVE'])->default('INACTIVE');
             $table->rememberToken();
             $table->timestamps();
         });

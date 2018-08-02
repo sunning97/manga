@@ -77,12 +77,20 @@ var app = new Vue({
         isAddress: false,
         isProvince: false,
         isDistrict: false,
-        isPassword: false
+        isPassword: false,
+        email: '',
+        isEmail: false,
+        emailCheckMess: ''
     },
     mounted: function mounted() {
         this.getProvinces();
     },
 
+    watch: {
+        email: function email() {
+            console.log(this.email);
+        }
+    },
     methods: {
         getProvinces: function getProvinces() {
             var _this = this;
@@ -106,6 +114,22 @@ var app = new Vue({
             axios.get('/admin/axios/wards/' + $(e.path[0]).val()).then(function (response) {
                 _this3.wards = response.data;
             });
+        },
+        checkEmail: function checkEmail() {
+            var _this4 = this;
+
+            this.isEmail = false;
+            axios.post('/admin/axios/admin/check-email', {
+                email: this.email
+            }).then(function (response) {
+                if (response.data == 'used') {
+                    _this4.isEmail = true;
+                    _this4.emailCheckMess = response.data;
+                } else _this4.emailCheckMess = response.data;
+            });
+        },
+        submit: function submit(e) {
+            if (this.isEmail) e.preventDefault();
         }
     }
 });

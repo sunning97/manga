@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Classes\ActivationService;
 use App\District;
 use App\Models\Admin;
 use App\Province;
@@ -15,10 +16,11 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
-
-    public function __construct()
+    protected $activationService;
+    public function __construct(ActivationService $activationService)
     {
         $this->middleware('auth:admin');
+        $this->activationService = $activationService;
     }
 
     /**
@@ -58,7 +60,6 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-
         $all = $request->only(['f_name','l_name','email','gender','birth_date','province','district','ward','street','password']);
         $data = array(
             'f_name' => $all['f_name'],
@@ -67,7 +68,7 @@ class AdminController extends Controller
             'gender' => $all['gender'],
             'avatar' => 'default.png'
         );
-
+        if(Admin::where('email',$request->email)->first()) return redirect()->back()->withErrors(['mess'=>'Email đã được sử dụng. vui lòng nhập email khác']);
         if($request->province){
             $ward = Ward::find($all['ward'])->type.' '.Ward::find($all['ward'])->name;
             $district = District::find($all['district'])->type.' '.District::find($all['district'])->name;
@@ -83,14 +84,15 @@ class AdminController extends Controller
 
         if($request->birth_date){
             $birth_date = $all['birth_date'];
-            $data['birth_date'] = $birth_date;
+            $data['birth_date'] = date('Y-m-d',strtotime($birth_date));
         }
-
         $admin = new Admin();
         foreach ($data as $k => $v){
             $admin->$k = $v;
         }
         $admin->save();
+
+        $this->activationService->sendActivationMail($admin);
         return redirect()->route('admins.index')->withSuccess(['mess'=>'Tạo admin thành công, chờ xác nhận email']);
     }
 

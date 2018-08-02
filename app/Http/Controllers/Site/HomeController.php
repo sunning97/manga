@@ -11,4 +11,9 @@ class HomeController extends Controller
     {
         return 'home';
     }
+
+    public function activateUser()
+    {
+
+    }
 }

@@ -7,28 +7,51 @@ var app = new Vue({
         isAddress:false,
         isProvince:false,
         isDistrict:false,
-        isPassword:false
+        isPassword:false,
+        email:'',
+        isEmail:false,
+        emailCheckMess:'',
     },
     mounted(){
         this.getProvinces();
+    },
+    watch:{
+        email:function () {
+            console.log(this.email);
+        }
     },
     methods:{
         getProvinces:function () {
             axios.get('/admin/axios/provinces').then(response=>{
                 this.provinces = response.data;
-            })
+            });
         },
         getDistricts:function (e) {
             this.isProvince = true;
             axios.get(`/admin/axios/districts/${$(e.path[0]).val()}`).then(response=>{
                 this.districts = response.data;
-            })
+            });
         },
         getWards:function (e) {
             this.isDistrict = true;
             axios.get(`/admin/axios/wards/${$(e.path[0]).val()}`).then(response=>{
                 this.wards = response.data;
             });
+        },
+        checkEmail:function () {
+            this.isEmail = false;
+            axios.post('/admin/axios/admin/check-email',{
+                email:this.email
+            }).then(response=>{
+                if(response.data == 'used'){
+                    this.isEmail = true;
+                    this.emailCheckMess = response.data;
+                }
+                else this.emailCheckMess = response.data;
+            });
+        },
+        submit:function (e) {
+            if(this.isEmail) e.preventDefault();
         }
     }
 });

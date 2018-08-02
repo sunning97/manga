@@ -20,6 +20,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 
 class AxiosController extends Controller
 {
@@ -254,4 +255,15 @@ class AxiosController extends Controller
             return response('No sesult',404);
         }
     }
+
+    public function checkEmailAdmin(Request $request)
+    {
+        $email = $request->only('email');
+
+        if(Admin::where('email',$email)->first()){
+            return response('used',200);
+        }
+        return response('ok',200);
+    }
+
 }

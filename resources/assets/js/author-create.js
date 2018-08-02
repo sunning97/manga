@@ -6,7 +6,7 @@ var app = new Vue({
     },
     watch: {
         name: function (str) {
-            this.getSlug(str)
+            this.getSlug(str);
         }
     },
     methods: {

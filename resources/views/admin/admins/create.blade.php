@@ -62,7 +62,9 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label">Địa chỉ email</label>
-                                    <input type="text" id="email" name="email" class="form-control" placeholder="" data-inputmask="'alias': 'email'"></div>
+                                    <input type="text" id="email" name="email" class="form-control" placeholder="" v-model="email" @blur="checkEmail">
+                                    <label id="email-errorr" class="error mt-2 text-danger" for="email" style="" v-if="isEmail"> Email đã được sử dụng !</label>
+                                </div>
                             </div>
                         </div>
                         <!--/row-->
@@ -133,7 +135,7 @@
                         </div>
                     </div>
                     <div class="form-actions text-right mt-5">
-                        <button type="submit" class="btn btn-success">Tạo Admin</button>
+                        <button type="submit" class="btn btn-success" @click="submit">Tạo Admin</button>
                     </div>
                 </form>
             </div>
