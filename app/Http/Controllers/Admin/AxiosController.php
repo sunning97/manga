@@ -285,4 +285,11 @@ class AxiosController extends Controller
         return response('ok',200);
     }
 
+    public function checkPer(Request $request)
+    {
+        if(Auth::guard('admin')->user()->hasPermission($request->permission)){
+            return response()->json('ok',200);
+        }
+        return response()->json('error',200);
+    }
 }

@@ -91,5 +91,6 @@ Route::prefix('/admin')->group(function (){
         Route::get('/axios/get-roles','Admin\AxiosController@getRoles');
         Route::post('/axios/search-admin','Admin\AxiosController@searchAdmin');
         Route::post('/axios/admin/check-email','Admin\AxiosController@checkEmailAdmin');
+        Route::post('/axios/admin/check-permission','Admin\AxiosController@checkPer');
     });
 });

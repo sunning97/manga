@@ -30,7 +30,7 @@
                         </tr>
                     </tbody>
                     <tbody v-if="searchResult.length == 0 && searchData.length == ''">
-                        <admin-row v-for="(admin,index) in admins" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)" :url="url"></admin-row>
+                        <admin-row v-for="(admin,index) in admins" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)" :url="url" :permissions="permissions"></admin-row>
                     </tbody>
                     <tbody v-if="searchResult.length > 0 && searchData.length != ''">
                         <admin-row v-for="(admin,index) in searchResult" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)" :url="url"></admin-row>
@@ -64,10 +64,14 @@
                 pagination:{},
                 offset:3,
                 roles:[],
-                state:'ACTIVE'
+                state:'ACTIVE',
+                permissions:[]
             }
         },
         mounted(){
+            this.checkPermission('delete-admins');
+            this.checkPermission('update-admins');
+            this.checkPermission('read-admins');
             this.getRoles();
             this.getAdmins(this.state,1);
         },
@@ -120,6 +124,15 @@
                 }).catch(error=>{
                     this.isSearching = false;
                     this.searchResult = [];
+                });
+            },
+            checkPermission:function (permission) {
+                axios.post('/admin/axios/admin/check-permission',{
+                    permission:permission
+                }).then(response=>{
+                    if(response.data == 'ok'){
+                        this.permissions.push(permission);
+                    }
                 });
             }
         }

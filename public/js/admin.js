@@ -319,10 +319,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             pagination: {},
             offset: 3,
             roles: [],
-            state: 'ACTIVE'
+            state: 'ACTIVE',
+            permissions: []
         };
     },
     mounted: function mounted() {
+        this.checkPermission('delete-admins');
+        this.checkPermission('update-admins');
+        this.checkPermission('read-admins');
         this.getRoles();
         this.getAdmins(this.state, 1);
     },
@@ -380,6 +384,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 _this3.isSearching = false;
                 _this3.searchResult = [];
+            });
+        },
+        checkPermission: function checkPermission(permission) {
+            var _this4 = this;
+
+            axios.post('/admin/axios/admin/check-permission', {
+                permission: permission
+            }).then(function (response) {
+                if (response.data == 'ok') {
+                    _this4.permissions.push(permission);
+                }
             });
         }
     }
@@ -458,6 +473,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
+        permissions: {
+            type: Array
+        },
         admin: {
             type: Object
         },
@@ -469,6 +487,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         url: {
             type: String
+        }
+    },
+    methods: {
+        checkPermission: function checkPermission(permission) {
+            if (this.permissions.indexOf(permission) > -1) return true;
         }
     }
 });
@@ -499,42 +522,44 @@ var render = function() {
           attrs: { role: "group", "aria-label": "Basic example" }
         },
         [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-sm btn-success",
-              attrs: { href: _vm.url + "/" + _vm.admin.id }
-            },
-            [_vm._v("Xem "), _c("i", { staticClass: "ti-eye" })]
-          ),
+          _vm.checkPermission("read-admins")
+            ? _c(
+                "a",
+                {
+                  staticClass: "btn btn-sm btn-success",
+                  attrs: { href: _vm.url + "/" + _vm.admin.id }
+                },
+                [_vm._v("Xem "), _c("i", { staticClass: "ti-eye" })]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-sm btn-primary",
-              attrs: { href: _vm.url + "/" + _vm.admin.id + "/edit" }
-            },
-            [_vm._v("Cập nhât quyền "), _c("i", { staticClass: "ti-pencil" })]
-          ),
+          _vm.checkPermission("update-admins")
+            ? _c(
+                "a",
+                {
+                  staticClass: "btn btn-sm btn-primary",
+                  attrs: { href: _vm.url + "/" + _vm.admin.id + "/edit" }
+                },
+                [_vm._v("Vai trò "), _c("i", { staticClass: "ti-pencil" })]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _vm._m(0)
+          _vm.checkPermission("delete-admins")
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-sm btn-danger",
+                  attrs: { type: "button" }
+                },
+                [_vm._v("Xóa "), _c("i", { staticClass: "ti-trash" })]
+              )
+            : _vm._e()
         ]
       )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-sm btn-danger", attrs: { type: "button" } },
-      [_vm._v("Xóa "), _c("i", { staticClass: "ti-trash" })]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -901,7 +926,8 @@ var render = function() {
                         admin: admin,
                         index: _vm.getIndex(index),
                         role: _vm.role(admin.role_id),
-                        url: _vm.url
+                        url: _vm.url,
+                        permissions: _vm.permissions
                       }
                     })
                   })
