@@ -60,20 +60,20 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 44);
+/******/ 	return __webpack_require__(__webpack_require__.s = 46);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 44:
+/***/ 46:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(45);
+module.exports = __webpack_require__(47);
 
 
 /***/ }),
 
-/***/ 45:
+/***/ 47:
 /***/ (function(module, exports) {
 
 var name = $('.page-title').data('name');
@@ -82,7 +82,9 @@ var app = new Vue({
     el: '#app',
     data: {
         name: name,
-        perSelected: []
+        perSelected: [],
+        roles: [],
+        levels: []
     },
     watch: {
         name: function name(str) {
@@ -99,9 +101,29 @@ var app = new Vue({
             axios.get('/admin/axios/permissions/' + id).then(function (rs) {
                 _this.perSelected = rs.data;
             }).catch(function (e) {});
+        },
+        getRoles: function getRoles() {
+            var _this2 = this;
+
+            axios.get('/admin/axios/roles').then(function (response) {
+                _this2.roles = response.data;
+                var levels = [];
+                for (var i = 1; i <= 20; i++) {
+                    var found = false;
+                    for (var j = 0; j < _this2.roles.length; j++) {
+                        if (_this2.roles[j].level == i) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found == false) levels.push(i);
+                }
+                _this2.levels = levels;
+            });
         }
     }, mounted: function mounted() {
         this.getPermission();
+        this.getRoles();
     }
 });
 

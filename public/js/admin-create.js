@@ -60,12 +60,20 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 99);
+/******/ 	return __webpack_require__(__webpack_require__.s = 101);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 100:
+/***/ 101:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(102);
+
+
+/***/ }),
+
+/***/ 102:
 /***/ (function(module, exports) {
 
 var app = new Vue({
@@ -102,17 +110,18 @@ var app = new Vue({
         getDistricts: function getDistricts(e) {
             var _this2 = this;
 
-            this.isProvince = true;
             axios.get('/admin/axios/districts/' + $(e.path[0]).val()).then(function (response) {
                 _this2.districts = response.data;
+                _this2.isProvince = true;
+                _this2.wards = [];
             });
         },
         getWards: function getWards(e) {
             var _this3 = this;
 
-            this.isDistrict = true;
             axios.get('/admin/axios/wards/' + $(e.path[0]).val()).then(function (response) {
                 _this3.wards = response.data;
+                _this3.isDistrict = true;
             });
         },
         checkEmail: function checkEmail() {
@@ -183,14 +192,6 @@ $("#signupForm").validate({
         $(element).addClass('form-control-danger');
     }
 });
-
-/***/ }),
-
-/***/ 99:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(100);
-
 
 /***/ })
 

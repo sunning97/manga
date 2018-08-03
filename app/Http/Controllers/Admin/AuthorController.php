@@ -22,7 +22,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        if(!Auth::user()->hasPermission('read-authors')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền xem tác giả!']);
+        if(!$this->checkPermission('read-authors'))
+            return $this->returnError(['mess'=>'Bạn không có quyền xem tác giả!']);
+
         $authors = Author::paginate(10);
         if(preg_match('/\=\b/',url()->full()))
         {
@@ -38,7 +40,9 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        if(!Auth::user()->hasPermission('create-authors')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền thêm tác giả!']);
+        if(!$this->checkPermission('create-authors'))
+            return $this->$this->returnError(['mess'=>'Bạn không có quyền thêm tác giả!']);
+
         return view('admin.authors.create');
     }
 
@@ -88,8 +92,10 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        if(!Auth::user()->hasPermission('update-authors')) return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền cập nhật tác giả']);
+        if(!$this->checkPermission('update-authors'))
+            return $this->returnError(['mess' => 'Bạn không có quyền cập nhật tác giả']);
         $author = Author::find($id);
+
         return view('admin.authors.edit')->withAuthor($author);
     }
 

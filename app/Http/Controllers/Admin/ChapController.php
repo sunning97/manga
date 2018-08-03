@@ -26,7 +26,9 @@ class ChapController extends Controller
      */
     public function index()
     {
-        if(!Auth::user()->hasPermission('read-chaps')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền xem Chap']);
+        if(!$this->checkPermission('read-chaps'))
+            return $this->returnError(['mess'=>'Bạn không có quyền xem Chap']);
+
         $chaps = Chap::orderBy('id','desc')->paginate(10);
         return view('admin.chaps.index')->withChaps($chaps);
     }
@@ -38,7 +40,9 @@ class ChapController extends Controller
      */
     public function create()
     {
-        if(!Auth::user()->hasPermission('create-chaps')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền thêm mới Chap']);
+        if(!$this->checkPermission('create-chaps'))
+            return $this->returnError(['mess'=>'Bạn không có quyền thêm mới Chap']);
+
         $mangas = Manga::all();
         return view('admin.chaps.create')->withMangas($mangas);
     }

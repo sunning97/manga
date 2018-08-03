@@ -25,8 +25,10 @@ class RoleController extends Controller
      */
     public function index()
     {
-        if(!Auth::user()->hasPermission('read-acl')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền xem Role']);
-        $roles = Role::paginate(10);
+        if(!$this->checkPermission('read-acl'))
+            return $this->returnError(['mess'=>'Bạn không có quyền xem Role']);
+
+        $roles = Role::orderBy('level','ASC')->paginate(10);
         return view('admin.roles.index')->withRoles($roles);
     }
 
@@ -37,7 +39,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        if(!Auth::user()->hasPermission('create-acl')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền thêm mới Role']);
+        if(!$this->checkPermission('create-acl'))
+            return $this->returnError(['mess'=>'Bạn không có quyền thêm mới Role']);
+
         return view('admin.roles.create');
     }
 
@@ -49,8 +53,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $all = $request->only(['name','slug_name','description']);
-
+        $all = $request->only(['name','slug_name','description','level']);
         $notice = Validator::make($all,[
            'name' => 'required|min:3',
             'description' => 'required|min:5'
@@ -61,9 +64,8 @@ class RoleController extends Controller
             'description.min' => 'Mô tả không được ít hơn 5 kí tự!',
         ]);
 
-        if($notice->fails()) return redirect()->back()->withErrors($notice);
-        $all['level'] = (Role::max('level')+1);
-
+        if($notice->fails())
+            return $this->returnError($notice,$all);
         $role = Role::create($all);
 
         return redirect()->route('roles.show',$role->id)->withSuccess(['mess' => 'Thêm mới role '.$role->name.' thành công!']);
@@ -78,7 +80,9 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        if(!Auth::user()->hasPermission('read-acl')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền xem Role']);
+        if(!$this->checkPermission('read-acl'))
+            return $this->returnError(['mess'=>'Bạn không có quyền xem Role']);
+
         $role = Role::find($id);
         $permissons = $role->permission;
         if($role){
@@ -94,7 +98,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        if(!Auth::user()->hasPermission('update-acl')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền cập nhật Role']);
+        if(!$this->checkPermission('update-acl'))
+            return $this->returnError(['mess'=>'Bạn không có quyền cập nhật Role']);
+
         $role = Role::find($id);
         $permissions = Permission::all();
         $r_p = $role->permission;
@@ -123,8 +129,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $all = $request->only(['name','slug_name','description']);
-
+        $all = $request->only(['name','slug_name','description','level']);
         $notice = Validator::make($all,[
             'name' => 'required|min:3',
             'description' => 'required|min:5'
@@ -135,7 +140,8 @@ class RoleController extends Controller
             'description.min' => 'Mô tả không được ít hơn 5 kí tự!',
         ]);
 
-        if($notice->fails()) return redirect()->back()->withErrors($notice);
+        if($notice->fails())
+            return $this->returnError($notice,$all);
 
         $role = Role::find($id);
         $role->update($all);

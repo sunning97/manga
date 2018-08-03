@@ -22,7 +22,9 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        if(!Auth::user()->hasPermission('read-acl')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền xem Permission']);
+        if(!$this->checkPermission('read-acl'))
+            return $this->returnError(['mess'=>'Bạn không có quyền xem Permission']);
+
         $permissions = Permission::paginate(10);
         if (preg_match('/\=\b/',url()->full()))
             $page = explode('=',url()->full())[1];
@@ -38,7 +40,8 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        if(!Auth::user()->hasPermission('create-acl')) return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền thêm mới Permission']);
+        if(!$this->checkPermission('create-acl'))
+            return $this->returnError(['mess' => 'Bạn không có quyền thêm mới Permission']);
         return view('admin.permissions.create');
     }
 
@@ -94,7 +97,8 @@ class PermissionController extends Controller
      */
     public function show($id)
     {
-        if(!Auth::user()->hasPermission('read-acl')) return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền xem Permission']);
+        if(!$this->checkPermission('read-acl'))
+            return $this->returnError(['mess' => 'Bạn không có quyền xem Permission']);
         $permission = Permission::find($id);
         return view('admin.permissions.show')->withPermission($permission);
     }
@@ -107,7 +111,8 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        if(!Auth::user()->hasPermission('update-acl')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền cập nhật Permission']);
+        if(!$this->checkPermission('update-acl'))
+            return $this->returnError(['mess'=>'Bạn không có quyền cập nhật Permission']);
         $permission = Permission::find($id);
         return view('admin.permissions.edit')->withPermission($permission);
     }

@@ -60,36 +60,62 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 42);
+/******/ 	return __webpack_require__(__webpack_require__.s = 44);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 42:
+/***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(43);
+module.exports = __webpack_require__(45);
 
 
 /***/ }),
 
-/***/ 43:
+/***/ 45:
 /***/ (function(module, exports) {
 
 var app = new Vue({
     el: '#app',
     data: {
         isPortrait: false,
-        name: name
+        name: $('.active').data('name') ? $('.active').data('name') : '',
+        roles: [],
+        levels: []
     },
     watch: {
         name: function name(str) {
             this.getSlug(str);
         }
     },
+    mounted: function mounted() {
+        this.getRoles();
+    },
+
     methods: {
         getSlug: function getSlug(str) {
             return str_slug(str);
+        },
+        getRoles: function getRoles() {
+            var _this = this;
+
+            axios.get('/admin/axios/roles').then(function (response) {
+                _this.roles = response.data;
+
+                var levels = [];
+                for (var i = 1; i <= 20; i++) {
+                    var found = false;
+                    for (var j = 0; j < _this.roles.length; j++) {
+                        if (_this.roles[j].level == i) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found == false) levels.push(i);
+                }
+                _this.levels = levels;
+            });
         }
     }
 });

@@ -27,15 +27,16 @@ var app = new Vue({
             });
         },
         getDistricts:function (e) {
-            this.isProvince = true;
             axios.get(`/admin/axios/districts/${$(e.path[0]).val()}`).then(response=>{
                 this.districts = response.data;
+                this.isProvince = true;
+                this.wards = [];
             });
         },
         getWards:function (e) {
-            this.isDistrict = true;
             axios.get(`/admin/axios/wards/${$(e.path[0]).val()}`).then(response=>{
                 this.wards = response.data;
+                this.isDistrict = true;
             });
         },
         checkEmail:function () {

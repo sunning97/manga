@@ -24,7 +24,9 @@ class GenreController extends Controller
      */
     public function index()
     {
-        if(!Auth::user()->hasPermission('read-genres')) return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền xem thể loại']);
+        if(!$this->checkPermission('read-genres'))
+            return $this->returnError(['mess' => 'Bạn không có quyền xem thể loại']);
+
         $genres = Genre::paginate(10);
         if (preg_match('/\=\b/',url()->full()))
             $page = explode('=',url()->full())[1];
@@ -40,7 +42,9 @@ class GenreController extends Controller
      */
     public function create()
     {
-        if(!Auth::user()->hasPermission('create-genres')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền thêm mới thể loại']);
+        if(!$this->checkPermission('create-genres'))
+            return $this->returnError(['mess'=>'Bạn không có quyền thêm mới thể loại']);
+
         return view('admin.genres.create');
     }
 
@@ -89,7 +93,8 @@ class GenreController extends Controller
      */
     public function edit($id)
     {
-        if(!Auth::user()->hasPermission('update-genres')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền cập nhật thể loại']);
+        if(!$this->checkPermission('update-genres'))
+            return $this->returnError(['mess'=>'Bạn không có quyền cập nhật thể loại']);
         $gener = Genre::find($id);
         return view('admin.genres.edit')->withGenre($gener);
     }

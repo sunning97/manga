@@ -63,6 +63,8 @@ Route::prefix('/admin')->group(function (){
         // Axios
 
         Route::get('/axios/permissions/{id}','Admin\AxiosController@permissions');
+        Route::get('/axios/roles','Admin\AxiosController@roles');
+        Route::post('/axios/role/search','Admin\AxiosController@searchRole');
         Route::get('/axios/permissions-delete/{id}','Admin\AxiosController@deletePermission');
         Route::get('/axios/provinces','Admin\AxiosController@provinces');
         Route::get('/axios/districts/{id}','Admin\AxiosController@districts');

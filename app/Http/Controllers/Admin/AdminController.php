@@ -30,7 +30,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        if (!Auth::user()->hasPermission('read-admins')) return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền xem quản trị viên']);
+        if (!$this->checkPermission('read-admins'))
+            return $this->returnError(['mess' => 'Bạn không có quyền xem quản trị viên']);
+
         $adminsActive = Admin::where('id', '!=', Auth::user()->id)->paginate(10)->where('state','=','ACTIVE');
         $adminsInactive = Admin::where('id', '!=', Auth::user()->id)->paginate(10)->where('state','=','INACTIVE');
         return view('admin.admins.index')->withAdminsActive($adminsActive)->withAdminsInactive($adminsInactive);
@@ -47,8 +49,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        if(!Auth::guard('admin')->user()->hasPermission('create-admins'))
-            return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền tạo mới admin!']);
+        if(!$this->checkPermission('create-admins'))
+            return $this->returnError(['mess' => 'Bạn không có quyền tạo mới admin!']);
         return view('admin.admins.create');
     }
 
@@ -68,7 +70,11 @@ class AdminController extends Controller
             'gender' => $all['gender'],
             'avatar' => 'default.png'
         );
-        if(Admin::where('email',$request->email)->first()) return redirect()->back()->withErrors(['mess'=>'Email đã được sử dụng. vui lòng nhập email khác']);
+        if(Admin::where('email',$request->email)->first())
+            return redirect()
+                    ->back()
+                    ->withErrors(['mess'=>'Email đã được sử dụng. vui lòng nhập email khác']);
+
         if($request->province){
             $ward = Ward::find($all['ward'])->type.' '.Ward::find($all['ward'])->name;
             $district = District::find($all['district'])->type.' '.District::find($all['district'])->name;
@@ -93,7 +99,9 @@ class AdminController extends Controller
         $admin->save();
 
         $this->activationService->sendActivationMail($admin);
-        return redirect()->route('admins.index')->withSuccess(['mess'=>'Tạo admin thành công, chờ xác nhận email']);
+        return redirect()
+            ->route('admins.index')
+            ->withSuccess(['mess'=>'Tạo admin thành công, chờ xác nhận email']);
     }
 
     /**
@@ -104,7 +112,9 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        if (!Auth::user()->hasPermission('read-admins')) return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền xem quản trị viên']);
+        if (!$this->checkPermission('read-admins'))
+            return $this->returnError(['mess' => 'Bạn không có quyền xem quản trị viên']);
+
         if ($id == Auth::user()->id) return redirect()->route('admin.profile');
         $admin = Admin::find($id);
         return view('admin.admins.show')->withAdmin($admin);
@@ -119,7 +129,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        if (!Auth::user()->hasPermisson('edit-admins')) return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền cập nhật quản trị viên']);
+        if (!$this->checkPermission('edit-admins'))
+            return $this->returnError(['mess' => 'Bạn không có quyền cập nhật quản trị viên']);
     }
 
     /**

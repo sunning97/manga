@@ -27,7 +27,9 @@ class MangaController extends Controller
      */
     public function index()
     {
-        if(!Auth::user()->hasPermission('read-mangas')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền xem Manga']);
+        if(!$this->checkPermission('read-mangas'))
+            return $this->returnError(['mess'=>'Bạn không có quyền xem Manga']);
+
         $mangas = Manga::paginate(10);
         return view('admin.mangas.index')->withMangas($mangas);
     }
@@ -39,7 +41,9 @@ class MangaController extends Controller
      */
     public function create()
     {
-        if(!Auth::user()->hasPermission('create-mangas')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền thêm mới Manga']);
+        if(!$this->checkPermission('create-mangas'))
+            return $this->returnError(['mess'=>'Bạn không có quyền thêm mới Manga']);
+
         return view('admin.mangas.create');
     }
 
@@ -164,7 +168,8 @@ class MangaController extends Controller
      */
     public function show($id)
     {
-        if(!Auth::user()->hasPermission('read-mangas')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền xem Manga này']);
+        if(!$this->checkPermission('read-mangas'))
+            return $this->returnError(['mess'=>'Bạn không có quyền xem Manga này']);
 
         $manga = Manga::find($id);
         $chaps = $manga->chaps()->paginate(10);
@@ -182,7 +187,9 @@ class MangaController extends Controller
      */
     public function edit($id)
     {
-        if(!Auth::user()->hasPermission('update-mangas')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền cập nhật Manga này']);
+        if(!$this->checkPermission('update-mangas'))
+            return $this->returnError(['mess'=>'Bạn không có quyền cập nhật Manga này']);
+
         $manga = Manga::find($id);
         return view('admin.mangas.edit')->withManga($manga);
     }

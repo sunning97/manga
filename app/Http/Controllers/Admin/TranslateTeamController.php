@@ -24,7 +24,9 @@ class TranslateTeamController extends Controller
      */
     public function index()
     {
-        if(!Auth::user()->hasPermission('read-teams')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền xem danh sách nhóm dịch']);
+        if(!$this->checkPermission('read-teams'))
+            return $this->returnError(['mess'=>'Bạn không có quyền xem danh sách nhóm dịch']);
+
         $teams = TranslateTeam::paginate(10);
         return view('admin.teams.index')->withTeams($teams);
     }
@@ -36,7 +38,8 @@ class TranslateTeamController extends Controller
      */
     public function create()
     {
-        if(!Auth::user()->hasPermission('create-teams')) return redirect()->back()->withErrors(['mess' => 'Bạn không có quyền thêm mới nhóm dịch']);
+        if(!$this->checkPermission('create-teams'))
+            return $this->returnError(['mess' => 'Bạn không có quyền thêm mới nhóm dịch']);
         return view('admin.teams.create');
     }
 
@@ -90,7 +93,8 @@ class TranslateTeamController extends Controller
      */
     public function show($id)
     {
-        if(!Auth::user()->hasPermission('read-teams')) return redirect()-back()->withErrors(['mess'=>'Bạn không có quyền xem nhóm dịch']);
+        if(!$this->checkPermission('read-teams'))
+            return $this->returnError(['mess'=>'Bạn không có quyền xem nhóm dịch']);
         $team = TranslateTeam::find($id);
         return view('admin.teams.show')->withTeam($team);
     }
@@ -103,7 +107,8 @@ class TranslateTeamController extends Controller
      */
     public function edit($id)
     {
-        if(!Auth::user()->hasPermission('update-teams')) return redirect()->back()->withErrors(['mess'=>'Bạn không có quyền cập nhật nhóm dịch']);
+        if(!$this->checkPermission('update-teams'))
+            return $this->returnError(['mess'=>'Bạn không có quyền cập nhật nhóm dịch']);
         $team = TranslateTeam::find($id);
         return view('admin.teams.edit')->withTeam($team);
     }

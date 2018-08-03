@@ -60,20 +60,20 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 52);
+/******/ 	return __webpack_require__(__webpack_require__.s = 54);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 52:
+/***/ 54:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(53);
+module.exports = __webpack_require__(55);
 
 
 /***/ }),
 
-/***/ 53:
+/***/ 55:
 /***/ (function(module, exports) {
 
 var app = new Vue({
@@ -104,14 +104,14 @@ var app = new Vue({
         getProvinces: function getProvinces() {
             var _this = this;
 
-            axios.get('/manga/axios/provinces').then(function (rs) {
+            axios.get('/admin/axios/provinces').then(function (rs) {
                 _this.provinces = rs.data;
             }).catch(function (e) {});
         },
         getDistricts: function getDistricts(id) {
             var _this2 = this;
 
-            axios.get('/manga/axios/districts/' + id).then(function (rs) {
+            axios.get('/admin/axios/districts/' + id).then(function (rs) {
                 _this2.districts = rs.data;
                 _this2.wards = [];
                 _this2.isProvinceSelected = true;
@@ -120,7 +120,7 @@ var app = new Vue({
         getWards: function getWards(id) {
             var _this3 = this;
 
-            axios.get('/manga/axios/wards/' + id).then(function (rs) {
+            axios.get('/admin/axios/wards/' + id).then(function (rs) {
                 _this3.wards = rs.data;
                 _this3.isDistrictSelected = true;
             }).catch(function (e) {});

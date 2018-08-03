@@ -21,12 +21,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use PhpParser\Node\Expr\Cast\Array_;
 
 class AxiosController extends Controller
 {
     public function permissions($id){
         $result = Role::find($id)->permission;
         return response()->json($result,'200');
+    }
+
+    public function roles()
+    {
+        $roles = Role::orderBy('level', 'ASC')->get();
+        return response()->json($roles,200);
     }
 
     public function deletePermission($id){
@@ -236,7 +243,19 @@ class AxiosController extends Controller
         $roles = Role::all();
         return response()->json($roles,200);
     }
-
+    public function searchRole(Request $request)
+    {
+        $slug = str_slug($request->data);
+        $roles = DB::table('roles')
+            ->where(function ($query) use($request,$slug){
+                $query->where('slug_name','like',"%$slug%")
+                ->orWhere('level','=',$request->data);
+            })->get();
+        if($roles->first()){
+            return response()->json($roles,200);
+        }
+        return response('error',404);
+    }
     public function searchAdmin(Request $request)
     {
         $result = DB::table('admins')

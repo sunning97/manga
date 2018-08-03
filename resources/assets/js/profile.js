@@ -16,7 +16,7 @@ var app = new Vue({
     },
     watch: {
         name: function (str) {
-            this.getSlug(str)
+            this.getSlug(str);
         }
     },
     methods: {
@@ -24,19 +24,19 @@ var app = new Vue({
             return str_slug(str);
         },
         getProvinces: function(){
-            axios.get('/manga/axios/provinces').then(rs => {
+            axios.get('/admin/axios/provinces').then(rs => {
                 this.provinces = rs.data;
             }).catch(e =>{});
         },
         getDistricts: function(id){
-            axios.get('/manga/axios/districts/'+id).then(rs => {
+            axios.get('/admin/axios/districts/'+id).then(rs => {
                 this.districts = rs.data;
                 this.wards = [];
                 this.isProvinceSelected = true;
             }).catch(e =>{});
         },
         getWards: function(id){
-            axios.get('/manga/axios/wards/'+id).then(rs => {
+            axios.get('/admin/axios/wards/'+id).then(rs => {
                 this.wards = rs.data;
                 this.isDistrictSelected = true;
             }).catch(e =>{});

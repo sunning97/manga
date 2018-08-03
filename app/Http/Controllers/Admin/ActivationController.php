@@ -17,7 +17,7 @@ class ActivationController extends Controller
     public function activateUser($token)
     {
         if ($user = $this->activationService->activateUser($token)) {
-            return 'xac thuc thanh cong';
+            return view('admin.auth.activation');
         }
         abort(404);
     }

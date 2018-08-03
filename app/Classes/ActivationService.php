@@ -9,6 +9,7 @@
 namespace App\Classes;
 
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\UserActivation;
 use App\Mail\UserActivationEmail;
@@ -41,6 +42,10 @@ class ActivationService
         $user = Admin::find($activation->user_id);
         $user->state = 'ACTIVE';
         $user->save();
+        DB::table('admin_role')->insert([
+            'admin_id' => $user->id,
+            'role_id' => 20
+        ]);
         $this->userActivation->deleteActivation($token);
         return $user;
     }
