@@ -64,6 +64,7 @@
                                     <label class="control-label">Địa chỉ email</label>
                                     <input type="text" id="email" name="email" class="form-control" placeholder="" v-model="email" @blur="checkEmail">
                                     <label id="email-errorr" class="error mt-2 text-danger" for="email" style="" v-if="isEmail"> Email đã được sử dụng !</label>
+                                    <p class="text-muted m-b-30 font-13">Vui lòng nhâp một địa chỉ email khả dụng, hệ thống sẽ gửi yêu cầu <b>xác thực</b> đến địa chỉ email này</p>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +83,7 @@
                                         <label class="col-sm-12">Chọn Tỉnh/Thành phố</label>
                                         <select class="custom-select col-12" id="province" name="province" @change="getDistricts">
                                             <option selected></option>
-                                            <option v-for="province in provinces" :value="province.id">@{{ province.name }}</option>
+                                            <option v-for="province in provinces" :value="province.id">@{{ province.type +' '+ province.name }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -92,7 +93,7 @@
                                         <label class="col-sm-12">Chọn Quận/Huyện</label>
                                         <select class="custom-select col-12" id="district" name="district" :disabled="!isProvince" @change="getWards">
                                             <option selected></option>
-                                            <option v-for="district in districts" :value="district.id">@{{ district.name }}</option>
+                                            <option v-for="district in districts" :value="district.id">@{{ district.type +' '+ district.name }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -101,7 +102,7 @@
                                         <label class="col-sm-12">Chọn Phường/Xã</label>
                                         <select class="custom-select col-12" id="ward" name="ward" :disabled="!isDistrict">
                                             <option selected></option>
-                                            <option v-for="ward in wards" :value="ward.id">@{{ ward.name }}</option>
+                                            <option v-for="ward in wards" :value="ward.id">@{{ ward.type +' '+ ward.name }}</option>
                                         </select>
                                     </div>
                                 </div>

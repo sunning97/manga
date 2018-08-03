@@ -37,4 +37,5 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/author-edit.js', 'public/js')
     .js('resources/assets/js/admin-create.js', 'public/js')
     .js('resources/assets/js/admin.js', 'public/js')
+    .js('resources/assets/js/admin-edit.js','public/js')
 ;

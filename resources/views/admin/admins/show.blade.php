@@ -35,8 +35,6 @@
             <div class="white-box">
                 <ul class="nav customtab nav-tabs" role="tablist">
                     <li role="presentation" class="nav-item"><a href="#information" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="fa fa-home"></i></span><span class="hidden-xs"> Thông tin</span></a></li>
-                    <li role="presentation" class="nav-item"><a href="#avatar" class="nav-link" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="fa fa-user"></i></span> <span class="hidden-xs"> Ảnh đại diện</span></a></li>
-                    <li role="presentation" class="nav-item"><a href="#password" class="nav-link" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs"> Mật khẩu</span></a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="information">
@@ -66,10 +64,6 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                    <div class="tab-pane" id="avatar">
-                    </div>
-                    <div class="tab-pane" id="password">
                     </div>
                 </div>
             </div>

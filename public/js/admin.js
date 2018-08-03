@@ -188,7 +188,10 @@ module.exports = __webpack_require__(104);
 
 Vue.component('admin-index', __webpack_require__(105));
 var app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        url: $('.active').data('url')
+    }
 });
 
 /***/ }),
@@ -301,6 +304,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         'admin-row': __WEBPACK_IMPORTED_MODULE_0__AdminRow___default.a,
         'pagination': __WEBPACK_IMPORTED_MODULE_1__Pagination___default.a
+    },
+    props: {
+        url: {
+            typr: String
+        }
     },
     data: function data() {
         return {
@@ -458,6 +466,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         role: {
             type: String
+        },
+        url: {
+            type: String
         }
     }
 });
@@ -480,15 +491,7 @@ var render = function() {
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.role))]),
     _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "text-center" }, [
+    _c("td", { staticClass: "text-center" }, [
       _c(
         "div",
         {
@@ -497,31 +500,39 @@ var staticRenderFns = [
         },
         [
           _c(
-            "button",
+            "a",
             {
               staticClass: "btn btn-sm btn-success",
-              attrs: { type: "button" }
+              attrs: { href: _vm.url + "/" + _vm.admin.id }
             },
             [_vm._v("Xem "), _c("i", { staticClass: "ti-eye" })]
           ),
           _vm._v(" "),
           _c(
-            "button",
+            "a",
             {
               staticClass: "btn btn-sm btn-primary",
-              attrs: { type: "button" }
+              attrs: { href: _vm.url + "/" + _vm.admin.id + "/edit" }
             },
-            [_vm._v("Sửa "), _c("i", { staticClass: "ti-pencil" })]
+            [_vm._v("Cập nhât quyền "), _c("i", { staticClass: "ti-pencil" })]
           ),
           _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-sm btn-danger", attrs: { type: "button" } },
-            [_vm._v("Xóa "), _c("i", { staticClass: "ti-trash" })]
-          )
+          _vm._m(0)
         ]
       )
     ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-sm btn-danger", attrs: { type: "button" } },
+      [_vm._v("Xóa "), _c("i", { staticClass: "ti-trash" })]
+    )
   }
 ]
 render._withStripped = true
@@ -889,7 +900,8 @@ var render = function() {
                       attrs: {
                         admin: admin,
                         index: _vm.getIndex(index),
-                        role: _vm.role(admin.role_id)
+                        role: _vm.role(admin.role_id),
+                        url: _vm.url
                       }
                     })
                   })
@@ -904,7 +916,8 @@ var render = function() {
                       attrs: {
                         admin: admin,
                         index: _vm.getIndex(index),
-                        role: _vm.role(admin.role_id)
+                        role: _vm.role(admin.role_id),
+                        url: _vm.url
                       }
                     })
                   })

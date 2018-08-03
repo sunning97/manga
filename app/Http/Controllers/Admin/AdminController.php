@@ -10,6 +10,7 @@ use App\Ward;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -129,8 +130,10 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        if (!$this->checkPermission('edit-admins'))
+        if (!$this->checkPermission('update-admins'))
             return $this->returnError(['mess' => 'Bạn không có quyền cập nhật quản trị viên']);
+        $admin = Admin::find($id);
+        return view('admin.admins.edit')->withAdmin($admin);
     }
 
     /**
@@ -142,8 +145,19 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //if(!Auth::user()->hasPermission('update-admins')) return redirect()->back()->withErrors(['mess' =>'Bạn không có quyền cập nhật Admin']);
+        if(!$this->checkPermission('update-admins'))
+            return $this->returnError(['mess'=>'Bạn không có quyền cập nhật admin']);
 
+        $admin = Admin::find($id);
+        if($admin->first()){
+            DB::table('admin_role')
+                ->where('admin_id','=',$admin->id)
+                ->update([
+                    'role_id' => $request->role
+                ]);
+        }
+
+        return redirect()->route('admins.show',$id)->withSuccess(['mess' => "Cập nhật vai trò cho $admin->f_name $admin->l_name thành công"]);
     }
 
     public function updateProfile(Request $request)

@@ -9,6 +9,7 @@
 namespace App\Classes;
 
 
+use App\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\UserActivation;
@@ -42,9 +43,11 @@ class ActivationService
         $user = Admin::find($activation->user_id);
         $user->state = 'ACTIVE';
         $user->save();
+
+        $role = Role::where('level','=','20')->get();
         DB::table('admin_role')->insert([
             'admin_id' => $user->id,
-            'role_id' => 20
+            'role_id' => $role->first()->id
         ]);
         $this->userActivation->deleteActivation($token);
         return $user;
@@ -55,5 +58,4 @@ class ActivationService
         $activation = $this->userActivation->getActivation($user);
         return $activation === null || strtotime($activation->created_at) + 60 * 60 * $this->resendAfter < time();
     }
-
 }

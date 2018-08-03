@@ -12,14 +12,14 @@
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
                 <li><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a></li>
-                <li class="active">Admin</li>
+                <li class="active" data-url="{{ route('admins.index') }}">Admin</li>
             </ol>
         </div>
     </div>
     <div class="row" id="app">
         <div class="col-md-12">
             <div class="white-box">
-                <admin-index></admin-index>
+                <admin-index :url="url"></admin-index>
             </div>
         </div>
     </div>

@@ -30,10 +30,10 @@
                         </tr>
                     </tbody>
                     <tbody v-if="searchResult.length == 0 && searchData.length == ''">
-                        <admin-row v-for="(admin,index) in admins" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)"></admin-row>
+                        <admin-row v-for="(admin,index) in admins" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)" :url="url"></admin-row>
                     </tbody>
                     <tbody v-if="searchResult.length > 0 && searchData.length != ''">
-                        <admin-row v-for="(admin,index) in searchResult" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)"></admin-row>
+                        <admin-row v-for="(admin,index) in searchResult" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)" :url="url"></admin-row>
                     </tbody>
                 </table>
             </div>
@@ -49,6 +49,11 @@
         components:{
             'admin-row':AdminRow,
             'pagination':Pagination
+        },
+        props:{
+            url:{
+                typr:String,
+            }
         },
         data(){
             return{

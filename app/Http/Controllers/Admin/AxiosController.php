@@ -231,7 +231,7 @@ class AxiosController extends Controller
             ->leftJoin('admin_role','admins.id','=','admin_role.admin_id')
             ->where('admins.id','!=',Auth::guard('admin')->user()->id)
             ->where('admins.state','=',$request->state)
-            ->select('f_name','l_name','email','role_id')
+//            ->select('f_name','l_name','email','role_id','admins.id')
             ->paginate(5);
             return response()->json($adminsActive,200);
 
