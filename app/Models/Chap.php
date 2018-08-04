@@ -3,12 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Chap extends Model
 {
     protected $table='chaps';
     protected $fillable=['name','slug_name','manga_id','created_at','updated_at','post_by','update_by'];
     public $timestamps=true;
+
+    public function format_time($time)
+    {
+        return $time->format('d-m-Y , H:i');
+    }
 
     public function postBy(){
         return $this->hasOne('App\Models\Admin','id','post_by');

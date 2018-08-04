@@ -31,7 +31,7 @@
                             </tr>
                             <tr>
                                 <th>Ngày đăng</th>
-                                <td><b>{{ $chap->created_at->format('d-m-Y - H:m') }}</b></td>
+                                <td><b>{{ $chap->format_time($chap->created_at) }}</b></td>
                             </tr>
                             @if($chap->updateBy)
                             <tr>
@@ -40,7 +40,7 @@
                             </tr>
                             <tr>
                                 <th>Ngày cập nhật</th>
-                                <td><b>{{ $chap->updated_at->format('d-m-Y - H:m') }}</b></td>
+                                <td><b>{{ $chap->format_time($chap->updated_at) }}</b></td>
                             </tr>
                             @else
                                 <tr>

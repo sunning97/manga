@@ -74,15 +74,17 @@ module.exports = __webpack_require__(71);
 /***/ }),
 
 /***/ 71:
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__) {
 
+"use strict";
 var app = new Vue({
     el: '#app',
     data: {
         name: $('.page-title').data('name'),
         mangas: [],
         chapImage: [],
-        imageEdit: ''
+        imageEdit: null,
+        noInputImage: false
     },
     watch: {
         name: function name(str) {
@@ -130,9 +132,12 @@ var app = new Vue({
         },
         editImage: function editImage(event) {
             var el = $(event.path[0]).parent().prev().children().children().children().children('.form-group').children().children('input');
-
+            if (!el.val()) {
+                this.noInputImage = true;
+                return false;
+            }
             var formData = new FormData();
-
+            this.noInputImage = false;
             formData.append("image", el[0].files[0]);
             formData.append("id", this.imageEdit.id);
 
@@ -142,14 +147,14 @@ var app = new Vue({
                 }
             }).then(function (rs) {
                 app.getChapImages();
-                swal("Thành công!", "Chỉnh sửa thành công", "success");
-                el[0].val('');
-                Dropify.clearElement();
+                swal("Thành công!", "Cập nhật thành công", "success");
+                el.val('');
             }).catch(function (e) {});
         }
-    }, mounted: function mounted() {
-        this.getMangas();
+    },
+    mounted: function mounted() {
         this.getChapImages();
+        this.getMangas();
     }
 });
 $('#input-file-now').dropify();

@@ -133,13 +133,14 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <img class="img-responsive" :src="'{{ asset('uploads/chap-images/') }}/'+imageEdit.image" alt="">
+                                    <img class="img-responsive" :src="imageEdit ? '{{ asset('uploads/chap-images/') }}/'+imageEdit.image : ''" alt="">
                                 </div>
                             </div>
+                            <p class="text-muted m-b-30 font-13 text-danger" v-if="noInputImage">Bạn chưa chọn hình ảnh nào</p>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" @click="editImage" data-dismiss="modal">Cập nhật</button>
+                        <button type="button" class="btn btn-primary" @click="editImage" :data-dismiss="noInputImage ? '' : 'modal'">Cập nhật</button>
                     </div>
                 </div>
             </div>

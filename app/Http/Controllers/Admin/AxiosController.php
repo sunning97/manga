@@ -17,6 +17,7 @@ use App\Province;
 use App\Ward;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -78,19 +79,6 @@ class AxiosController extends Controller
         return response()->json($mangas,'200');
     }
 
-    public function deleteChapImage($id){
-        $image = ChapImage::find($id);
-        if($image){
-            File::delete(public_path('uploads/chap-images/'.$image->image));
-            $result = DB::table('chap_images')
-                ->where('id',$id)
-                ->delete();
-            return response()->json($image->images,'200');
-        } else {
-            return response()->json($image->images,'401');
-        }
-    }
-
     public function chapImages($id){
         $images = Chap::find($id)->images;
         $images = collect($images);
@@ -139,6 +127,7 @@ class AxiosController extends Controller
         if($request->file('image')){
             $image = $request->file('image');
             $chapImage = ChapImage::find($request->id);
+            $chap = $chapImage->chap;
             if($chapImage){
                 $new_name = $chapImage->chap->slug_name.'-'.time().rand(111,999).'.'.$image->getClientOriginalExtension();
                 $image->move(public_path('uploads/chap-images'),$new_name);
@@ -146,11 +135,31 @@ class AxiosController extends Controller
 
                 $chapImage->image = $new_name;
                 $chapImage->save();
-
+                $chap->updated_at = Carbon::now()->toDateTimeString();
+                $chap->update_by = Auth::guard('admin')->user()->id;
+                $chap->save();
                 return response()->json($chapImage,200);
             }
         } else {
             return response('error',404);
+        }
+    }
+
+    public function deleteChapImage($id){
+        $image = ChapImage::find($id);
+        if($image){
+            $chap = $image->chap;
+            $image->delete();
+
+            File::delete(public_path('uploads/chap-images/'.$image->image));
+
+            $chap->updated_at = Carbon::now()->toDateTimeString();
+            $chap->update_by = Auth::guard('admin')->user()->id;
+            $chap->save();
+
+            return response()->json($image->image,'200');
+        } else {
+            return response()->json('error','401');
         }
     }
 

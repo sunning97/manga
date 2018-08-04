@@ -7,6 +7,7 @@ use App\Models\ChapImage;
 use App\Models\Manga;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -64,7 +65,7 @@ class ChapController extends Controller
             'name.min' =>'Tên chap không được ít hơn 5 kí tự'
         ]);
 
-        if($notice->fails()) return redirect()->back()->withErrors($notice);
+        if($notice->fails()) return $this->returnError($notice);
 
         $all['post_by'] = Auth::user()->id;
 
@@ -90,7 +91,7 @@ class ChapController extends Controller
 
             $image->move(public_path('uploads/chap-images'),$new_name);
 
-            $result = ChapImage::create([
+            ChapImage::create([
                 'chap_id'=> $id,
                 'image'=>$new_name,
                 'order'=>($order+1)
@@ -108,7 +109,8 @@ class ChapController extends Controller
             }
 
             $chap->update([
-                'update_by' => Auth::user()->id
+                'update_by' => Auth::user()->id,
+                'updated_at' => Carbon::now()->toDateTimeString()
             ]);
         }
     }

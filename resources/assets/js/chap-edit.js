@@ -4,11 +4,12 @@ var app = new Vue({
         name: $('.page-title').data('name'),
         mangas:[],
         chapImage:[],
-        imageEdit:''
+        imageEdit:null,
+        noInputImage: false
     },
     watch: {
         name: function (str) {
-            this.getSlug(str)
+            this.getSlug(str);
         }
     },
     methods: {
@@ -39,7 +40,7 @@ var app = new Vue({
             }, function(){
                 axios.get('/admin/axios/delete-chap-image/'+id).then(rs => {
                     app.getChapImages();
-                    swal("Thành công!", "Đã xóa "+rs.data, "success")
+                    swal("Thành công!", "Đã xóa "+rs.data, "success");
                 }).catch(e =>{});
             });
         },
@@ -48,9 +49,12 @@ var app = new Vue({
         },
         editImage: function (event) {
             var el = $(event.path[0]).parent().prev().children().children().children().children('.form-group').children().children('input');
-
+            if(!el.val()){
+                this.noInputImage  = true;
+                return false;
+            }
             var formData = new FormData();
-
+            this.noInputImage = false;
             formData.append("image", el[0].files[0]);
             formData.append("id",this.imageEdit.id);
 
@@ -60,14 +64,14 @@ var app = new Vue({
                 }
             }).then(rs => {
                 app.getChapImages();
-                swal("Thành công!", "Chỉnh sửa thành công", "success");
-                el[0].val('');
-                Dropify.clearElement();
+                swal("Thành công!", "Cập nhật thành công", "success");
+                el.val('');
             }).catch(e =>{});
         }
-    },mounted: function () {
-        this.getMangas();
+    },
+    mounted: function () {
         this.getChapImages();
+        this.getMangas();
     }
 });
 $('#input-file-now').dropify();

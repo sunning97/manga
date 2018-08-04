@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Author;
 use App\Models\Chap;
 use App\Models\Manga;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -130,7 +131,7 @@ class MangaController extends Controller
 
 
     public function storeChap(Request $request,$id){
-
+        $manga = Manga::find($id)->first();
         $all = $request->only(['name','slug_name']);
 
         $notice = Validator::make($all,[
@@ -140,7 +141,7 @@ class MangaController extends Controller
             'name.min' =>'Tên chap không được ít hơn 5 kí tự'
         ]);
 
-        if($notice->fails()) return redirect()->back()->withErrors($notice);
+        if($notice->fails()) return $this->returnError($notice,$all);
 
         $all['post_by'] = Auth::user()->id;
         $all['manga_id'] = $id;
@@ -156,6 +157,8 @@ class MangaController extends Controller
             DB::table('manga_admin')->insert(
                 ['manga_id'=>$id,'admin_id'=>Auth::user()->id]
             );
+            $manga->updated_at = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
+            $manga->save();
         }
 
         return redirect()->route('mangas.show',$id)->withSuccess(['mess' =>'Thêm mới chap '.$chap->name.' thành công']);
