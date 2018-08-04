@@ -10,9 +10,9 @@ class Manga extends Model
     protected $fillable = ['name','other_name','slug_name','state','view','origin','cover','description','post_by','genre_id','update_by','created_at','updated_at'];
     public $timestamps=true;
 
-    public function state()
+    public function getState($id)
     {
-        switch ($this->state){
+        switch (Manga::find($id)->first()->state){
             case 'COMPLETE':
                 return 'Hoàn thành';
                 break;

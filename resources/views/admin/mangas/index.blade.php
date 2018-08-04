@@ -39,15 +39,7 @@
                             <tr>
                                 <td>{{ $manga->id }}</td>
                                 <td>{{ $manga->name }}</td>
-                                <td>
-                                @if($manga->state =='IN_PROCESS')
-                                    Đang tiến hành
-                                @elseif($manga->state =='COMPLETE')
-                                    Hoàn thành
-                                @elseif($manga->state =='HIDDEN')
-                                    Ẩn
-                                @endif
-                                </td>
+                                <td>{{ $manga->getState($manga->id) }}</td>
                                 <td class="text-center"><img src="{{ asset('uploads/manga-covers/'.$manga->cover) }}" alt="" class="img-responsive" style="width: 100px;"></td>
                                 @if(auth()->guard('admin')->user()->hasPermission('read-mangas') || auth()->guard('admin')->user()->hasPermission('update-mangas') || auth()->guard('admin')->user()->hasPermission('delete-mangas'))
                                 <td class="text-center">

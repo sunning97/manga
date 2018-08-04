@@ -32,7 +32,7 @@
                                 <tr>
                                     <th>Trạng thái</th>
                                     <td>
-                                        {{ $manga->state }}
+                                        {{ $manga->getState($manga->id) }}
                                     </td>
                                 </tr>
                                 <tr>

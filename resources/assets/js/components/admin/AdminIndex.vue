@@ -19,6 +19,16 @@
                         <th class="text-center">Hành động</th>
                     </tr>
                     </thead>
+                    <tbody v-if="admins.length == 0 && isAdminsEmpty == false">
+                        <tr class="text-center">
+                            <td colspan="5">Đang tải...</td>
+                        </tr>
+                    </tbody>
+                    <tbody v-if="admins.length == 0 && isAdminsEmpty == true">
+                        <tr class="text-center">
+                            <td colspan="5">Không có dữ liệu</td>
+                        </tr>
+                    </tbody>
                     <tbody v-if="isSearching">
                         <tr>
                             <td colspan="5">đang tìm kiếm..</td>
@@ -33,7 +43,7 @@
                         <admin-row v-for="(admin,index) in admins" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)" :url="url" :permissions="permissions"></admin-row>
                     </tbody>
                     <tbody v-if="searchResult.length > 0 && searchData.length != ''">
-                        <admin-row v-for="(admin,index) in searchResult" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)" :url="url"></admin-row>
+                        <admin-row v-for="(admin,index) in searchResult" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)" :url="url" :permissions="permissions"></admin-row>
                     </tbody>
                 </table>
             </div>
@@ -52,7 +62,7 @@
         },
         props:{
             url:{
-                typr:String,
+                type:String,
             }
         },
         data(){
@@ -61,6 +71,7 @@
                 searchResult:[],
                 isSearching:false,
                 admins:[],
+                isAdminsEmpty:false,
                 pagination:{},
                 offset:3,
                 roles:[],
@@ -87,6 +98,8 @@
                 }).then(response=>{
                     this.admins = response.data.data;
                     this.pagination = response.data;
+                    if(this.admins.length == 0) this.isAdminsEmpty = true;
+                    else this.isAdminsEmpty = false;
                 })
             },
             getRoles:function () {
@@ -106,6 +119,7 @@
             },
             admin:function (state) {
                 this.state = state;
+                this.admins = [];
                 this.getAdmins(this.state,1);
             },
             getSearch:function () {

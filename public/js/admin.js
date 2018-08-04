@@ -297,6 +297,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -307,7 +317,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     props: {
         url: {
-            typr: String
+            type: String
         }
     },
     data: function data() {
@@ -316,6 +326,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             searchResult: [],
             isSearching: false,
             admins: [],
+            isAdminsEmpty: false,
             pagination: {},
             offset: 3,
             roles: [],
@@ -345,6 +356,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 _this.admins = response.data.data;
                 _this.pagination = response.data;
+                if (_this.admins.length == 0) _this.isAdminsEmpty = true;else _this.isAdminsEmpty = false;
             });
         },
         getRoles: function getRoles() {
@@ -365,6 +377,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         admin: function admin(state) {
             this.state = state;
+            this.admins = [];
             this.getAdmins(this.state, 1);
         },
         getSearch: function getSearch() {
@@ -909,12 +922,20 @@ var render = function() {
           _c("table", { staticClass: "table" }, [
             _vm._m(2),
             _vm._v(" "),
-            _vm.isSearching ? _c("tbody", [_vm._m(3)]) : _vm._e(),
+            _vm.admins.length == 0 && _vm.isAdminsEmpty == false
+              ? _c("tbody", [_vm._m(3)])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.admins.length == 0 && _vm.isAdminsEmpty == true
+              ? _c("tbody", [_vm._m(4)])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.isSearching ? _c("tbody", [_vm._m(5)]) : _vm._e(),
             _vm._v(" "),
             _vm.searchResult.length == 0 &&
             _vm.searchData.length != "" &&
             _vm.isSearching == false
-              ? _c("tbody", [_vm._m(4)])
+              ? _c("tbody", [_vm._m(6)])
               : _vm._e(),
             _vm._v(" "),
             _vm.searchResult.length == 0 && _vm.searchData.length == ""
@@ -943,7 +964,8 @@ var render = function() {
                         admin: admin,
                         index: _vm.getIndex(index),
                         role: _vm.role(admin.role_id),
-                        url: _vm.url
+                        url: _vm.url,
+                        permissions: _vm.permissions
                       }
                     })
                   })
@@ -1027,6 +1049,22 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Hành động")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", { staticClass: "text-center" }, [
+      _c("td", { attrs: { colspan: "5" } }, [_vm._v("Đang tải...")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", { staticClass: "text-center" }, [
+      _c("td", { attrs: { colspan: "5" } }, [_vm._v("Không có dữ liệu")])
     ])
   },
   function() {
