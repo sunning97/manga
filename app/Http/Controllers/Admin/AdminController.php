@@ -199,7 +199,9 @@ class AdminController extends Controller
 
             Auth::user()->update($all);
 
-            return redirect()->route('admin.profile')->withSuccess(['mess' => 'Cập nhật thông tin cá nhân thành công!']);
+            return redirect()
+                ->route('admin.profile')
+                ->withSuccess(['mess' => 'Cập nhật thông tin cá nhân thành công!']);
         }
     }
 
@@ -212,7 +214,9 @@ class AdminController extends Controller
             if ($image->move(public_path('uploads/admins-avatar'), $avatar_name)) {
                 File::delete(public_path('uploads/admins-avatar/' . Auth::user()->avatar));
                 Auth::user()->update(['avatar' => $avatar_name]);
-                return redirect()->route('admin.profile')->withSuccess(['mess' => 'Cập nhật ảnh đại diện thành công!']);
+                return redirect()
+                    ->route('admin.profile')
+                    ->withSuccess(['mess' => 'Cập nhật ảnh đại diện thành công!']);
             }
         }
     }
@@ -222,9 +226,11 @@ class AdminController extends Controller
         $all = $request->only(['curr_password', 'password']);
         if (Hash::check($all['curr_password'], Auth::user()->password)) {
             Auth::user()->update(['password' => Hash::make($all['password'])]);
-            return redirect()->route('admin.profile')->withSuccess(['mess' => 'Thay đổi mật khẩu thành công']);
+            return redirect()
+                ->route('admin.profile')
+                ->withSuccess(['mess' => 'Thay đổi mật khẩu thành công']);
         } else {
-            return redirect()->back()->withErrors(['mess' => 'Mật khẩu hiện tại không đúng']);
+            return $this->returnError(['mess' => 'Mật khẩu hiện tại không đúng']);
         }
     }
 

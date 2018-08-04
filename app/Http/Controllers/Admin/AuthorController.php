@@ -41,7 +41,7 @@ class AuthorController extends Controller
     public function create()
     {
         if(!$this->checkPermission('create-authors'))
-            return $this->$this->returnError(['mess'=>'Bạn không có quyền thêm tác giả!']);
+            return $this->returnError(['mess'=>'Bạn không có quyền thêm tác giả!']);
 
         return view('admin.authors.create');
     }
@@ -66,11 +66,13 @@ class AuthorController extends Controller
             'description.min' => 'Mô tả không được ít hơn 5 kí tự!',
         ]);
 
-        if($notice->fails()) return redirect()->back()->with('data',$all)->withErrors($notice);
+        if($notice->fails()) return $this->returnError($notice,$all);
 
         $author = Author::create($all);
 
-        return redirect()->route('authors.index')->withSuccess(['mess' => 'Thêm mới tác giả '.$author->name.' thành công!']);
+        return redirect()
+            ->route('authors.index')
+            ->withSuccess(['mess' => 'Thêm mới tác giả '.$author->name.' thành công!']);
     }
 
     /**
@@ -120,7 +122,7 @@ class AuthorController extends Controller
             'description.min' => 'Mô tả không được ít hơn 5 kí tự'
         ]);
 
-        if($notice->fails()) return redirect()->back()->withErrors($notice)->withInput($all);
+        if($notice->fails()) return $this->returnError($notice,$all);
 
         $author = Author::find($id);
 
@@ -129,7 +131,9 @@ class AuthorController extends Controller
         $author->description = $all['description'];
         $author->save();
 
-        return redirect()->route('authors.index')->withSuccess(['mess' => 'Cập nhật tác giả '.$author->name.' thành công!']);
+        return redirect()
+            ->route('authors.index')
+            ->withSuccess(['mess' => 'Cập nhật tác giả '.$author->name.' thành công!']);
     }
 
     /**

@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label class="col-md-12" id="author-name" data-name="@if(session()->has('data')){{ session('data')['name'] }}@endif">Tên tác giả</label>
+                                <label class="col-md-12" id="author-name" data-name="{{ old('name') }}">Tên tác giả</label>
                                 <div class="col-md-12">
                                     <input type="text" class="form-control" name="name" v-model="name">
                                 </div>
@@ -46,7 +46,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Mô tả</label>
                                 <div class="col-md-12">
-                                    <textarea class="form-control" rows="5" name="description">@if(session()->has('data')){{ session('data')['description'] }}@endif</textarea>
+                                    <textarea class="form-control" rows="5" name="description">{{ old('description') }}</textarea>
                                 </div>
                             </div>
                         </div>

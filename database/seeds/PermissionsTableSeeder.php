@@ -29,7 +29,19 @@ class PermissionsTableSeeder extends Seeder
             ['name'=>'Xem Chaps','slug_name'=>'read-chaps','description'=>'Cho phép người dùng xem Chaps','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
             ['name'=>'Thêm Chaps','slug_name'=>'create-chaps','description'=>'Cho phép người dùng thêm mới Chaps','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
             ['name'=>'Xóa Chaps','slug_name'=>'delete-chaps','description'=>'Cho phép người dùng xóa Chaps','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
-            ['name'=>'Cập nhật Chaps','slug_name'=>'update-chaps','description'=>'Cho phép người dùng cập nhật Chaps','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()]
+            ['name'=>'Cập nhật Chaps','slug_name'=>'update-chaps','description'=>'Cho phép người dùng cập nhật Chaps','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Xem Authors','slug_name'=>'read-authors','description'=>'Cho phép người dùng xem tác giả','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Thêm Authors','slug_name'=>'create-authors','description'=>'Cho phép người dùng thêm mới tác giả','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Xóa Authors','slug_name'=>'delete-authors','description'=>'Cho phép người dùng xóa tác giả','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Cập nhật Authors','slug_name'=>'update-authors','description'=>'Cho phép người dùng cập nhật tác giả','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Xem Genres','slug_name'=>'read-genres','description'=>'Cho phép người dùng xem thể loại','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Thêm Genres','slug_name'=>'create-genres','description'=>'Cho phép người dùng thêm mới thể loại','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Xóa Genres','slug_name'=>'delete-genres','description'=>'Cho phép người dùng xóa thể loại','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Cập nhật Genres','slug_name'=>'update-genres','description'=>'Cho phép người dùng cập nhật thể loại','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Xem Teams','slug_name'=>'read-teams','description'=>'Cho phép người dùng xem nhóm dich','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Thêm Teams','slug_name'=>'create-teams','description'=>'Cho phép người dùng thêm mới nhóm dich','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Xóa Teams','slug_name'=>'delete-teams','description'=>'Cho phép người dùng xóa nhóm dich','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Cập nhật Teams','slug_name'=>'update-teams','description'=>'Cho phép người dùng cập nhật nhóm dich','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
         ]);
     }
 }

@@ -32,13 +32,7 @@
                                 <tr>
                                     <th>Trạng thái</th>
                                     <td>
-                                        @if($manga->state =='IN_PROCESS')
-                                            <b class="text-danger">Đang tiến hành</b>
-                                        @elseif($manga->state =='COMPLETE')
-                                            <b class="text-success">Hoàn thành</b>
-                                        @elseif($manga->state =='HIDDEN')
-                                            <b class="text-dark">Ẩn</b>
-                                        @endif
+                                        {{ $manga->state }}
                                     </td>
                                 </tr>
                                 <tr>

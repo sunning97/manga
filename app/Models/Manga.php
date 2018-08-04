@@ -10,6 +10,20 @@ class Manga extends Model
     protected $fillable = ['name','other_name','slug_name','state','view','origin','cover','description','post_by','genre_id','update_by','created_at','updated_at'];
     public $timestamps=true;
 
+    public function state()
+    {
+        switch ($this->state){
+            case 'COMPLETE':
+                return 'Hoàn thành';
+                break;
+            case 'IN_PROCESS':
+                return 'Đang tiến hành';
+                break;
+            case 'HIDDEN':
+                return 'Không hiển thị';
+                break;
+        }
+    }
     public function genres(){
         return $this->belongsToMany('App\Models\Genre','manga_genre','manga_id','genre_id');
     }
