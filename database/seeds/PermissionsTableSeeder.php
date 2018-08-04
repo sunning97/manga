@@ -42,6 +42,10 @@ class PermissionsTableSeeder extends Seeder
             ['name'=>'Thêm Teams','slug_name'=>'create-teams','description'=>'Cho phép người dùng thêm mới nhóm dich','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
             ['name'=>'Xóa Teams','slug_name'=>'delete-teams','description'=>'Cho phép người dùng xóa nhóm dich','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
             ['name'=>'Cập nhật Teams','slug_name'=>'update-teams','description'=>'Cho phép người dùng cập nhật nhóm dich','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Xem Comments','slug_name'=>'read-comments','description'=>'Cho phép người dùng xem bình luận','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Thêm Comments','slug_name'=>'create-comments','description'=>'Cho phép người dùng thêm mới bình luận','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Xóa Comments','slug_name'=>'delete-comments','description'=>'Cho phép người dùng xóa bình luận','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
+            ['name'=>'Cập nhật Comments','slug_name'=>'update-comments','description'=>'Cho phép người dùng cập nhật bình luận','created_at'=>$mytime->toDateTimeString(),'updated_at'=>$mytime->toDateTimeString()],
         ]);
     }
 }
