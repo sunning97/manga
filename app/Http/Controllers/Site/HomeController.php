@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return 'home';
+        return view('site.home');
     }
 
     public function activateUser()
