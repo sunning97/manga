@@ -17,9 +17,14 @@ class CreateCommentTable extends Migration
             $table->increments('id');
             $table->text('content');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
+            $table->foreign('user_id')
+                ->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('manga_id');
-            $table->foreign('manga_id')->references('id')->on('mangas')->onDelete('cascade');;
+            $table->foreign('manga_id')
+                ->references('id')->on('mangas')->onDelete('cascade');
+            $table->unsignedInteger('comment_id');
+            $table->foreign('comment_id')
+                ->references('id')->on('comments')->onDelete('cascade');
             $table->timestamps();
         });
     }
