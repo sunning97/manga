@@ -218,6 +218,13 @@
 <script src="{{ asset('assets/site/js/jquery-3.1.1.min.js') }}"></script>
 <script src="{{ asset('assets/site/js/jquery.slicknav.min.js') }}"></script>
 <script src="{{ asset('assets/site/js/script.js') }}"></script>
+<script src="{{ asset('assets/site/js/jquery.slimscroll.js') }}"></script>
+<script>
+    $('#slimtest1').slimScroll({
+        height: '250px'
+    });
+
+</script>
 </body>
 
 <!-- Mirrored from feelman.info/html/leopold/index-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Jul 2018 15:18:18 GMT -->

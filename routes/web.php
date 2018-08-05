@@ -14,5 +14,7 @@
 Route::get('/login','Site\LoginController@showloginForm')->name('login');
 Route::post('/login','Site\LoginController@login')->name('login.submit');
 Route::get('/logout','Site\LoginController@logout')->name('logout');
-Route::get('/','Site\HomeController@index')->name('home');
 Route::get('/activation/{token}', 'Site\HomeController@activateUser')->name('site.activate');
+
+Route::get('/','Site\HomeController@index')->name('home');
+Route::get('/manga/{id}','Site\HomeController@detailManga')->name('home.manga');

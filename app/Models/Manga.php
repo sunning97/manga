@@ -42,4 +42,9 @@ class Manga extends Model
     public function teams(){
         return $this->belongsToMany('App\Models\TranslateTeam','manga_translate_team','manga_id','team_id');
     }
+
+    public function postBy()
+    {
+        return $this->belongsTo('App\Models\Admin','post_by','id');
+    }
 }
