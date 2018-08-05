@@ -24,11 +24,6 @@ class AppServiceProvider extends ServiceProvider
             $colors = ['info','default','primary','success','danger','warning'];
            return '<?php echo "'.$colors[array_rand($colors)].'" ?>';
         });
-//        if(!$this->app->runningInConsole()) {
-//            $admins = Admin::all();
-//            View::share('all_admin', $admins);
-//        }
-
     }
 
     /**
