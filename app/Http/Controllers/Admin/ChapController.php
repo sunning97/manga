@@ -71,6 +71,9 @@ class ChapController extends Controller
 
         $chap = Chap::create($all);
 
+        $manga = $chap->manga;
+        $manga->updated_at = Carbon::now()->toDateTimeString();
+        $manga->save();
         return redirect()->route('chaps.show',$chap->id)->withSuccess(['mess' =>'Thêm mới chap '.$chap->name.' thành công']);
     }
 
@@ -179,6 +182,8 @@ class ChapController extends Controller
         }
 
         $chap->update($all);
+        $manga->updated_at = Carbon::now()->toDateTimeString();
+        $manga->save();
         return redirect()->route('chaps.show',$chap->id)->withSuccess(['mess' =>'Cập nhật chap '.$chap->name.' thành công']);
     }
 

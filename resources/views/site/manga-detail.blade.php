@@ -1,5 +1,6 @@
 @extends('site.layout.app')
 
+@section('title',$manga->name)
 @section('content')
     <div class="col-md-8  col-lg-9  container--list">
         <nav aria-label="breadcrumb">
@@ -92,7 +93,7 @@
                                             <tbody>
                                             @foreach($manga->chaps as $chap)
                                                 <tr>
-                                                    <td><b><a href="">{{ $chap->name }}</a></b></td>
+                                                    <td><b><a href="{{ route('home.manga.chap',$chap->id) }}">{{ $chap->name }}</a></b></td>
                                                     <td class="text-right">{{ $chap->created_at->format('d-m-Y , H:i') }}</td>
                                                 </tr>
                                             @endforeach

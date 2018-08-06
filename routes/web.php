@@ -18,3 +18,4 @@ Route::get('/activation/{token}', 'Site\HomeController@activateUser')->name('sit
 
 Route::get('/','Site\HomeController@index')->name('home');
 Route::get('/manga/{id}','Site\HomeController@detailManga')->name('home.manga');
+Route::get('/manga/chap/{id_chap}','Site\HomeController@chapMangaE')->name('home.manga.chap');

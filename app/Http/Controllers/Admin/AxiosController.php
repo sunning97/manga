@@ -128,6 +128,7 @@ class AxiosController extends Controller
             $image = $request->file('image');
             $chapImage = ChapImage::find($request->id);
             $chap = $chapImage->chap;
+            $manga = $chap->manga;
             if($chapImage){
                 $new_name = $chapImage->chap->slug_name.'-'.time().rand(111,999).'.'.$image->getClientOriginalExtension();
                 $image->move(public_path('uploads/chap-images'),$new_name);
@@ -138,6 +139,8 @@ class AxiosController extends Controller
                 $chap->updated_at = Carbon::now()->toDateTimeString();
                 $chap->update_by = Auth::guard('admin')->user()->id;
                 $chap->save();
+                $manga->updated_at = Carbon::now()->toDateTimeString();
+                $manga->save();
                 return response()->json($chapImage,200);
             }
         } else {
@@ -149,6 +152,7 @@ class AxiosController extends Controller
         $image = ChapImage::find($id);
         if($image){
             $chap = $image->chap;
+            $manga = $chap->manga;
             $image->delete();
 
             File::delete(public_path('uploads/chap-images/'.$image->image));
@@ -156,7 +160,8 @@ class AxiosController extends Controller
             $chap->updated_at = Carbon::now()->toDateTimeString();
             $chap->update_by = Auth::guard('admin')->user()->id;
             $chap->save();
-
+            $manga->updated_at = Carbon::now()->toDateTimeString();
+            $manga->save();
             return response()->json($image->image,'200');
         } else {
             return response()->json('error','401');

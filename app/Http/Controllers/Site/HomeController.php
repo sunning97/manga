@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Models\Chap;
 use App\Models\Manga;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,5 +23,11 @@ class HomeController extends Controller
     public function activateUser()
     {
 
+    }
+
+    public function chapMangaE($chap_id)
+    {
+        $chap = Chap::findOrFail($chap_id);
+        return view('site.manga-chap')->withChap($chap);
     }
 }
