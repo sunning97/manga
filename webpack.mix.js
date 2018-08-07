@@ -39,4 +39,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/admin-create.js', 'public/js')
     .js('resources/assets/js/admin.js', 'public/js')
     .js('resources/assets/js/admin-edit.js','public/js')
+
+// site
+    .js('resources/assets/js/site/manga-detail.js','public/js')
 ;

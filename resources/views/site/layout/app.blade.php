@@ -216,7 +216,7 @@
     </div>
 </div>
 <div class="content-overlay"></div>
-<script src="{{ asset('assets/site/js/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('assets/site/js/jquery.slicknav.min.js') }}"></script>
 <script src="{{ asset('assets/site/js/script.js') }}"></script>
 @yield('plugin_js')

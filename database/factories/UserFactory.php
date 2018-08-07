@@ -13,10 +13,17 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Models\Message::class, function (Faker $faker) {
+$factory->define(App\Models\Comment::class, function (Faker $faker) {
+
+    $user_id = rand(1,3);
+    $time = Carbon\Carbon::now();
+
     return [
-        'sent_from' => 1,
-        'sent_to' => 2,
-        'content' => $faker->sentence,
+        'content' => $faker->sentence(10),
+        'user_id' => $user_id,
+        'manga_id' => 1,
+        'comment_id' => null,
+        'created_at' => $time->toDateTimeString(),
+        'updated_at' => $time->toDateTimeString()
     ];
 });

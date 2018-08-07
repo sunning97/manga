@@ -22,6 +22,7 @@ class CreateMangasTable extends Migration
             $table->decimal('view',10)->default(0);
             $table->text('cover');
             $table->text('description');
+            $table->text('second_des')->nullable();
             $table->unsignedInteger('post_by');
             $table->foreign('post_by')->references('id')->on('admins');
             $table->text('origin')->nullable();

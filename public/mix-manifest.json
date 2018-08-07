@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/message.js": "/js/message.js",
+    "/js/manga-detail.js": "/js/manga-detail.js",
     "/js/admin.js": "/js/admin.js",
     "/js/translate-team.js": "/js/translate-team.js",
     "/js/translate-team-edit.js": "/js/translate-team-edit.js",
