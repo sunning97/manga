@@ -1,6 +1,10 @@
 @extends('site.layout.app')
 
 @section('title',$manga->name)
+@section('plugin_css')
+    <link href="{{ asset('assets/admin/plugin/bootstrap-table/dist/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css" />
+@endsection
+
 @section('content')
     <div class="col-md-8  col-lg-9  container--list">
         <nav aria-label="breadcrumb">
@@ -74,39 +78,44 @@
             <div class="row mt-5">
                 <div class="panel panel-default">
                     <div class="panel-heading"><h5><b>Tổng hợp ( {{ $manga->chaps()->count() }} Chương )</b></h5></div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">Tên chương</th>
-                                                <th class="text-right">Ngày đăng</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                                <div id="slimtest1">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <tbody>
-                                            @foreach($manga->chaps as $chap)
-                                                <tr>
-                                                    <td><b><a href="{{ route('home.manga.chap',$chap->id) }}">{{ $chap->name }}</a></b></td>
-                                                    <td class="text-right">{{ $chap->created_at->format('d-m-Y , H:i') }}</td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="">
+                        <div class="col-12">
+                            <table data-toggle="table" data-height="400" data-mobile-responsive="true" class="table-striped">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tên</th>
+                                    <th>Ngày đăng</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @php($i = 1)
+                                @forelse($manga->chaps as $chap)
+                                    <tr id="tr-id-{{ $i }}" class="tr-class-{{ $i }}">
+                                        <td id="td-id-{{ $i }}" class="td-class-{{ $i }}">{{ $i }}</td>
+                                        <td><b><a href="{{ route('home.manga.chap',[$manga->slug_name,$chap->slug_name,$chap->id]) }}">{{ $chap->name }}</a></b></td>
+                                        <td>
+                                            {{ $chap->created_at->format('d-m-Y , H:i') }}
+                                        </td>
+                                    </tr>
+                                    @php($i++)
+                                @empty
+                                    <td colspan="5" class="text-center">Không có dữ liệu</td>
+                                @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+@endsection
+
+@section('plugin_js')
+    <script src="{{ asset('assets/admin/plugin/bootstrap-table/dist/bootstrap-table.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugin/bootstrap-table/dist/bootstrap-table.ints.js') }}"></script>
+@endsection
+
+@section('custom_js')
 @endsection

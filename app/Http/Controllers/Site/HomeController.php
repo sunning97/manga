@@ -15,7 +15,7 @@ class HomeController extends Controller
         return view('site.home')->withMangas($mangas);
     }
 
-    public function detailManga($id)
+    public function detailManga($slug,$id)
     {
         $manga = Manga::findOrFail($id);
         return view('site.manga-detail')->withManga($manga);
@@ -25,9 +25,9 @@ class HomeController extends Controller
 
     }
 
-    public function chapMangaE($chap_id)
+    public function chapManga($manga,$chap_slug,$id)
     {
-        $chap = Chap::findOrFail($chap_id);
+        $chap = Chap::findOrFail($id);
         return view('site.manga-chap')->withChap($chap);
     }
 }

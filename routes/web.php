@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/login','Site\LoginController@showloginForm')->name('login');
-Route::post('/login','Site\LoginController@login')->name('login.submit');
-Route::get('/logout','Site\LoginController@logout')->name('logout');
-Route::get('/activation/{token}', 'Site\HomeController@activateUser')->name('site.activate');
+Route::get('login','Site\LoginController@showloginForm')->name('login');
+Route::post('login','Site\LoginController@login')->name('login.submit');
+Route::get('logout','Site\LoginController@logout')->name('logout');
+Route::get('activation/{token}', 'Site\HomeController@activateUser')->name('site.activate');
 
 Route::get('/','Site\HomeController@index')->name('home');
-Route::get('/manga/{id}','Site\HomeController@detailManga')->name('home.manga');
-Route::get('/manga/chap/{id_chap}','Site\HomeController@chapMangaE')->name('home.manga.chap');
+Route::get('manga/{slug}.{id}','Site\HomeController@detailManga')->name('home.manga');
+Route::get('manga/{manga}/{chap_slug}.{id_chap}','Site\HomeController@chapManga')->name('home.manga.chap');

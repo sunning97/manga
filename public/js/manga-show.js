@@ -60,74 +60,24 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 66);
+/******/ 	return __webpack_require__(__webpack_require__.s = 64);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 66:
+/***/ 64:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(67);
+module.exports = __webpack_require__(65);
 
 
 /***/ }),
 
-/***/ 67:
+/***/ 65:
 /***/ (function(module, exports) {
 
-var id = $('.page-title').data('id');
-var app = new Vue({
-    el: '#app',
-    data: {
-        name: $('.page-title').data('name'),
-        isCoverChecked: false,
-        authors: [],
-        genres: [],
-        teams: []
-    },
-    watch: {
-        name: function name(str) {
-            this.getSlug(str);
-        }
-    },
-    methods: {
-        getSlug: function getSlug(str) {
-            return str_slug(str);
-        },
-        getAuthors: function getAuthors() {
-            var _this = this;
-
-            axios.get('/admin/axios/authors-notin/' + id).then(function (rs) {
-                _this.authors = rs.data;
-            }).catch(function (e) {});
-        },
-        getGenres: function getGenres() {
-            var _this2 = this;
-
-            axios.get('/admin/axios/genres-notin/' + id).then(function (rs) {
-                _this2.genres = rs.data;
-            }).catch(function (e) {});
-        },
-        getTeams: function getTeams() {
-            var _this3 = this;
-
-            axios.get('/admin/axios/teams-notin/' + id).then(function (rs) {
-                _this3.teams = rs.data;
-            }).catch(function (e) {});
-        }
-    },
-    mounted: function mounted() {
-        this.getAuthors();
-        this.getGenres();
-        this.getTeams();
-    }
-});
-$('#input-file-now').dropify();
-$(".select2").select2();
-$('.summernote').summernote({
-    height: 250,
-    focus: false
+$('#chap-scroll').slimScroll({
+    height: '500px'
 });
 
 /***/ })

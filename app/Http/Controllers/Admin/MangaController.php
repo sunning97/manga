@@ -157,7 +157,7 @@ class MangaController extends Controller
             DB::table('manga_admin')->insert(
                 ['manga_id'=>$id,'admin_id'=>Auth::user()->id]
             );
-            $manga->updated_at = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
+            $manga->updated_at = Carbon::now()->toDateTimeString();
             $manga->save();
         }
 

@@ -8,7 +8,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="#">Truyện</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('home.manga',$chap->manga->id) }}">{{ $chap->manga->name }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('home.manga',[$chap->manga->slug_name,$chap->manga->id]) }}">{{ $chap->manga->name }}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ $chap->name }}</li>
             </ol>
         </nav>

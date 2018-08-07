@@ -3,6 +3,7 @@
 @section('title',$manga->name)
 
 @section('plugin_css')
+    <link href="{{ asset('assets/admin/plugin/bootstrap-table/dist/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -117,63 +118,58 @@
                 </div>
                 <div class="row">
                     <div class="col-10">
-                        <h4 class="text-left mt-5"><b>Tất Cả Các Chap: {{ $manga->name }}</b> <a href="{{ route('admin.chap.create',$manga->id) }}" class="btn btn-success btn-sm waves-effect ml-5">Thêm chap</a></h4>
+                        <h4 class="text-left mt-5"><b>Tất Cả Các Chap: {{ $manga->chaps->count() }} chap</b> <a href="{{ route('admin.chap.create',$manga->id) }}" class="btn btn-success btn-sm waves-effect ml-5">Thêm chap</a></h4>
                     </div>
                 </div>
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <b>
-                                        <th style="width: 300px;">Tiêu đề</th>
-                                        <th>Ngày đăng</th>
-                                        <th>Người đăng</th>
-                                        <th>Người update</th>
-                                        <th class="text-center">Action</th>
-                                    </b>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @forelse($chaps as $chap)
-                                    <tr>
-                                        <td><b>{{ $chap->name }}</b></td>
-                                        <td>
-                                            {{ $chap->created_at->format('d-m-Y') }}
-                                        </td>
-                                        <td><b>{{ $chap->postBy->f_name .' '. $chap->postBy->l_name }}</b></td>
-                                        <td><b>
-                                            @if($chap->updateBy)
-                                                {{ $chap->updateBy->f_name .' ' . $chap->updateBy->l_name}}
-                                            @else
-                                                Không có
-                                            @endif
-                                        </b></td>
-                                        <td class="text-center">
-                                            <div class="btn-group m-b-20">
-                                                @can('read-chaps')
-                                                    <a href="{{ route('chaps.show',$chap->id) }}" class="btn btn-success btn-sm text-sm-center">Xem <i class="ti-eye"></i></a>
-                                                @endcan
-                                                @can('update-chaps')
-                                                    <a href="{{ route('chaps.edit',$chap->id) }}" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>
-                                                @endcan
-                                                @can('delete-chaps')
-                                                    <button type="button" class="btn btn-danger btn-sm">Xóa <i class="ti-trash"></i></button>
-                                                @endcan
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <td colspan="5" class="text-center">Không có dữ liệu</td>
-                                @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="text-right">
-                            {{ $chaps->render('admin.mangas.pagination_chap') }}
-                        </div>
-                    </div>
+                <div class="col-12">
+                    <table data-toggle="table" data-height="500" data-mobile-responsive="true" class="table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên</th>
+                            <th>Ngày đăng</th>
+                            <th>Người đăng</th>
+                            <th>Người cập nhật</th>
+                            <th class="text-center">Hành động</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @php($i = 1)
+                        @forelse($chaps as $chap)
+                            <tr id="tr-id-{{ $i }}" class="tr-class-{{ $i }}">
+                                <td id="td-id-{{ $i }}" class="td-class-{{ $i }}">{{ $i }}</td>
+                                <td><b>{{ $chap->name }}</b></td>
+                                <td>
+                                    {{ $chap->created_at->format('d-m-Y') }}
+                                </td>
+                                <td><b>{{ $chap->postBy->f_name .' '. $chap->postBy->l_name }}</b></td>
+                                <td><b>
+                                        @if($chap->updateBy)
+                                            {{ $chap->updateBy->f_name .' ' . $chap->updateBy->l_name}}
+                                        @else
+                                            Không có
+                                        @endif
+                                    </b></td>
+                                <td class="text-center">
+                                    <div class="btn-group m-b-20">
+                                        @can('read-chaps')
+                                            <a href="{{ route('chaps.show',$chap->id) }}" class="btn btn-success btn-sm text-sm-center">Xem <i class="ti-eye"></i></a>
+                                        @endcan
+                                        @can('update-chaps')
+                                            <a href="{{ route('chaps.edit',$chap->id) }}" class="btn btn-primary btn-sm waves-effect">Sửa <i class="ti-pencil"></i></a>
+                                        @endcan
+                                        @can('delete-chaps')
+                                            <button type="button" class="btn btn-danger btn-sm">Xóa <i class="ti-trash"></i></button>
+                                        @endcan
+                                    </div>
+                                </td>
+                            </tr>
+                            @php($i++)
+                        @empty
+                            <td colspan="5" class="text-center">Không có dữ liệu</td>
+                        @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -181,7 +177,10 @@
 @endsection
 
 @section('plugin_js')
+    <script src="{{ asset('assets/admin/plugin/bootstrap-table/dist/bootstrap-table.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugin/bootstrap-table/dist/bootstrap-table.ints.js') }}"></script>
 @endsection
 
 @section('custom_js')
+    <script src="{{ asset('js/manga-show.js') }}"></script>
 @endsection

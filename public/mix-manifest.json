@@ -12,6 +12,7 @@
     "/js/permission.js": "/js/permission.js",
     "/js/permission-edit.js": "/js/permission-edit.js",
     "/js/permission-create.js": "/js/permission-create.js",
+    "/js/manga-show.js": "/js/manga-show.js",
     "/js/manga-edit.js": "/js/manga-edit.js",
     "/js/manga-create.js": "/js/manga-create.js",
     "/js/manga-chap-create.js": "/js/manga-chap-create.js",

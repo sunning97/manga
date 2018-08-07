@@ -11,6 +11,7 @@
     <link rel="shortcut icon" href="{{ asset('assets/site/img/favicon.png') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
     <link href="{{ asset('assets/site/css/bootstrap.min.css') }}" rel="stylesheet">
+    @yield('plugin_css')
     <link href="{{ asset('assets/site/css/style.min.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -218,14 +219,8 @@
 <script src="{{ asset('assets/site/js/jquery-3.1.1.min.js') }}"></script>
 <script src="{{ asset('assets/site/js/jquery.slicknav.min.js') }}"></script>
 <script src="{{ asset('assets/site/js/script.js') }}"></script>
-<script src="{{ asset('assets/site/js/jquery.slimscroll.js') }}"></script>
-<script>
-    $('#slimtest1').slimScroll({
-        height: '250px'
-    });
-
-</script>
+@yield('plugin_js')
+@yield('custom_js')
 </body>
 
-<!-- Mirrored from feelman.info/html/leopold/index-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Jul 2018 15:18:18 GMT -->
 </html>
