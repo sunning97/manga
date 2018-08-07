@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title','asdasdas')
+@section('title','Manga- Dashboard')
 
 @section('plugin_css')
 @endsection
