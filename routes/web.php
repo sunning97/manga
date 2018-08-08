@@ -11,6 +11,7 @@
 |
 */
 
+Route::get('register','Site\RegisterController@showRegistrationForm')->name('register');
 Route::get('login','Site\LoginController@showloginForm')->name('login');
 Route::post('login','Site\LoginController@login')->name('login.submit');
 Route::get('logout','Site\LoginController@logout')->name('logout');
@@ -25,4 +26,5 @@ Route::get('manga/{manga}/{chap_slug}.{id_chap}','Site\HomeController@chapManga'
 Route::prefix('axios')->group(function (){
     Route::post('get-comment','Site\AxiosController@getComments');
     Route::post('get-child-comment','Site\AxiosController@getChildComments');
+    Route::post('get-total-comments','Site\AxiosController@getTotalComments');
 });

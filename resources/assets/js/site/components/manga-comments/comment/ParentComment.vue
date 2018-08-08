@@ -6,7 +6,7 @@
             </div>
             <div class="col-md-10 bg-info rounded">
                 <div class="post__comments-item-reply">
-                    <a href="#">Reply</a>
+                    <span class="btn btn-default" @click="reply">Reply</span>
                 </div>
                 <div class="post__comments-item-info">
                     <div class="post__comments-item-info-author">
@@ -18,6 +18,20 @@
                 </div>
                 <div class="post__comments-item-post">
                     <p>{{ comment.content }}</p>
+                </div>
+            </div>
+            <div class="row" v-if="isReply">
+                <div class="col-md-11 col-md-push-1">
+                    <div class="post__comments-respond">
+                        <form action="" method="post">
+                            <p class="post__comments-respond-comment">
+                                <textarea id="comment" name="comment" cols="30" aria-required="true"></textarea>
+                            </p>
+                            <p class="post__comments-respond-submit">
+                                <input id="submit" type="submit" name="submit" size="30" value="Đăng">
+                            </p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,24 +55,31 @@
         },
         data(){
           return{
-              comments:[]
+              comments:[],
+              isReply:false
           }
         },
         mounted(){
-            this.getChildComments();
+            this.childComments();
+        },
+        computed:{
+
         },
         methods:{
-            getChildComments:function () {
+            childComments:function () {
                 axios.post('/axios/get-child-comment',{
                     parent_comment:this.comment.comment_id
                 }).then(response=>{
                     this.comments = response.data;
                 }).catch(error=>{
-
+                    this.comments = [];
                 });
             },
             date_format:function (str) {
                 return $.format.date(str, "dd-MM-yyyy");
+            },
+            reply:function () {
+                this.isReply = !this.isReply;
             }
         },
         components:{

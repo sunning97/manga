@@ -21,10 +21,10 @@
         <div class="nav__container  container">
             <ul class="nav__list">
                 <li class="nav__item">
-                    <a href="about.html">Đăng nhập</a>
+                    <a href="{{ route('login') }}">Đăng nhập</a>
                 </li>
                 <li class="nav__item">
-                    <a href="contact.html">Đăng kí</a>
+                    <a href="{{ route('register') }}">Đăng kí</a>
                 </li>
                 <li class="nav__item">
                     <a href="contact.html">Danh sách truyện</a>

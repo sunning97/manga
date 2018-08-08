@@ -24,6 +24,13 @@ class AxiosController extends Controller
         return response()->json($comments,200);
     }
 
+    public function getTotalComments(Request $request)
+    {
+        $total = Comment::where('manga_id','=',$request->manga_id)
+            ->whereNull('parent_comment')->count();
+        return response()->json($total,200);
+    }
+
     public function getChildComments(Request $request)
     {
         $comments = DB::table('comments')
@@ -32,7 +39,10 @@ class AxiosController extends Controller
             ->select(['comments.id as comment_id','comments.content','comments.parent_comment','comments.user_id','comments.created_at','users.id','users.f_name','users.l_name','users.avatar'])
             ->get();
 
-        return response()->json($comments,200);
+        if($comments->all()){
+            return response()->json($comments,200);
+        }
+        return response('no child comment',404);
 
     }
 }
