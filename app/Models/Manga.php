@@ -47,4 +47,5 @@ class Manga extends Model
     {
         return $this->belongsTo('App\Models\Admin','post_by','id');
     }
+
 }

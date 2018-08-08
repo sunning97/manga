@@ -22,7 +22,7 @@ $factory->define(App\Models\Comment::class, function (Faker $faker) {
         'content' => $faker->sentence(10),
         'user_id' => $user_id,
         'manga_id' => 1,
-        'comment_id' => null,
+        'parent_comment' => null,
         'created_at' => $time->toDateTimeString(),
         'updated_at' => $time->toDateTimeString()
     ];

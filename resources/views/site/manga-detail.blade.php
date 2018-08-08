@@ -2,8 +2,7 @@
 
 @section('title',$manga->name)
 @section('plugin_css')
-    <link href="{{ asset('assets/admin/plugin/bootstrap-table/dist/bootstrap-table.min.css') }}" rel="stylesheet"
-          type="text/css"/>
+    <link href="{{ asset('assets/admin/plugin/bootstrap-table/dist/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css"/>
 @endsection
 
 @section('content')
@@ -18,14 +17,13 @@
         <div class="row">
             <h3 class="text-center"><b>{{ $manga->name }}</b></h3>
             <div class="row text-center">
-                <img src="{{ asset('uploads/manga-covers/'.$manga->cover) }}" alt="{{ $manga->name }}"
-                     class="img-responsive">
+                <img src="{{ asset('uploads/manga-covers/'.$manga->cover) }}" alt="{{ $manga->name }}" class="img-responsive">
             </div>
             <hr>
             <div class="row mt-5">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center"><b>Sơ lược</b></div>
-                    <div class="panel-body">{{ $manga->description }}</div>
+                    <div class="panel-body">{!! $manga->description !!}</div>
                 </div>
             </div>
             <div class="row mt-5">
@@ -113,7 +111,7 @@
                 </div>
             </div>
             <div class="row mt-5" id="app">
-                <comment></comment>
+                <comment :manga="{{ $manga }}" :url="'{{ asset('uploads/users-avatar') }}'"></comment>
             </div>
         </div>
     </div>

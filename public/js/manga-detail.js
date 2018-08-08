@@ -266,6 +266,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        manga: {
+            type: Object,
+            default: null,
+            required: true
+        },
+        url: {
+            type: String,
+            default: ''
+        }
+    },
+    data: function data() {
+        return {
+            comments: [],
+            pagination: {},
+            offset: 5
+        };
+    },
+    mounted: function mounted() {
+        this.getComment();
+    },
+
+    methods: {
+        getComment: function getComment() {
+            var _this = this;
+
+            axios.post('/axios/get-comment', {
+                manga_id: this.manga.id
+            }).then(function (response) {
+                _this.comments = response.data.data;
+                _this.pagination = response.data;
+            }).catch(function (error) {
+                console.log(error.response.data.message);
+            });
+        }
+    },
     components: {
         'list-comment': __WEBPACK_IMPORTED_MODULE_0__ListComment___default.a,
         'pagination': __WEBPACK_IMPORTED_MODULE_1__Pagination___default.a,
@@ -328,86 +364,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__comment_ParentComment__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__comment_ParentComment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__comment_ParentComment__);
 //
 //
 //
@@ -419,11 +377,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        comments: {
+            type: Array,
+            default: []
+        },
+        url: {
+            type: String,
+            default: ''
+        }
+    },
     mounted: function mounted() {
         $('#commnent').slimScroll({
             height: '500px'
         });
+    },
+
+    methods: {},
+    components: {
+        'parent-comment': __WEBPACK_IMPORTED_MODULE_0__comment_ParentComment___default.a
     }
 });
 
@@ -436,166 +410,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h5", [_vm._v("3 Bình luận")]),
+    _vm._v(" "),
+    _c(
+      "ul",
+      { staticClass: "post__comments-list", attrs: { id: "commnent" } },
+      _vm._l(_vm.comments, function(comment) {
+        return _c(
+          "li",
+          { staticClass: "post__comments-item" },
+          [_c("parent-comment", { attrs: { comment: comment, url: _vm.url } })],
+          1
+        )
+      })
+    )
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h5", [_vm._v("3 Bình luận")]),
-      _vm._v(" "),
-      _c(
-        "ul",
-        { staticClass: "post__comments-list", attrs: { id: "commnent" } },
-        [
-          _c("li", { staticClass: "post__comments-item" }, [
-            _c("div", { staticClass: "post__comments-item-body" }, [
-              _c("div", { staticClass: "post__comments-item-avatar" }, [
-                _c("img", {
-                  attrs: { src: "img/comment1.jpg", alt: "Comment Author" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "post__comments-item-right" }, [
-                _c("div", { staticClass: "post__comments-item-reply" }, [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("Reply")])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "post__comments-item-info" }, [
-                  _c(
-                    "div",
-                    { staticClass: "post__comments-item-info-author" },
-                    [
-                      _c("span", [
-                        _c("a", { attrs: { href: "#" } }, [_vm._v("Matt Kian")])
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "post__comments-item-info-date" }, [
-                    _c("span", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("March 30, 2017 at 2:28 pm")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "post__comments-item-post" }, [
-                  _c("p", [
-                    _vm._v(
-                      "Dignissim pharetra consequat condimentum scelerisque. Vestibulum sagittis scelerisque montes enim Cursus dui lectus cras mattis Laoreet aliquam varius ut adipiscing interdum lacus risus mattis urna semper cras hendrerit, morbi nonummy."
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("ul", { staticClass: "post__comments-children" }, [
-              _c("li", { staticClass: "post__comments-item" }, [
-                _c("div", { staticClass: "post__comments-item-body" }, [
-                  _c("div", { staticClass: "post__comments-item-avatar" }, [
-                    _c("img", {
-                      attrs: { src: "img/comment2.jpg", alt: "Comment Author" }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "post__comments-item-right" }, [
-                    _c("div", { staticClass: "post__comments-item-reply" }, [
-                      _c("a", { attrs: { href: "#" } }, [_vm._v("Reply")])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "post__comments-item-info" }, [
-                      _c(
-                        "div",
-                        { staticClass: "post__comments-item-info-author" },
-                        [
-                          _c("span", [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _vm._v("Olyvia Becca")
-                            ])
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "post__comments-item-info-date" },
-                        [
-                          _c("span", [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _vm._v("April 11, 2017 at 7:35 pm")
-                            ])
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "post__comments-item-post" }, [
-                      _c("p", [
-                        _vm._v(
-                          "Aliquet arcu cubilia dignissim natoque posuere vestibulum malesuada integer Ridiculus suscipit justo In tempus penatibus diam arcu dictumst felis scelerisque nunc blandit cubilia condimentum class justo natoque volutpat nam."
-                        )
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "post__comments-item" }, [
-            _c("div", { staticClass: "post__comments-item-body" }, [
-              _c("div", { staticClass: "post__comments-item-avatar" }, [
-                _c("img", {
-                  attrs: { src: "img/comment3.jpg", alt: "Comment Author" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "post__comments-item-right" }, [
-                _c("div", { staticClass: "post__comments-item-reply" }, [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("Reply")])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "post__comments-item-info" }, [
-                  _c(
-                    "div",
-                    { staticClass: "post__comments-item-info-author" },
-                    [
-                      _c("span", [
-                        _c("a", { attrs: { href: "#" } }, [
-                          _vm._v("Jess Lavone")
-                        ])
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "post__comments-item-info-date" }, [
-                    _c("span", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("April 15, 2017 at 8:32 pm")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "post__comments-item-post" }, [
-                  _c("p", [
-                    _vm._v(
-                      "Dapibus ullamcorper ullamcorper class potenti sed, rhoncus arcu. Ligula iaculis aliquet, interdum luctus porttitor lacinia eu etiam. Pede elementum nisl dui facilisis at, metus facilisi, class consectetuer. Feugiat malesuada dis."
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -892,7 +724,10 @@ var render = function() {
     "div",
     { staticClass: "post__comments" },
     [
-      _c("list-comment"),
+      _c("list-comment", {
+        staticClass: "border border-secondary",
+        attrs: { comments: _vm.comments, url: _vm.url }
+      }),
       _vm._v(" "),
       _c("pagination"),
       _vm._v(" "),
@@ -908,6 +743,394 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-96a04b2e", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 132:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(133)
+/* template */
+var __vue_template__ = __webpack_require__(134)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\site\\components\\manga-comments\\comment\\ParentComment.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6550798e", Component.options)
+  } else {
+    hotAPI.reload("data-v-6550798e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 133:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChildComment__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChildComment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ChildComment__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        comment: {
+            type: Object,
+            default: {}
+        },
+        url: {
+            type: String,
+            default: ''
+        }
+    },
+    data: function data() {
+        return {
+            comments: []
+        };
+    },
+    mounted: function mounted() {
+        this.getChildComments();
+    },
+
+    methods: {
+        getChildComments: function getChildComments() {
+            var _this = this;
+
+            axios.post('/axios/get-child-comment', {
+                parent_comment: this.comment.comment_id
+            }).then(function (response) {
+                _this.comments = response.data;
+            }).catch(function (error) {});
+        },
+        date_format: function date_format(str) {
+            return $.format.date(str, "dd-MM-yyyy");
+        }
+    },
+    components: {
+        'child-comment': __WEBPACK_IMPORTED_MODULE_0__ChildComment___default.a
+    }
+});
+
+/***/ }),
+
+/***/ 134:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "row mb-5" }, [
+        _c("div", { staticClass: "col-md-2" }, [
+          _c("img", {
+            staticClass: "img-responsive",
+            attrs: {
+              src: _vm.url + "/" + _vm.comment.avatar,
+              alt: _vm.comment.f_name + " " + _vm.comment.l_name
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-10 bg-info rounded" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "post__comments-item-info" }, [
+            _c("div", { staticClass: "post__comments-item-info-author" }, [
+              _c("span", [
+                _c("a", { attrs: { href: "#" } }, [
+                  _vm._v(_vm._s(_vm.comment.f_name + " " + _vm.comment.l_name))
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "post__comments-item-info-date" }, [
+              _c("span", [
+                _c("a", { attrs: { href: "#" } }, [
+                  _vm._v(_vm._s(_vm.date_format(_vm.comment.created_at)))
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "post__comments-item-post" }, [
+            _c("p", [_vm._v(_vm._s(_vm.comment.content))])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _vm.comments.length > 0
+        ? _c("child-comment", {
+            attrs: { comments: _vm.comments, url: _vm.url }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _c("hr")
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "post__comments-item-reply" }, [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Reply")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6550798e", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 135:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(136)
+/* template */
+var __vue_template__ = __webpack_require__(137)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\site\\components\\manga-comments\\comment\\ChildComment.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-771ac06f", Component.options)
+  } else {
+    hotAPI.reload("data-v-771ac06f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 136:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        comments: {
+            type: Array,
+            default: []
+        },
+        url: {
+            type: String,
+            default: ''
+        }
+    },
+    methods: {
+        date_format: function date_format(str) {
+            return $.format.date(str, "dd-MM-yyyy");
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 137:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    _vm._l(_vm.comments, function(comment) {
+      return _c("ul", { staticClass: "post__comments-children mb-5" }, [
+        _c("li", { staticClass: "post__comments-item" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-2" }, [
+              _c("img", {
+                staticClass: "img-responsive",
+                attrs: {
+                  src: _vm.url + "/" + comment.avatar,
+                  alt: "Comment Author"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "col-md-10",
+                staticStyle: { "background-color": "rgb(214, 214, 214)" }
+              },
+              [
+                _c("div", { staticClass: "post__comments-item-info" }, [
+                  _c(
+                    "div",
+                    { staticClass: "post__comments-item-info-author" },
+                    [
+                      _c("span", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _vm._v(_vm._s(comment.f_name + " " + comment.l_name))
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "post__comments-item-info-date" }, [
+                    _c("span", [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _vm._v(_vm._s(_vm.date_format(comment.created_at)))
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", {}, [_c("p", [_vm._v(_vm._s(comment.content))])])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("hr")
+        ])
+      ])
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-771ac06f", module.exports)
   }
 }
 

@@ -19,3 +19,10 @@ Route::get('activation/{token}', 'Site\HomeController@activateUser')->name('site
 Route::get('/','Site\HomeController@index')->name('home');
 Route::get('manga/{slug}.{id}','Site\HomeController@detailManga')->name('home.manga');
 Route::get('manga/{manga}/{chap_slug}.{id_chap}','Site\HomeController@chapManga')->name('home.manga.chap');
+
+// route for axios site
+
+Route::prefix('axios')->group(function (){
+    Route::post('get-comment','Site\AxiosController@getComments');
+    Route::post('get-child-comment','Site\AxiosController@getChildComments');
+});

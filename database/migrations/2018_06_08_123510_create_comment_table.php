@@ -22,8 +22,8 @@ class CreateCommentTable extends Migration
             $table->unsignedInteger('manga_id');
             $table->foreign('manga_id')
                 ->references('id')->on('mangas')->onDelete('cascade');
-            $table->unsignedInteger('comment_id')->nullable();
-            $table->foreign('comment_id')
+            $table->unsignedInteger('parent_comment')->nullable();
+            $table->foreign('parent_comment')
                 ->references('id')->on('comments')->onDelete('cascade');
             $table->timestamps();
         });
