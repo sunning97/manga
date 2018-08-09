@@ -9,7 +9,9 @@
 namespace App\Classes;
 
 
+use App\Mail\AdminActivationEmail;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\UserActivation;
@@ -19,7 +21,7 @@ use App\Models\Admin;
 class ActivationService
 {
     protected $userActivation;
-
+    protected $resendAfter = 120;
     public function __construct(UserActivation $userActivation)
     {
         $this->userActivation = $userActivation;
@@ -29,10 +31,14 @@ class ActivationService
     {
         if ($user->state == 'ACTIVE' || !$this->shouldSend($user)) return;
         $token = $this->userActivation->createActivation($user);
-        if(class_basename($user) == 'Admin')
+        if(class_basename($user) == 'Admin'){
             $user->activation_link = route('admin.activate', $token);
-        else $user->activation_link = route('site.activate', $token);
-        $mailable = new UserActivationEmail($user);
+            $mailable = new AdminActivationEmail($user);
+        }
+        else {
+            $user->activation_link = route('site.activate', $token);
+            $mailable = new UserActivationEmail($user);
+        }
         Mail::to($user->email)->send($mailable);
     }
 
@@ -40,19 +46,29 @@ class ActivationService
     {
         $activation = $this->userActivation->getActivationByToken($token);
         if ($activation === null) return null;
-        $user = Admin::find($activation->user_id);
+        $user = User::find($activation->user_id);
         $user->state = 'ACTIVE';
         $user->save();
 
-        $role = Role::where('level','=','20')->get();
-        DB::table('admin_role')->insert([
-            'admin_id' => $user->id,
-            'role_id' => $role->first()->id
-        ]);
         $this->userActivation->deleteActivation($token);
         return $user;
     }
+    public function activateAdmin($token)
+    {
+        $activation = $this->userActivation->getActivationByToken($token);
+        if ($activation === null) return null;
+        $admin = Admin::find($activation->user_id);
+        $admin->state = 'ACTIVE';
+        $admin->save();
 
+        $role = Role::where('level','=','20')->get();
+        DB::table('admin_role')->insert([
+            'admin_id' => $admin->id,
+            'role_id' => $role->first()->id
+        ]);
+        $this->userActivation->deleteActivation($token);
+        return $admin;
+    }
     private function shouldSend($user)
     {
         $activation = $this->userActivation->getActivation($user);

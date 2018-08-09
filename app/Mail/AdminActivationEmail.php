@@ -2,25 +2,25 @@
 
 namespace App\Mail;
 
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserActivationEmail extends Mailable
+class AdminActivationEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $admin;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public $user;
-    public function __construct(User $user)
+    public function __construct(Admin $admin)
     {
-        $this->user = $user;
+        $this->admin = $admin;
     }
 
     /**
@@ -30,6 +30,6 @@ class UserActivationEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('email.user-activation')->withUser($this->user);
+        return $this->view('email.admin-activation')->withAdmin($this->admin);
     }
 }

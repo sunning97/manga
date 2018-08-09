@@ -49,10 +49,11 @@ class RegisterController extends Controller
         $user->l_name =$request->l_name;
         $user->email =$request->email;
         $user->password = Hash::make($request->password);
-
+        $user->avatar = 'default.png';
         $user->save();
 
         $this->activationService->sendActivationMail($user);
+
     }
 
     protected function getValidateRegister(Request $request)

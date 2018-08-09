@@ -23,14 +23,14 @@
                 <tbody>
                 <tr>
                     <td style="border-bottom:1px solid #f6f6f6;"><h1 style="font-size:14px; font-family:arial; margin:0px; font-weight:bold;">Xin chào!</h1>
-                        <p style="margin-top:0px; color:#bbbbbb;">Chúc mừng! Tài khoản của bạn đã được tạo
+                        <p style="margin-top:0px; color:#bbbbbb;">Chúc mừng! Tài khoản Admin của bạn đã được tạo bởi Quản trị viên cấp cao
                             <br>Bạn nhận được email này do hệ thống cần xác thực email trước khi cho phép bạn tham gia hệ thống. Vui lòng nhấn vào liên kết phía dưới để hoàn tất :)
                         </p></td>
                 </tr>
                 <tr>
                     <td style="padding:10px 0 30px 0;"><p>Nếu bạn không muốn tham hệ thống vui lòng bỏ qua email này. Cảm ơn đã đọc</p>
                         <center>
-                            <a href="{{ $user->activation_link }}" style="display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 15px; color: #fff; background: #00c0c8; border-radius: 60px; text-decoration:none;">Xác nhận tài khoản</a>
+                            <a href="{{ $admin->activation_link }}" style="display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 15px; color: #fff; background: #00c0c8; border-radius: 60px; text-decoration:none;">Xác nhận tài khoản</a>
                         </center>
                         <b>- Xin cảm ơn (Ban quản trị)</b> </td>
                 </tr>
