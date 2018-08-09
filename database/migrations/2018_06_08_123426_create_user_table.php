@@ -27,7 +27,7 @@ class CreateUserTable extends Migration
             $table->string('skypeId','255')->nullable();
             $table->string('website','255')->nullable();
             $table->string('password','255');
-            $table->text('avatar');
+            $table->text('avatar')->default('default.png');
             $table->enum('state',['ACTIVE','INACTIVE','BANNED'])->default('INACTIVE');
             $table->rememberToken();
             $table->timestamps();
