@@ -111,7 +111,7 @@
                 </div>
             </div>
             <div class="row mt-5" id="app">
-                <comment :manga="{{ $manga }}" :url="'{{ asset('uploads/users-avatar') }}'" :user="{{ auth()->guard('site')->check() ? auth()->guard('site')->user(): '{}' }}"></comment>
+                <comment :manga="{{ $manga }}" :url="'{{ asset('uploads/users-avatar') }}'" @if(auth()->guard('site')->check()):user="{{ auth()->guard('site')->user() }}"@endif></comment>
             </div>
         </div>
     </div>

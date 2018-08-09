@@ -278,7 +278,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         user: {
             type: Object,
-            default: {}
+            default: null
         }
     },
     data: function data() {
@@ -1236,14 +1236,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: {
         user: {
             type: Object,
-            default: {}
+            default: null
         }
     },
-    methods: {
-        isUser: function isUser() {
-            return $.isEmptyObject(this.user);
-        }
-    }
+    mounted: function mounted() {},
+
+    methods: {}
 });
 
 /***/ }),
@@ -1259,7 +1257,7 @@ var render = function() {
     _c("div", {}, [
       _c("h5", [_vm._v("Viết bình luận của bạn")]),
       _vm._v(" "),
-      !_vm.isUser
+      _vm.user
         ? _c(
             "form",
             {

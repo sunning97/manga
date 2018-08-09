@@ -20,12 +20,29 @@
     <nav class="nav">
         <div class="nav__container  container">
             <ul class="nav__list">
-                <li class="nav__item">
-                    <a href="{{ route('login') }}">Đăng nhập</a>
-                </li>
-                <li class="nav__item">
-                    <a href="{{ route('register') }}">Đăng kí</a>
-                </li>
+                @if(auth()->guard('site')->check())
+                    <li class="nav__item">
+                        <a href="">{{ auth()->guard('site')->user()->fullName(auth()->guard('site')->user()->id) }}</a>
+                        <ul class="nav__list-submenu">
+                            <li class="nav__item-submenu">
+                                <a href="category-fullsize.html">Category Fullsize</a>
+                            </li>
+                            <li class="nav__item-submenu">
+                                <a href="category-grid.html">Category Grid</a>
+                            </li>
+                            <li class="nav__item-submenu">
+                                <a href="{{ route('logout') }}">Thoát</a>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="nav__item">
+                        <a href="{{ route('login') }}">Đăng nhập</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="{{ route('register') }}">Đăng kí</a>
+                    </li>
+                @endif
                 <li class="nav__item">
                     <a href="contact.html">Danh sách truyện</a>
                 </li>

@@ -2,7 +2,7 @@
     <div class="post__comments-respond">
         <div class="">
             <h5>Viết bình luận của bạn</h5>
-            <form action="http://feelman.info/html/leopold/post.html" method="post" v-if="!isUser">
+            <form action="http://feelman.info/html/leopold/post.html" method="post" v-if="user">
                 <p class="post__comments-respond-comment">
                     <label for="comment">Comment</label>
                     <textarea id="comment" name="comment" cols="45" aria-required="true"></textarea>
@@ -22,13 +22,13 @@
         props:{
             user:{
                 type:Object,
-                default:{}
+                default:null
             }
         },
+        mounted(){
+
+        },
         methods:{
-            isUser:function () {
-                return $.isEmptyObject(this.user)
-            }
         }
     }
 </script>
