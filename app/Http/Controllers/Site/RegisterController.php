@@ -24,35 +24,40 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $this->getValidateRegister($request);
 
-        if($this->checkEmail($request))
-            return $this->registerFailedResponse(
-                [
-                    'email' => 'Email đã được đăng kí vui lòng chọn email hợp lệ khác'
-                ],
-                [
-                    'email' => $request->email
-                ]
-            );
+//        $this->getValidateRegister($request);
+//
+//        if($this->checkEmail($request))
+//            return $this->registerFailedResponse(
+//                [
+//                    'email' => 'Email đã được đăng kí vui lòng chọn email hợp lệ khác'
+//                ],
+//                [
+//                    'l_name' => $request->l_name,
+//                    'f_name' => $request->f_name,
+//                    'email' => $request->email
+//                ]
+//            );
+//
+//        if(!$this->checkAgreeTerm($request))
+//            return $this->registerFailedResponse(
+//                [
+//                    'term' => 'Bạn chưa đồng ý với điều khoản của hệ thống'
+//                ],
+//                $request->all()
+//            );
+//
+//        $user = new User();
+//        $user->f_name =$request->f_name;
+//        $user->l_name =$request->l_name;
+//        $user->email =$request->email;
+//        $user->password = Hash::make($request->password);
+//        $user->avatar = 'default.png';
+//        $user->save();
+//
+//        $this->activationService->sendActivationMail($user);
 
-        if(!$this->checkAgreeTerm($request))
-            return $this->registerFailedResponse(
-                [
-                    'term' => 'Bạn chưa đồng ý với điều khoản của hệ thống'
-                ],
-                $request->all()
-            );
-
-        $user = new User();
-        $user->f_name =$request->f_name;
-        $user->l_name =$request->l_name;
-        $user->email =$request->email;
-        $user->password = Hash::make($request->password);
-        $user->avatar = 'default.png';
-        $user->save();
-
-        $this->activationService->sendActivationMail($user);
+        return $this->registerSuccessResponse(User::find(10));
 
     }
 
@@ -89,11 +94,11 @@ class RegisterController extends Controller
         return ($request->agree_term) ? true : false ;
     }
 
-    protected function registerSuccessResponse($mess)
+    protected function registerSuccessResponse($user)
     {
         return redirect()
             ->route('register.success')
-            ->withSuccess($mess);
+            ->withUser($user);
     }
 
     protected function registerFailedResponse($mess,$input=['no' => ''])
@@ -106,6 +111,6 @@ class RegisterController extends Controller
 
     public function registerSuccess()
     {
-
+        return view('site.auth.register-success');
     }
 }

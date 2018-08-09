@@ -13,7 +13,7 @@
 
 Route::get('register','Site\RegisterController@showRegistrationForm')->name('register');
 Route::post('register','Site\RegisterController@register')->name('register.submit');
-Route::get('register/success','Site\RegisterController@registerSuccess')->name('register.success');
+Route::get('register/success/{}','Site\RegisterController@registerSuccess')->name('register.success');
 Route::get('login','Site\LoginController@showloginForm')->name('login');
 Route::post('login','Site\LoginController@login')->name('login.submit');
 Route::get('logout','Site\LoginController@logout')->name('logout');
