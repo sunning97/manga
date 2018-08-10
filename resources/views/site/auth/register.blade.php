@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +7,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <title>TheSaaS — Register</title>
+    <title>Đăng kí</title>
 
     <!-- Styles -->
     <link href="{{ asset('assets/site/css/page.min.css') }}" rel="stylesheet">
@@ -80,7 +79,6 @@
                     @endif
                 </div>
             </div>
-
             <div class="form-group">
                 <button class="btn btn-block btn-primary" type="submit">Đăng kí</button>
             </div>
@@ -100,5 +98,4 @@
 
 </body>
 
-<!-- Mirrored from thetheme.io/thesaas/page/user-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Aug 2018 03:51:41 GMT -->
 </html>
