@@ -3,6 +3,7 @@
     "/js/manga-detail.js": "/js/manga-detail.js",
     "/js/message.js": "/js/message.js",
     "/js/admin.js": "/js/admin.js",
+    "/js/user.js": "/js/user.js",
     "/js/translate-team.js": "/js/translate-team.js",
     "/js/translate-team-edit.js": "/js/translate-team-edit.js",
     "/js/translate-team-create.js": "/js/translate-team-create.js",

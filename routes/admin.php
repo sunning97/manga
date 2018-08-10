@@ -35,6 +35,7 @@ Route::middleware('login')->group(function (){
     Route::post('/admins/update-password','Admin\AdminController@updatePassword')->name('admin.update-password');
     Route::post('/admins/update-profile','Admin\AdminController@updateProfile')->name('admin.profile.update');
 
+    Route::resource('users','Admin\UserController');
     Route::resource('/permissions','Admin\PermissionController');
     Route::resource('/roles','Admin\RoleController');
     Route::resource('/mangas','Admin\MangaController');
@@ -83,5 +84,7 @@ Route::middleware('login')->group(function (){
         Route::post('/search-admin','Admin\AxiosController@searchAdmin');
         Route::post('/admin/check-email','Admin\AxiosController@checkEmailAdmin');
         Route::post('/admin/check-permission','Admin\AxiosController@checkPer');
+        Route::post('/get-users','Admin\AxiosController@getUsers');
+        Route::post('/search-user','Admin\AxiosController@searchUser');
     });
 });

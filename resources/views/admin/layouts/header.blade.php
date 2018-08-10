@@ -17,6 +17,10 @@
                     <li><a href="{{ route('admins.create') }}"><i class="icon-user mr-3"></i> Quản trị viên</a></li>
                     <li role="separator" class="divider"></li>
                 @endcan
+                @can('create-users')
+                    <li><a href="{{ route('users.create') }}"><i class="icon-user mr-3"></i> Người dùng</a></li>
+                    <li role="separator" class="divider"></li>
+                @endcan
                 @can('create-acl')
                     <li><a href="{{ route('roles.create') }}"><i class="icon-magic-wand mr-3"></i> Vai trò</a></li>
                     <li role="separator" class="divider"></li>

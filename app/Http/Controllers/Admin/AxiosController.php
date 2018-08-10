@@ -306,4 +306,25 @@ class AxiosController extends Controller
         return response()->json('error',200);
     }
 
+    public function getUsers(Request $request)
+    {
+        $user = User::where('state','=',$request->state)
+            ->paginate(10);
+
+        return response()->json($user,200);
+    }
+
+    public function searchUser(Request $request)
+    {
+        $users = User::where('state','=',$request->state)
+                ->where(function ($query) use($request){
+                    $query->where('f_name','like',"%$request->data%")
+                    ->orWhere('l_name','like',"%$request->data%");
+                })->get();
+
+        if($users->first())
+            return response()->json($users,200);
+
+        return response('no data',405);
+    }
 }

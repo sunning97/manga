@@ -19,7 +19,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        if(!$this->checkPermission('read-users'))
+            return $this->returnError(
+                ['mess' => 'Bạn không có quyền xem người dùng']
+            );
+
+        return view('admin.users.index');
     }
 
     /**

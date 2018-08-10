@@ -28,6 +28,9 @@
                 </ul>
             </li>
             @endcan
+            @can('read-users')
+                <li><a href="{{ route('users.index') }}" class="waves-effect"><i class="icon-book-open mr-3"></i><span class="hide-menu" >Người dùng</span></a> </li>
+            @endcan
             @can('read-mangas')
                 <li><a href="{{ route('mangas.index') }}" class="waves-effect"><i class="icon-book-open mr-3"></i><span class="hide-menu" >Mangas</span></a> </li>
             @endcan
