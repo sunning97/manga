@@ -33,6 +33,9 @@
         @if($errors->has('no-account'))
             <span style="color: red;"><strong>{{ $errors->first('no-account') }}</strong></span>
         @endif
+        @if($errors->has('user-banned'))
+            <span style="color: red;"><strong>{{ $errors->first('user-banned') }}</strong></span>
+        @endif
         <form action="{{ route('login.submit') }}" method="post">
             @csrf
             @method('post')

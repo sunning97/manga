@@ -29,6 +29,7 @@ class CreateUserTable extends Migration
             $table->string('password','255');
             $table->text('avatar');
             $table->enum('state',['ACTIVE','INACTIVE','BANNED'])->default('INACTIVE');
+            $table->enum('banned',['T','F'])->default('F');
             $table->rememberToken();
             $table->timestamps();
         });

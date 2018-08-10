@@ -34,7 +34,7 @@ class LoginController extends Controller
                 ]
             );
         }
-        if(!$this->checkActivation($request)) {
+        if(!$this->checkState($request,'ACTIVE')) {
             return $this->loginFailedResponse(
                 [
                 'user-inactive' => 'Tài khoản chưa được kích hoạt, vui lòng kiểm tra email của bạn hoặc liên hệ với admin để được hỗ trợ'
@@ -43,6 +43,16 @@ class LoginController extends Controller
                     'email' => $request->email
                 ]);
         }
+        if($this->checkBanned($request)) {
+            return $this->loginFailedResponse(
+                [
+                    'user-banned' => 'Tài khoản đã bị cấm, vui lòng liên hệ với admin để được hỗ trợ'
+                ],
+                [
+                    'email' => $request->email
+                ]);
+        }
+
         if($this->attemptLogin($request)){
             return $this->loginSuccessResponse();
         }
@@ -69,14 +79,21 @@ class LoginController extends Controller
         ]);
     }
 
-    protected function checkActivation(Request $request)
+    protected function checkState(Request $request,$state)
     {
-        return (User::where(function ($query) use($request){
+        return (User::where(function ($query) use($request,$state){
             $query->where('email','=',$request->email)
-                ->where('state','=','ACTIVE');
+                ->where('state','=',$state);
         })->get()->first()) ? true : false;
     }
 
+    protected function checkBanned(Request $request)
+    {
+        return (User::where(function ($query) use($request){
+            $query->where('email','=',$request->email)
+                ->where('banned','=','T');
+        })->get()->first()) ? true : false;
+    }
     protected function checkAccount(Request$request)
     {
         return (
