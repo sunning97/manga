@@ -86,5 +86,6 @@ Route::middleware('login')->group(function (){
         Route::post('/admin/check-permission','Admin\AxiosController@checkPer');
         Route::post('/get-users','Admin\AxiosController@getUsers');
         Route::post('/search-user','Admin\AxiosController@searchUser');
+        Route::post('/ban-account','Admin\AxiosController@banAccount');
     });
 });

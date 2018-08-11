@@ -730,6 +730,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -839,7 +843,7 @@ var render = function() {
                                 attrs: { type: "button" }
                               },
                               [
-                                _vm._v("Xóa "),
+                                _vm._v("\n                            Xóa "),
                                 _c("i", { staticClass: "ti-trash" })
                               ]
                             )
@@ -899,7 +903,7 @@ var render = function() {
                                 attrs: { type: "button" }
                               },
                               [
-                                _vm._v("Xóa "),
+                                _vm._v("\n                            Xóa "),
                                 _c("i", { staticClass: "ti-trash" })
                               ]
                             )
