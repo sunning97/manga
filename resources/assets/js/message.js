@@ -1,4 +1,4 @@
-Vue.component('message-box', require('./components/message/MessageBox.vue'));
+Vue.component('message-box', require('./components/admin/message/MessageBox.vue'));
 new Vue({
     el:'#app',
 });

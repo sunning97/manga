@@ -1,4 +1,4 @@
-Vue.component('admin-index',require('./components/admin/AdminIndex'));
+Vue.component('admin-index',require('./components/admin/adminIndex/AdminIndex'));
 var app = new Vue({
     el:'#app',
     data:{

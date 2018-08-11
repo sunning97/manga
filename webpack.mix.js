@@ -42,5 +42,5 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/user.js','public/js')
 
 // site
-    .js('resources/assets/js/site/manga-detail.js','public/js')
+    .js('resources/assets/js/manga-detail.js','public/js')
 ;

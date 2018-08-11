@@ -72,7 +72,7 @@
         </form>
         <hr class="w-30">
 
-        <p class="text-center text-muted small-2">Bạn chưa có tài khoản? <a href="user-register.html">Đăng kí ngay</a></p>
+        <p class="text-center text-muted small-2">Bạn chưa có tài khoản? <a href="{{ route('register') }}">Đăng kí ngay</a></p>
     </div>
 
 </main><!-- /.main-content -->

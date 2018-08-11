@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 120);
+/******/ 	return __webpack_require__(__webpack_require__.s = 129);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -175,19 +175,19 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 120:
+/***/ 129:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(121);
+module.exports = __webpack_require__(130);
 
 
 /***/ }),
 
-/***/ 121:
+/***/ 130:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-Vue.component('comment', __webpack_require__(122));
+Vue.component('comment', __webpack_require__(131));
 var app = new Vue({
     el: '#app',
     data: {}
@@ -195,15 +195,15 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 122:
+/***/ 131:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(123)
+var __vue_script__ = __webpack_require__(132)
 /* template */
-var __vue_template__ = __webpack_require__(139)
+var __vue_template__ = __webpack_require__(148)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -220,7 +220,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\site\\components\\manga-comments\\MangaComments.vue"
+Component.options.__file = "resources\\assets\\js\\components\\site\\manga-comments\\MangaComments.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -229,9 +229,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-96a04b2e", Component.options)
+    hotAPI.createRecord("data-v-1e6f2527", Component.options)
   } else {
-    hotAPI.reload("data-v-96a04b2e", Component.options)
+    hotAPI.reload("data-v-1e6f2527", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -243,16 +243,16 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 123:
+/***/ 132:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ListComment__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ListComment__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ListComment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ListComment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Pagination__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Pagination__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Pagination___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Pagination__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__WriteComment__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__WriteComment__ = __webpack_require__(145);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__WriteComment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__WriteComment__);
 //
 //
@@ -328,15 +328,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 124:
+/***/ 133:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(125)
+var __vue_script__ = __webpack_require__(134)
 /* template */
-var __vue_template__ = __webpack_require__(132)
+var __vue_template__ = __webpack_require__(141)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -353,7 +353,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\site\\components\\manga-comments\\ListComment.vue"
+Component.options.__file = "resources\\assets\\js\\components\\site\\manga-comments\\ListComment.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -362,9 +362,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3dfaeb7c", Component.options)
+    hotAPI.createRecord("data-v-0af16c80", Component.options)
   } else {
-    hotAPI.reload("data-v-3dfaeb7c", Component.options)
+    hotAPI.reload("data-v-0af16c80", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -376,12 +376,12 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 125:
+/***/ 134:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__comment_ParentComment__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__comment_ParentComment__ = __webpack_require__(135);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__comment_ParentComment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__comment_ParentComment__);
 //
 //
@@ -425,15 +425,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 126:
+/***/ 135:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(127)
+var __vue_script__ = __webpack_require__(136)
 /* template */
-var __vue_template__ = __webpack_require__(131)
+var __vue_template__ = __webpack_require__(140)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -450,7 +450,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\site\\components\\manga-comments\\comment\\ParentComment.vue"
+Component.options.__file = "resources\\assets\\js\\components\\site\\manga-comments\\comment\\ParentComment.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -459,9 +459,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6550798e", Component.options)
+    hotAPI.createRecord("data-v-4a112012", Component.options)
   } else {
-    hotAPI.reload("data-v-6550798e", Component.options)
+    hotAPI.reload("data-v-4a112012", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -473,12 +473,12 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 127:
+/***/ 136:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChildComment__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChildComment__ = __webpack_require__(137);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChildComment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ChildComment__);
 //
 //
@@ -572,15 +572,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 128:
+/***/ 137:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(129)
+var __vue_script__ = __webpack_require__(138)
 /* template */
-var __vue_template__ = __webpack_require__(130)
+var __vue_template__ = __webpack_require__(139)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -597,7 +597,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\site\\components\\manga-comments\\comment\\ChildComment.vue"
+Component.options.__file = "resources\\assets\\js\\components\\site\\manga-comments\\comment\\ChildComment.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -606,9 +606,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-771ac06f", Component.options)
+    hotAPI.createRecord("data-v-ced8f81e", Component.options)
   } else {
-    hotAPI.reload("data-v-771ac06f", Component.options)
+    hotAPI.reload("data-v-ced8f81e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -620,7 +620,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 129:
+/***/ 138:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -677,7 +677,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 130:
+/***/ 139:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -746,13 +746,13 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-771ac06f", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-ced8f81e", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 131:
+/***/ 140:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -861,13 +861,13 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6550798e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-4a112012", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 132:
+/***/ 141:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -908,21 +908,21 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3dfaeb7c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0af16c80", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 133:
+/***/ 142:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(134)
+var __vue_script__ = __webpack_require__(143)
 /* template */
-var __vue_template__ = __webpack_require__(135)
+var __vue_template__ = __webpack_require__(144)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -939,7 +939,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\site\\components\\manga-comments\\Pagination.vue"
+Component.options.__file = "resources\\assets\\js\\components\\site\\manga-comments\\Pagination.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -948,9 +948,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6a16b7c9", Component.options)
+    hotAPI.createRecord("data-v-9478d46a", Component.options)
   } else {
-    hotAPI.reload("data-v-6a16b7c9", Component.options)
+    hotAPI.reload("data-v-9478d46a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -962,7 +962,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 134:
+/***/ 143:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1029,7 +1029,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 135:
+/***/ 144:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1153,21 +1153,21 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6a16b7c9", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-9478d46a", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 136:
+/***/ 145:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(137)
+var __vue_script__ = __webpack_require__(146)
 /* template */
-var __vue_template__ = __webpack_require__(138)
+var __vue_template__ = __webpack_require__(147)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1184,7 +1184,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\site\\components\\manga-comments\\WriteComment.vue"
+Component.options.__file = "resources\\assets\\js\\components\\site\\manga-comments\\WriteComment.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -1193,9 +1193,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0c2b8e22", Component.options)
+    hotAPI.createRecord("data-v-0dd79e71", Component.options)
   } else {
-    hotAPI.reload("data-v-0c2b8e22", Component.options)
+    hotAPI.reload("data-v-0dd79e71", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -1207,7 +1207,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 137:
+/***/ 146:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1246,7 +1246,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 138:
+/***/ 147:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1312,13 +1312,13 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0c2b8e22", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0dd79e71", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 139:
+/***/ 148:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1361,7 +1361,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-96a04b2e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1e6f2527", module.exports)
   }
 }
 

@@ -8,6 +8,7 @@
                     <th>Tên</th>
                     <th>Email</th>
                     <th>Ngày đăng kí</th>
+                    <th>Trạng thái</th>
                     <th class="text-center">Hành động</th>
                 </tr>
                 </thead>
@@ -17,6 +18,7 @@
                         <td>{{ `${user.f_name} ${user.l_name}` }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ date_format(user.created_at) }}</td>
+                        <td>{{ getState(user.banned) }}</td>
                         <td class="text-center">
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="" class="btn btn-sm btn-success">Xem <i class="ti-eye"></i></a>
@@ -32,6 +34,7 @@
                         <td>{{ `${user.f_name} ${user.l_name}` }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ date_format(user.created_at) }}</td>
+                        <td>{{ getState(user.banned) }}</td>
                         <td class="text-center">
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="" class="btn btn-sm btn-success">Xem <i class="ti-eye"></i></a>
@@ -102,6 +105,9 @@
                     return true;
 
                 return false;
+            },
+            getState:function (state) {
+                return (state == 'T') ? 'Hoạt động' : 'Bị cấm'
             }
         }
 

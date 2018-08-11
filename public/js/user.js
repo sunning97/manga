@@ -186,22 +186,22 @@ module.exports = __webpack_require__(119);
 /***/ 119:
 /***/ (function(module, exports, __webpack_require__) {
 
-Vue.component('user-index', __webpack_require__(140));
+Vue.component('user-index', __webpack_require__(120));
 var app = new Vue({
     el: '#app'
 });
 
 /***/ }),
 
-/***/ 140:
+/***/ 120:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(141)
+var __vue_script__ = __webpack_require__(121)
 /* template */
-var __vue_template__ = __webpack_require__(142)
+var __vue_template__ = __webpack_require__(128)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -218,7 +218,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\user\\UserIndex.vue"
+Component.options.__file = "resources\\assets\\js\\components\\admin\\user\\UserIndex.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -227,9 +227,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e261de26", Component.options)
+    hotAPI.createRecord("data-v-515e494c", Component.options)
   } else {
-    hotAPI.reload("data-v-e261de26", Component.options)
+    hotAPI.reload("data-v-515e494c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -241,16 +241,15 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 141:
+/***/ 121:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Pagination__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Pagination__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Pagination___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Pagination__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ListUser__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ListUser__ = __webpack_require__(125);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ListUser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ListUser__);
-//
 //
 //
 //
@@ -349,209 +348,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 142:
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "ul",
-        { staticClass: "nav customtab2 nav-tabs", attrs: { role: "tablist" } },
-        [
-          _c(
-            "li",
-            {
-              staticClass: "nav-item",
-              attrs: { role: "presentation" },
-              on: {
-                click: function($event) {
-                  _vm.changeState("ACTIVE")
-                }
-              }
-            },
-            [_vm._m(0)]
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass: "nav-item",
-              attrs: { role: "presentation" },
-              on: {
-                click: function($event) {
-                  _vm.changeState("INACTIVE")
-                }
-              }
-            },
-            [_vm._m(1)]
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass: "nav-item",
-              attrs: { role: "presentation" },
-              on: {
-                click: function($event) {
-                  _vm.changeState("BANNED")
-                }
-              }
-            },
-            [_vm._m(2)]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-12 mt-5 mb-5" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.searchInput,
-              expression: "searchInput"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Nhập tên..." },
-          domProps: { value: _vm.searchInput },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.searchInput = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("list-user", {
-        attrs: {
-          users: _vm.users,
-          pagination: _vm.pagination,
-          permissions: _vm.permissions,
-          searchUsers: _vm.searchResult,
-          searchInput: _vm.searchInput,
-          isSearching: _vm.isSearching
-        }
-      }),
-      _vm._v(" "),
-      _vm.pagination.per_page < _vm.pagination.total && _vm.searchInput == ""
-        ? _c("pagination", {
-            attrs: { pagination: _vm.pagination, offset: _vm.offset },
-            on: { page: _vm.changePage }
-          })
-        : _vm._e()
-    ],
-    1
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link active",
-        attrs: {
-          href: "#home6",
-          "aria-controls": "home",
-          role: "tab",
-          "data-toggle": "tab",
-          "aria-expanded": "false"
-        }
-      },
-      [
-        _c("span", { staticClass: "visible-xs" }, [
-          _c("i", { staticClass: "ti-home" })
-        ]),
-        _c("span", { staticClass: "hidden-xs" }, [
-          _vm._v("Thành viên đã xác thực")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link",
-        attrs: {
-          href: "#profile6",
-          "aria-controls": "profile",
-          role: "tab",
-          "data-toggle": "tab",
-          "aria-expanded": "false"
-        }
-      },
-      [
-        _c("span", { staticClass: "visible-xs" }, [
-          _c("i", { staticClass: "ti-user" })
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "hidden-xs" }, [
-          _vm._v("Thành viên chưa xác thực")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link",
-        attrs: {
-          href: "#messages6",
-          "aria-controls": "messages",
-          role: "tab",
-          "data-toggle": "tab",
-          "aria-expanded": "true"
-        }
-      },
-      [
-        _c("span", { staticClass: "visible-xs" }, [
-          _c("i", { staticClass: "ti-email" })
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "hidden-xs" }, [_vm._v("Thành viên bị cấm")])
-      ]
-    )
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-e261de26", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 143:
+/***/ 122:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(144)
+var __vue_script__ = __webpack_require__(123)
 /* template */
-var __vue_template__ = __webpack_require__(145)
+var __vue_template__ = __webpack_require__(124)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -568,7 +373,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\user\\Pagination.vue"
+Component.options.__file = "resources\\assets\\js\\components\\admin\\user\\Pagination.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -577,9 +382,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-068cae38", Component.options)
+    hotAPI.createRecord("data-v-771da7d2", Component.options)
   } else {
-    hotAPI.reload("data-v-068cae38", Component.options)
+    hotAPI.reload("data-v-771da7d2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -591,7 +396,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 144:
+/***/ 123:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -668,7 +473,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 145:
+/***/ 124:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -800,21 +605,21 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-068cae38", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-771da7d2", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 147:
+/***/ 125:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(148)
+var __vue_script__ = __webpack_require__(126)
 /* template */
-var __vue_template__ = __webpack_require__(149)
+var __vue_template__ = __webpack_require__(127)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -831,7 +636,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\user\\ListUser.vue"
+Component.options.__file = "resources\\assets\\js\\components\\admin\\user\\ListUser.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -840,9 +645,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1200b7d3", Component.options)
+    hotAPI.createRecord("data-v-0c156bc6", Component.options)
   } else {
-    hotAPI.reload("data-v-1200b7d3", Component.options)
+    hotAPI.reload("data-v-0c156bc6", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -854,11 +659,14 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 148:
+/***/ 126:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -962,6 +770,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.permissions.indexOf(permission) > -1) return true;
 
             return false;
+        },
+        getState: function getState(state) {
+            return state == 'T' ? 'Hoạt động' : 'Bị cấm';
         }
     }
 
@@ -969,7 +780,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 149:
+/***/ 127:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -993,6 +804,8 @@ var render = function() {
                   _c("td", [_vm._v(_vm._s(user.email))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.date_format(user.created_at)))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.getState(user.banned)))]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
                     _c(
@@ -1051,6 +864,8 @@ var render = function() {
                   _c("td", [_vm._v(_vm._s(user.email))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.date_format(user.created_at)))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.getState(user.banned)))]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
                     _c(
@@ -1125,6 +940,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Ngày đăng kí")]),
         _vm._v(" "),
+        _c("th", [_vm._v("Trạng thái")]),
+        _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Hành động")])
       ])
     ])
@@ -1179,7 +996,162 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1200b7d3", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0c156bc6", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 128:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "ul",
+        { staticClass: "nav customtab2 nav-tabs", attrs: { role: "tablist" } },
+        [
+          _c(
+            "li",
+            {
+              staticClass: "nav-item",
+              attrs: { role: "presentation" },
+              on: {
+                click: function($event) {
+                  _vm.changeState("ACTIVE")
+                }
+              }
+            },
+            [_vm._m(0)]
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "nav-item",
+              attrs: { role: "presentation" },
+              on: {
+                click: function($event) {
+                  _vm.changeState("INACTIVE")
+                }
+              }
+            },
+            [_vm._m(1)]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-12 mt-5 mb-5" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.searchInput,
+              expression: "searchInput"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", placeholder: "Nhập tên..." },
+          domProps: { value: _vm.searchInput },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.searchInput = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("list-user", {
+        attrs: {
+          users: _vm.users,
+          pagination: _vm.pagination,
+          permissions: _vm.permissions,
+          searchUsers: _vm.searchResult,
+          searchInput: _vm.searchInput,
+          isSearching: _vm.isSearching
+        }
+      }),
+      _vm._v(" "),
+      _vm.pagination.per_page < _vm.pagination.total && _vm.searchInput == ""
+        ? _c("pagination", {
+            attrs: { pagination: _vm.pagination, offset: _vm.offset },
+            on: { page: _vm.changePage }
+          })
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "nav-link active",
+        attrs: {
+          href: "#home6",
+          "aria-controls": "home",
+          role: "tab",
+          "data-toggle": "tab",
+          "aria-expanded": "false"
+        }
+      },
+      [
+        _c("span", { staticClass: "visible-xs" }, [
+          _c("i", { staticClass: "ti-home" })
+        ]),
+        _c("span", { staticClass: "hidden-xs" }, [
+          _vm._v("Thành viên đã xác thực")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "nav-link",
+        attrs: {
+          href: "#profile6",
+          "aria-controls": "profile",
+          role: "tab",
+          "data-toggle": "tab",
+          "aria-expanded": "false"
+        }
+      },
+      [
+        _c("span", { staticClass: "visible-xs" }, [
+          _c("i", { staticClass: "ti-user" })
+        ]),
+        _vm._v(" "),
+        _c("span", { staticClass: "hidden-xs" }, [
+          _vm._v("Thành viên chưa xác thực")
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-515e494c", module.exports)
   }
 }
 
