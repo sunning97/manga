@@ -267,6 +267,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        url: {
+            type: String,
+            default: ''
+        }
+    },
     data: function data() {
         return {
             users: [],
@@ -730,16 +736,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         users: {
             type: Array,
             default: []
+        },
+        url: {
+            type: String,
+            default: ''
         },
         pagination: {
             type: Object,
@@ -819,14 +825,23 @@ var render = function() {
                         attrs: { role: "group", "aria-label": "Basic example" }
                       },
                       [
-                        _vm._m(1, true),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-sm btn-success",
+                            attrs: { href: _vm.url + "/" + user.id }
+                          },
+                          [_vm._v("Xem "), _c("i", { staticClass: "ti-eye" })]
+                        ),
                         _vm._v(" "),
                         _vm.checkPermission("update-users")
                           ? _c(
                               "a",
                               {
                                 staticClass: "btn btn-sm btn-primary",
-                                attrs: { href: "" }
+                                attrs: {
+                                  href: _vm.url + "/" + user.id + "/edit"
+                                }
                               },
                               [
                                 _vm._v("Cập nhật "),
@@ -843,7 +858,7 @@ var render = function() {
                                 attrs: { type: "button" }
                               },
                               [
-                                _vm._v("\n                            Xóa "),
+                                _vm._v("Xóa "),
                                 _c("i", { staticClass: "ti-trash" })
                               ]
                             )
@@ -879,14 +894,23 @@ var render = function() {
                         attrs: { role: "group", "aria-label": "Basic example" }
                       },
                       [
-                        _vm._m(2, true),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-sm btn-success",
+                            attrs: { href: _vm.url + "/" + user.id }
+                          },
+                          [_vm._v("Xem "), _c("i", { staticClass: "ti-eye" })]
+                        ),
                         _vm._v(" "),
                         _vm.checkPermission("update-users")
                           ? _c(
                               "a",
                               {
                                 staticClass: "btn btn-sm btn-primary",
-                                attrs: { href: "" }
+                                attrs: {
+                                  href: _vm.url + "/" + user.id + "/edit"
+                                }
                               },
                               [
                                 _vm._v("Cập nhật "),
@@ -903,7 +927,7 @@ var render = function() {
                                 attrs: { type: "button" }
                               },
                               [
-                                _vm._v("\n                            Xóa "),
+                                _vm._v("Xóa "),
                                 _c("i", { staticClass: "ti-trash" })
                               ]
                             )
@@ -919,12 +943,12 @@ var render = function() {
         this.searchInput != "" &&
         this.searchUsers.length == 0 &&
         !_vm.isSearching
-          ? _c("tbody", [_vm._m(3)])
+          ? _c("tbody", [_vm._m(1)])
           : _vm._e(),
         _vm._v(" "),
-        _vm.isSearching ? _c("tbody", [_vm._m(4)]) : _vm._e(),
+        _vm.isSearching ? _c("tbody", [_vm._m(2)]) : _vm._e(),
         _vm._v(" "),
-        this.users.length == 0 ? _c("tbody", [_vm._m(5)]) : _vm._e()
+        this.users.length == 0 ? _c("tbody", [_vm._m(3)]) : _vm._e()
       ])
     ])
   ])
@@ -949,26 +973,6 @@ var staticRenderFns = [
         _c("th", { staticClass: "text-center" }, [_vm._v("Hành động")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "btn btn-sm btn-success", attrs: { href: "" } },
-      [_vm._v("Xem "), _c("i", { staticClass: "ti-eye" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "btn btn-sm btn-success", attrs: { href: "" } },
-      [_vm._v("Xem "), _c("i", { staticClass: "ti-eye" })]
-    )
   },
   function() {
     var _vm = this
@@ -1076,6 +1080,7 @@ var render = function() {
       _vm._v(" "),
       _c("list-user", {
         attrs: {
+          url: _vm.url,
           users: _vm.users,
           pagination: _vm.pagination,
           permissions: _vm.permissions,

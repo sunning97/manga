@@ -7,7 +7,7 @@
         <div class="col-md-12 mt-5 mb-5">
             <input type="text" class="form-control" placeholder="Nhập tên..." v-model="searchInput">
         </div>
-        <list-user :users="users" :pagination="pagination" :permissions="permissions" :searchUsers="searchResult" :searchInput="searchInput" :isSearching="isSearching"></list-user>
+        <list-user :url="url" :users="users" :pagination="pagination" :permissions="permissions" :searchUsers="searchResult" :searchInput="searchInput" :isSearching="isSearching"></list-user>
         <pagination :pagination="pagination" :offset="offset" v-if="pagination.per_page < pagination.total && searchInput == ''" @page="changePage"></pagination>
     </div>
 </template>
@@ -15,6 +15,12 @@
     import Pagination from './Pagination';
     import Listuser from './ListUser';
     export default {
+        props:{
+            url:{
+                type:String,
+                default:''
+            }
+        },
         data(){
             return {
                 users:[],

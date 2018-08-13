@@ -13,6 +13,7 @@ use Faker\Generator as Faker;
 |
 */
 
+
 $factory->define(App\Models\Comment::class, function (Faker $faker) {
 
     $user_id = rand(1,3);
@@ -24,6 +25,29 @@ $factory->define(App\Models\Comment::class, function (Faker $faker) {
         'manga_id' => 1,
         'parent_comment' => null,
         'created_at' => $time->toDateTimeString(),
+        'updated_at' => $time->toDateTimeString()
+    ];
+});
+
+$factory->define(App\Models\User::class, function (Faker $faker) {
+
+    $time = Carbon\Carbon::now();
+    $gender = ["MALE","FEMALE"];
+    $state = ["ACTIVE","INACTIVE"];
+    $banned = ["T","F"];
+    return [
+        'f_name' => $faker->firstName,
+        'l_name' => $faker->lastName,
+        'email' => $faker->email,
+        'gender' => array_random($gender),
+        'birth_date' => $faker->dateTimeBetween('1990-01-01','1999-01-01','Asia/Ho_Chi_Minh'),
+        'phone' => $faker->tollFreePhoneNumber,
+        'address' => $faker->address,
+        'password' => \Illuminate\Support\Facades\Hash::make('password'),
+        'avatar' => 'default.png',
+        'state' => array_random($state),
+        'banned' => array_random($banned),
+        'created_at' => $faker->dateTimeBetween('2015-01-01','2018-01-01','Asia/Ho_Chi_Minh'),
         'updated_at' => $time->toDateTimeString()
     ];
 });

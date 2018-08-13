@@ -1,9 +1,8 @@
 @extends('admin.layouts.app')
 
-@section('title','Quản Lý Admin')
+@section('title','Chi tiết người dùng: '.$user->fullName($user->id))
 
 @section('plugin_css')
-    <link href="{{ asset('assets/admin/plugin/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')
@@ -13,23 +12,22 @@
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
                 <li><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a></li>
-                <li class="active" data-url="{{ route('users.index') }}">Người dùng</li>
+                <li><a href="{{ route('users.index') }}">Người dùng</a></li>
+                <li class="active">{{ $user->fullName($user->id) }}</li>
             </ol>
         </div>
     </div>
     <div class="row" id="app">
         <div class="col-md-12">
             <div class="white-box">
-                <user-index :url="'{{ route('users.index') }}'"></user-index>
+
             </div>
         </div>
     </div>
 @endsection
 
 @section('plugin_js')
-    <script src="{{ asset('assets/admin/plugin/sweetalert/sweetalert.min.js') }}"></script>
 @endsection
 
 @section('custom_js')
-    <script src="{{ asset('js/user.js') }}"></script>
 @endsection

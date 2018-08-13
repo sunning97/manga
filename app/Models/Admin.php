@@ -35,4 +35,9 @@ class Admin extends Authenticatable
     {
         return Cache::has('user-online-'.$this->id);
     }
+
+    public function fullName($id)
+    {
+        return Admin::findOrFail($id)->f_name.' '.Admin::findOrFail($id)->l_name;
+    }
 }
