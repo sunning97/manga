@@ -3,6 +3,7 @@
 @section('title','Quản Lý Admin')
 
 @section('plugin_css')
+    <link href="{{ asset('assets/admin/plugin/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')
@@ -26,6 +27,7 @@
 @endsection
 
 @section('plugin_js')
+    <script src="{{ asset('assets/admin/plugin/sweetalert/sweetalert.min.js') }}"></script>
 @endsection
 
 @section('custom_js')

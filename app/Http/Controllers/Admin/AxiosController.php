@@ -265,7 +265,7 @@ class AxiosController extends Controller
                 ->leftJoin('admin_role', 'admins.id', '=', 'admin_role.admin_id')
                 ->where('admins.id', '!=', Auth::guard('admin')->user()->id)
                 ->where('admins.state', '=', $request->state)
-                ->paginate(5);
+                ->paginate(10);
             return response()->json($adminsActive, 200);
 
         } else return response('error', 404);
@@ -293,14 +293,20 @@ class AxiosController extends Controller
 
     public function searchAdmin(Request $request)
     {
+        $array = explode(' ',$request->data);
+
         $result = DB::table('admins')
             ->leftJoin('admin_role', 'admins.id', '=', 'admin_role.admin_id')
             ->where('admins.id', '!=', Auth::guard('admin')->user()->id)
             ->where('admins.state', '=', $request->state)
-            ->where(function ($query) use ($request) {
-                $query->where('admins.f_name', 'like', '%' . $request->data . '%')
-                    ->orWhere('admins.l_name', 'like', '%' . $request->data . '%')
-                    ->orWhere('admins.email', '=', $request->data)
+            ->where(function ($query) use ($request,$array) {
+                $query->where('admins.f_name', 'like', "%$request->data%")
+                    ->orWhere('admins.l_name', 'like', "%$request->data%");
+                if(count($array) > 1){
+                    $query->orWhere('admins.f_name','like',"%$array[0]")
+                        ->orWhere('admins.l_name','like',"$array[0]");
+                }
+                $query->orWhere('admins.email', '=', $request->data)
                     ->orWhere('admins.phone', '=', "'$request->data'");
             })->get();
         if ($result->first()) {
@@ -338,10 +344,17 @@ class AxiosController extends Controller
 
     public function searchUser(Request $request)
     {
+        $array = explode(' ',$request->data);
+
         $users = User::where('state', '=', $request->state)
-            ->where(function ($query) use ($request) {
+            ->where(function ($query) use ($request,$array) {
                 $query->where('f_name', 'like', "%$request->data%")
                     ->orWhere('l_name', 'like', "%$request->data%");
+                    if(count($array) > 1){
+                    $query->orWhere('l_name', 'like', "%$array[0]%")
+                        ->orWhere('l_name', 'like', "%$array[1]%");
+                }
+                    $query->orWhere('email','=',$request->data);
             })->get();
 
         if ($users->first())

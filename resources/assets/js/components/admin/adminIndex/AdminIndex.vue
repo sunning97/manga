@@ -6,58 +6,20 @@
         </ul>
         <div class="tab-content">
             <div class="row">
-                <input class="form-control" type="text" v-model="searchData">
+                <input class="form-control" type="text" v-model="searchData" placeholder="Nhập vào tên, email, vai trò...">
             </div>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Họ & tên</th>
-                        <th>Email</th>
-                        <th>Vai trò</th>
-                        <th class="text-center">Hành động</th>
-                    </tr>
-                    </thead>
-                    <tbody v-if="admins.length == 0 && isAdminsEmpty == false">
-                        <tr class="text-center">
-                            <td colspan="5">Đang tải...</td>
-                        </tr>
-                    </tbody>
-                    <tbody v-if="admins.length == 0 && isAdminsEmpty == true">
-                        <tr class="text-center">
-                            <td colspan="5">Không có dữ liệu</td>
-                        </tr>
-                    </tbody>
-                    <tbody v-if="isSearching">
-                        <tr>
-                            <td colspan="5">đang tìm kiếm..</td>
-                        </tr>
-                    </tbody>
-                    <tbody v-if="searchResult.length == 0 && searchData.length != '' && isSearching == false">
-                        <tr>
-                            <td colspan="5">Không tìm thấy</td>
-                        </tr>
-                    </tbody>
-                    <tbody v-if="searchResult.length == 0 && searchData.length == ''">
-                        <admin-row v-for="(admin,index) in admins" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)" :url="url" :permissions="permissions"></admin-row>
-                    </tbody>
-                    <tbody v-if="searchResult.length > 0 && searchData.length != ''">
-                        <admin-row v-for="(admin,index) in searchResult" :admin="admin" :index="getIndex(index)" :role="role(admin.role_id)" :url="url" :permissions="permissions"></admin-row>
-                    </tbody>
-                </table>
-            </div>
+            <admin-list @changeBan="changeBan" :admins="admins" :permissions="permissions" :roles="roles" :url="url" :pagination="pagination" :searchResult="searchResult" :searchData="searchData" :isSearching="isSearching" :isAdminsEmpty="isAdminsEmpty"></admin-list>
             <pagination :pagination="pagination" :offset="offset" @click.native="getAdmins(state,pagination.current_page)" v-if="pagination.per_page < pagination.total && searchResult.length == 0 && searchData.length == ''"></pagination>
         </div>
     </div>
 </template>
 
 <script>
-    import AdminRow from './AdminRow';
+    import AdminList from './AdminList';
     import Pagination from './Pagination';
     export default {
         components:{
-            'admin-row':AdminRow,
+            'admin-list':AdminList,
             'pagination':Pagination
         },
         props:{
@@ -107,19 +69,14 @@
                     this.roles = response.data;
                 })
             },
-            role:function (id) {
-                for(var i = 0;i<this.roles.length;i++)
-                {
-                    if(this.roles[i].id == id) return this.roles[i].name;
-                }
-                return 'Chưa phân vai trò';
-            },
             getIndex:function (index) {
                 return (this.pagination.current_page -1)*this.pagination.per_page + index +1;
             },
             admin:function (state) {
                 this.state = state;
                 this.admins = [];
+                this.searchResult = [];
+                this.searchData = '';
                 this.getAdmins(this.state,1);
             },
             getSearch:function () {
@@ -137,6 +94,7 @@
                     this.searchResult = response.data;
                 }).catch(error=>{
                     this.isSearching = false;
+                    this.isAdminsEmpty = true;
                     this.searchResult = [];
                 });
             },
@@ -148,6 +106,18 @@
                         this.permissions.push(permission);
                     }
                 });
+            },
+            changeBan:function (data) {
+                var tmp = this;
+                if(data.search){
+                    tmp.searchResult[data.index].banned = data.ban;
+                    tmp.admins.forEach(function (admin,index) {
+                        (admin.id == data.admin.id) ? (tmp.admins[index].banned = data.ban) : (null);
+                    });
+                    return;
+                }
+
+                tmp.admins[data.index].banned = data.ban;
             }
         }
     }

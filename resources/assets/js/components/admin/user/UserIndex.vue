@@ -7,7 +7,7 @@
         <div class="col-md-12 mt-5 mb-5">
             <input type="text" class="form-control" placeholder="Nhập tên..." v-model="searchInput">
         </div>
-        <list-user :url="url" :users="users" :pagination="pagination" :permissions="permissions" :searchUsers="searchResult" :searchInput="searchInput" :isSearching="isSearching"></list-user>
+        <list-user @changeBan="changeBan" :url="url" :users="users" :pagination="pagination" :permissions="permissions" :searchUsers="searchResult" :searchInput="searchInput" :isSearching="isSearching"></list-user>
         <pagination :pagination="pagination" :offset="offset" v-if="pagination.per_page < pagination.total && searchInput == ''" @page="changePage"></pagination>
     </div>
 </template>
@@ -69,6 +69,7 @@
                 this.getUsers(this.state,page);
             },
             changeState:function (state) {
+                this.searchInput = '';
                 this.state = state;
                 this.getUsers(state,1)
             },
@@ -89,6 +90,17 @@
                     this.searchResult = [];
                     this.isSearching = false
                 })
+            },
+            changeBan:function (data) {
+                var tmp = this;
+                if(data.search){
+                    tmp.searchResult[data.index].banned = data.ban;
+                    tmp.users.forEach(function (user,index) {
+                       (user.id == data.user.id) ? (tmp.users[index].banned = data.ban) : (null)
+                    });
+                    return;
+                }
+                tmp.users[data.index].banned = data.ban
             }
         },
         components:{
