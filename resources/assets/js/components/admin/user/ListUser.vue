@@ -34,7 +34,7 @@
                     <td>{{ `${user.f_name} ${user.l_name}` }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ date_format(user.created_at) }}</td>
-                    <td @click="changeBan(user,index)" :class="click">{{ getState(user.banned) }}</td>
+                    <td @click="changeBan(user,index)" class="click"><div :class="`text-${(user.banned == 'F') ? 'success' : 'danger'}`"><b>{{ getState(user.banned) }}</b></div></td>
                     <td class="text-center">
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <a :href="`${url}/${user.id}`" class="btn btn-sm btn-success">Xem <i class="ti-eye"></i></a>
