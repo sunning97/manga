@@ -60,7 +60,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($name,$id)
     {
         if(!$this->checkPermission('read-users'))
             return $this->returnError([
@@ -76,9 +76,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($name,$id)
     {
-        if($this->checkPermission('update-users'))
+        if(!$this->checkPermission('update-users'))
             return $this->returnError([
                 'mess' => 'Bạn không có quyền cập nhật người dùng này'
             ]);

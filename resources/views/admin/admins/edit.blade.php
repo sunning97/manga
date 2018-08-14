@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="col-6">
                         <h4 class="text-left"><b>Vai trò hiện tại</b></h4>
-                        <h5>{{ $admin->role()->first()->name }}</h5>
+                        <h4><b class="text-@random">{{ $admin->role()->first()->name }}</b></h4>
                     </div>
                     <div class="col-6">
                         <form action="{{ route('admins.update',$admin->id) }}" method="post">

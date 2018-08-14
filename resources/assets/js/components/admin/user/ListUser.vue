@@ -21,8 +21,8 @@
                     <td @click="changeBan(user,index)" class="click"><div :class="`text-${(user.banned == 'F') ? 'success' : 'danger'}`"><b>{{ getState(user.banned) }}</b></div></td>
                     <td class="text-center">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <a :href="`${url}/${user.id}`" class="btn btn-sm btn-success">Xem <i class="ti-eye"></i></a>
-                            <a :href="`${url}/${user.id}/edit`" class="btn btn-sm btn-primary" v-if="checkPermission('update-users')">Cập nhật <i class="ti-pencil"></i></a>
+                            <a :href="`${url}/${getSlug(`${user.f_name} ${user.l_name}`)}.${user.id}`" class="btn btn-sm btn-success">Xem <i class="ti-eye"></i></a>
+                            <a :href="`${url}/cap-nhat/${getSlug(`${user.f_name} ${user.l_name}`)}.${user.id}`" class="btn btn-sm btn-primary" v-if="checkPermission('update-users')">Cập nhật <i class="ti-pencil"></i></a>
                             <button type="button" class="btn btn-sm btn-danger" v-if="checkPermission('delete-users')" @click="showDelete(user,index)">Xóa <i class="ti-trash"></i></button>
                         </div>
                     </td>
@@ -37,8 +37,8 @@
                     <td @click="changeBan(user,index)" class="click"><div :class="`text-${(user.banned == 'F') ? 'success' : 'danger'}`"><b>{{ getState(user.banned) }}</b></div></td>
                     <td class="text-center">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <a :href="`${url}/${user.id}`" class="btn btn-sm btn-success">Xem <i class="ti-eye"></i></a>
-                            <a :href="`${url}/${user.id}/edit`" class="btn btn-sm btn-primary" v-if="checkPermission('update-users')">Cập nhật <i class="ti-pencil"></i></a>
+                            <a :href="`${url}/${getSlug(`${user.f_name} ${user.l_name}`)}.${user.id}`" class="btn btn-sm btn-success">Xem <i class="ti-eye"></i></a>
+                            <a :href="`${url}/cap-nhat/${getSlug(`${user.f_name} ${user.l_name}`)}.${user.id}`" class="btn btn-sm btn-primary" v-if="checkPermission('update-users')">Cập nhật <i class="ti-pencil"></i></a>
                             <button type="button" class="btn btn-sm btn-danger" v-if="checkPermission('delete-users')">Xóa <i class="ti-trash"></i></button>
                         </div>
                     </td>
@@ -178,6 +178,9 @@
                 }, function(){
 
                 });
+            },
+            getSlug:function (str) {
+                return str_slug(str);
             }
         }
 

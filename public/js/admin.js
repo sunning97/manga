@@ -654,6 +654,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     swal("Thành công", admin.banned == 'T' ? "Đã bỏ cấm tài khoản" : "Đã cấm tài khoản", "success");
                 }).catch(function (e) {});
             });
+        },
+        getSlug: function getSlug(str) {
+            return str_slug(str);
         }
     }
 
@@ -722,7 +725,16 @@ var render = function() {
                               "a",
                               {
                                 staticClass: "btn btn-sm btn-success",
-                                attrs: { href: _vm.url + "/" + admin.id }
+                                attrs: {
+                                  href:
+                                    _vm.url +
+                                    "/" +
+                                    _vm.getSlug(
+                                      admin.f_name + " " + admin.l_name
+                                    ) +
+                                    "." +
+                                    admin.id
+                                }
                               },
                               [
                                 _vm._v("Xem "),
@@ -737,7 +749,14 @@ var render = function() {
                               {
                                 staticClass: "btn btn-sm btn-primary",
                                 attrs: {
-                                  href: _vm.url + "/" + admin.id + "/edit"
+                                  href:
+                                    _vm.url +
+                                    "/cap-nhat/" +
+                                    _vm.getSlug(
+                                      admin.f_name + " " + admin.l_name
+                                    ) +
+                                    "." +
+                                    admin.id
                                 }
                               },
                               [
@@ -817,7 +836,16 @@ var render = function() {
                               "a",
                               {
                                 staticClass: "btn btn-sm btn-success",
-                                attrs: { href: _vm.url + "/" + admin.id }
+                                attrs: {
+                                  href:
+                                    _vm.url +
+                                    "/" +
+                                    _vm.getSlug(
+                                      admin.f_name + " " + admin.l_name
+                                    ) +
+                                    "." +
+                                    admin.id
+                                }
                               },
                               [
                                 _vm._v("Xem "),

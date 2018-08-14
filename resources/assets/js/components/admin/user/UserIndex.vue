@@ -1,8 +1,8 @@
 <template>
     <div>
         <ul class="nav customtab2 nav-tabs" role="tablist">
-            <li role="presentation" class="nav-item" @click="changeState('ACTIVE')"><a href="#home6" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs">Thành viên đã xác thực</span></a></li>
-            <li role="presentation" class="nav-item" @click="changeState('INACTIVE')"><a href="#profile6" class="nav-link" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Thành viên chưa xác thực</span></a></li>
+            <li role="presentation" class="nav-item" @click="changeState('ACTIVE')"><a href="#home6" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs">Người dùng đã xác thực</span></a></li>
+            <li role="presentation" class="nav-item" @click="changeState('INACTIVE')"><a href="#profile6" class="nav-link" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Người dùng chưa xác thực</span></a></li>
         </ul>
         <div class="col-md-12 mt-5 mb-5">
             <input type="text" class="form-control" placeholder="Nhập tên..." v-model="searchInput">

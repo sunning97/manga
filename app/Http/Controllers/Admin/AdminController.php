@@ -111,7 +111,7 @@ class AdminController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($name,$id)
     {
         if (!$this->checkPermission('read-admins'))
             return $this->returnError(['mess' => 'Bạn không có quyền xem quản trị viên']);
@@ -128,7 +128,7 @@ class AdminController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($name,$id)
     {
         if (!$this->checkPermission('update-admins'))
             return $this->returnError(['mess' => 'Bạn không có quyền cập nhật quản trị viên']);

@@ -21,8 +21,8 @@
                         <td class="click" @click="changeBan(admin,index)"><b :class="`text-${(admin.banned == 'T') ? 'danger' : 'success'}`">{{ getState(admin.banned) }}</b></td>
                         <td class="text-center">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a :href="url+'/'+admin.id" class="btn btn-sm btn-success" v-if="checkPermission('read-admins')">Xem <i class="ti-eye"></i></a>
-                                <a :href="url+'/'+admin.id+'/edit'" class="btn btn-sm btn-primary" v-if="checkPermission('update-admins')">Vai trò <i class="ti-pencil"></i></a>
+                                <a :href="url+'/'+getSlug(`${admin.f_name} ${admin.l_name}`) + '.' + admin.id" class="btn btn-sm btn-success" v-if="checkPermission('read-admins')">Xem <i class="ti-eye"></i></a>
+                                <a :href="url+'/cap-nhat/'+getSlug(`${admin.f_name} ${admin.l_name}`) + '.' + admin.id" class="btn btn-sm btn-primary" v-if="checkPermission('update-admins')">Vai trò <i class="ti-pencil"></i></a>
                                 <button type="button" class="btn btn-sm btn-danger" v-if="checkPermission('delete-admins')">Xóa <i class="ti-trash"></i></button>
                             </div>
                         </td>
@@ -37,7 +37,7 @@
                         <td class="click" @click="changeBan(admin,index)"><b :class="`text-${(admin.banned == 'T') ? 'danger' : 'success'}`">{{ getState(admin.banned) }}</b></td>
                         <td class="text-center">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a :href="url+'/'+admin.id" class="btn btn-sm btn-success" v-if="checkPermission('read-admins')">Xem <i class="ti-eye"></i></a>
+                                <a :href="url+'/'+getSlug(`${admin.f_name} ${admin.l_name}`)+'.'+admin.id" class="btn btn-sm btn-success" v-if="checkPermission('read-admins')">Xem <i class="ti-eye"></i></a>
                                 <a :href="url+'/'+admin.id+'/edit'" class="btn btn-sm btn-primary" v-if="checkPermission('update-admins')">Vai trò <i class="ti-pencil"></i></a>
                                 <button type="button" class="btn btn-sm btn-danger" v-if="checkPermission('delete-admins')">Xóa <i class="ti-trash"></i></button>
                             </div>
@@ -168,6 +168,9 @@
                         swal("Thành công", (admin.banned == 'T')? "Đã bỏ cấm tài khoản" : "Đã cấm tài khoản", "success");
                     }).catch(e =>{});
                 });
+            },
+            getSlug:function (str) {
+                return str_slug(str);
             }
         },
 

@@ -904,6 +904,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 confirmButtonText: "Xóa",
                 closeOnConfirm: true
             }, function () {});
+        },
+        getSlug: function getSlug(str) {
+            return str_slug(str);
         }
     }
 
@@ -971,7 +974,14 @@ var render = function() {
                           "a",
                           {
                             staticClass: "btn btn-sm btn-success",
-                            attrs: { href: _vm.url + "/" + user.id }
+                            attrs: {
+                              href:
+                                _vm.url +
+                                "/" +
+                                _vm.getSlug(user.f_name + " " + user.l_name) +
+                                "." +
+                                user.id
+                            }
                           },
                           [_vm._v("Xem "), _c("i", { staticClass: "ti-eye" })]
                         ),
@@ -982,7 +992,14 @@ var render = function() {
                               {
                                 staticClass: "btn btn-sm btn-primary",
                                 attrs: {
-                                  href: _vm.url + "/" + user.id + "/edit"
+                                  href:
+                                    _vm.url +
+                                    "/cap-nhat/" +
+                                    _vm.getSlug(
+                                      user.f_name + " " + user.l_name
+                                    ) +
+                                    "." +
+                                    user.id
                                 }
                               },
                               [
@@ -1066,7 +1083,14 @@ var render = function() {
                           "a",
                           {
                             staticClass: "btn btn-sm btn-success",
-                            attrs: { href: _vm.url + "/" + user.id }
+                            attrs: {
+                              href:
+                                _vm.url +
+                                "/" +
+                                _vm.getSlug(user.f_name + " " + user.l_name) +
+                                "." +
+                                user.id
+                            }
                           },
                           [_vm._v("Xem "), _c("i", { staticClass: "ti-eye" })]
                         ),
@@ -1077,7 +1101,14 @@ var render = function() {
                               {
                                 staticClass: "btn btn-sm btn-primary",
                                 attrs: {
-                                  href: _vm.url + "/" + user.id + "/edit"
+                                  href:
+                                    _vm.url +
+                                    "/cap-nhat/" +
+                                    _vm.getSlug(
+                                      user.f_name + " " + user.l_name
+                                    ) +
+                                    "." +
+                                    user.id
                                 }
                               },
                               [
@@ -1291,7 +1322,7 @@ var staticRenderFns = [
           _c("i", { staticClass: "ti-home" })
         ]),
         _c("span", { staticClass: "hidden-xs" }, [
-          _vm._v("Thành viên đã xác thực")
+          _vm._v("Người dùng đã xác thực")
         ])
       ]
     )
@@ -1318,7 +1349,7 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("span", { staticClass: "hidden-xs" }, [
-          _vm._v("Thành viên chưa xác thực")
+          _vm._v("Người dùng chưa xác thực")
         ])
       ]
     )

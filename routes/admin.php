@@ -12,14 +12,14 @@ use \Illuminate\Support\Facades\Auth;
 | contains the "admin" middleware group. Now create something great!
 |
 */
-Route::get('/login','Admin\LoginController@showLoginForm')->name('admin.login');
-Route::post('/login','Admin\LoginController@login')->name('admin.login.submit');
-Route::get('/logout','Admin\LoginController@logout')->name('admin.logout');
+Route::get('login','Admin\LoginController@showLoginForm')->name('admin.login');
+Route::post('login','Admin\LoginController@login')->name('admin.login.submit');
+Route::get('logout','Admin\LoginController@logout')->name('admin.logout');
 Route::get('activation/{token}', 'Admin\ActivationController@activateUser')->name('admin.activate');
 
-Route::post('/password/email','Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
-Route::post('/password/reset','Admin\ResetPasswordController@reset')->name('admin.password.reset');
-Route::get('/password/reset/{token}','Admin\ResetPasswordController@showResetForm')->name('admin.password.reset.request');
+Route::post('password/email','Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+Route::post('password/reset','Admin\ResetPasswordController@reset')->name('admin.password.reset');
+Route::get('password/reset/{token}','Admin\ResetPasswordController@showResetForm')->name('admin.password.reset.request');
 
 Route::middleware('login')->group(function (){
     View::composer(['*'],function ($view){
@@ -28,28 +28,34 @@ Route::middleware('login')->group(function (){
             $view->with('all_admin',$admins);
         }
     });
-    Route::get('/','Admin\DashboardController@index')->name('admin.dashboard');
-    Route::get('/admins/profile','Admin\AdminController@profile')->name('admin.profile');
-    Route::resource('/admins','Admin\AdminController');
-    Route::post('/admins/update-avatar','Admin\AdminController@updateAvatar')->name('admin.update-avatar');
-    Route::post('/admins/update-password','Admin\AdminController@updatePassword')->name('admin.update-password');
-    Route::post('/admins/update-profile','Admin\AdminController@updateProfile')->name('admin.profile.update');
 
-    Route::resource('users','Admin\UserController');
-    Route::resource('/permissions','Admin\PermissionController');
-    Route::resource('/roles','Admin\RoleController');
-    Route::resource('/mangas','Admin\MangaController');
-    Route::resource('/genres','Admin\GenreController');
-    Route::resource('/authors','Admin\AuthorController');
-    Route::resource('/chaps','Admin\ChapController');
-    Route::resource('/translate-teams','Admin\TranslateTeamController');
-    Route::get('/mangas/create-chap/{id}','Admin\MangaController@createChap')->name('admin.chap.create');
-    Route::post('/mangas/store-chap/{id}','Admin\MangaController@storeChap')->name('admin.chap.store');
-    Route::post('/roles/update-permission/{id}','Admin\RoleController@update_permission')->name('admin.update.role.permission');
-    Route::post('/chaps-images/{id}','Admin\ChapController@image')->name('chaps.image');
-    Route::get('/message','Admin\MessageController@index')->name('admin.messages');
-    Route::get('/message/{id}','Admin\MessageController@chatWith')->name('admin.messages.with');
-    Route::post('/message/send','Admin\MessageController@send');
+    Route::get('/','Admin\DashboardController@index')->name('admin.dashboard');
+    Route::get('admins/profile','Admin\AdminController@profile')->name('admin.profile');
+    Route::resource('admins','Admin\AdminController')->except(['show','edit']);
+    Route::get('admins/{name}.{id}','Admin\AdminController@show')->name('admins.show');
+    Route::get('admins/cap-nhat/{name}.{id}','Admin\AdminController@edit')->name('admins.edit');
+    Route::post('admins/update-avatar','Admin\AdminController@updateAvatar')->name('admin.update-avatar');
+    Route::post('admins/update-password','Admin\AdminController@updatePassword')->name('admin.update-password');
+    Route::post('admins/update-profile','Admin\AdminController@updateProfile')->name('admin.profile.update');
+
+
+    Route::resource('users','Admin\UserController')->except(['show','edit']);
+    Route::get('users/{name}.{id}','Admin\UserController@show')->name('users.show');
+    Route::get('users/cap-nhat/{name}.{id}','Admin\UserController@edit')->name('users.edit');
+    Route::resource('permissions','Admin\PermissionController');
+    Route::resource('roles','Admin\RoleController');
+    Route::resource('mangas','Admin\MangaController');
+    Route::resource('genres','Admin\GenreController');
+    Route::resource('authors','Admin\AuthorController');
+    Route::resource('chaps','Admin\ChapController');
+    Route::resource('translate-teams','Admin\TranslateTeamController');
+    Route::get('mangas/create-chap/{id}','Admin\MangaController@createChap')->name('admin.chap.create');
+    Route::post('mangas/store-chap/{id}','Admin\MangaController@storeChap')->name('admin.chap.store');
+    Route::post('roles/update-permission/{id}','Admin\RoleController@update_permission')->name('admin.update.role.permission');
+    Route::post('chaps-images/{id}','Admin\ChapController@image')->name('chaps.image');
+    Route::get('message','Admin\MessageController@index')->name('admin.messages');
+    Route::get('message/{id}','Admin\MessageController@chatWith')->name('admin.messages.with');
+    Route::post('message/send','Admin\MessageController@send');
 
     // Axios
 
