@@ -57,6 +57,11 @@
             url:{
                 type:String,
                 default:''
+            },
+            manga:{
+                type:Object,
+                default:{},
+                require:true
             }
         },
         data(){
@@ -105,6 +110,15 @@
 
                 tmp.isPassTime = false;
                 setTimeout(function(){ tmp.isPassTime = true; tmp.isSpam = false }, 5000);
+                axios.post('/axios/save-comment',{
+                    parent_id:tmp.comment.comment_id,
+                    comment:tmp.content,
+                    manga_id:tmp.manga.id
+                }).then(response=>{
+                    tmp.comments.push(response.data)
+                }).catch(error=>{
+
+                });
                 tmp.content = '';
             }
         },

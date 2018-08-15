@@ -21,6 +21,7 @@ class AxiosController extends Controller
             ->where('manga_id','=',$manga->id)
             ->whereNull('parent_comment')
             ->select(['comments.id as comment_id','comments.content','comments.parent_comment','comments.user_id','comments.created_at','users.id','users.f_name','users.l_name','users.avatar'])
+            ->orderBy('created_at','DECS')
             ->paginate(5);
 
         return response()->json($comments,200);
@@ -57,6 +58,10 @@ class AxiosController extends Controller
         $comment->manga_id = $manga->id;
         $comment->content = $request->comment;
         $comment->created_at = Carbon::now()->toDateTimeString();
+        if($request->parent_id){
+            $comment->parent_comment = $request->parent_id;
+        }
+
         $comment->save();
 
         $comment->avatar = Auth::guard('site')->user()->avatar;

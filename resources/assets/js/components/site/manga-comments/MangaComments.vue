@@ -1,6 +1,6 @@
 <template>
     <div class="post__comments bg-dark" style="background-color: rgba(212, 212, 212, 0.24);">
-        <list-comment :comments="comments" :url="url" :totalComments="totalComments" :isPage="isPage" class="border border-secondary"></list-comment>
+        <list-comment :comments="comments" :url="url" :totalComments="totalComments" :isPage="isPage" class="border border-secondary" :manga="manga" @refreshComment="refreshComment"></list-comment>
         <pagination :pagination="pagination" :offset="offset" @click.native="getComment(pagination.current_page)"></pagination>
         <write-comment :user="user" @postComment="postComment"></write-comment>
     </div>
@@ -18,7 +18,7 @@
             },
             url:{
                 type:String,
-                default:''
+                default:'',
             },
             user:{
                 type:Object,
@@ -70,6 +70,10 @@
                 }).catch(error=>{
 
                 });
+            },
+            refreshComment:function () {
+                this.getComment(1);
+                this.getTotalComments();
             }
         },
         components:{
