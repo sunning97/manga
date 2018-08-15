@@ -29,4 +29,5 @@ Route::prefix('axios')->group(function (){
     Route::post('get-comment','Site\AxiosController@getComments');
     Route::post('get-child-comment','Site\AxiosController@getChildComments');
     Route::post('get-total-comments','Site\AxiosController@getTotalComments');
+    Route::post('save-comment','Site\AxiosController@saveComment');
 });

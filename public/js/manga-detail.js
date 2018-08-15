@@ -286,7 +286,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             comments: [],
             pagination: {},
             offset: 5,
-            totalComments: 0
+            totalComments: 0,
+            isPage: false
         };
     },
     mounted: function mounted() {
@@ -298,6 +299,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getComment: function getComment(page) {
             var _this = this;
 
+            this.isPage = true;
             this.comments = [];
             this.pagination = {};
             axios.post('/axios/get-comment?page=' + page, {
@@ -305,6 +307,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 _this.comments = response.data.data;
                 _this.pagination = response.data;
+                _this.isPage = false;
             }).catch(function (error) {
                 console.log(error.response.data.message);
             });
@@ -317,6 +320,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 _this2.totalComments = response.data;
             });
+        },
+        postComment: function postComment(comment) {
+            var _this3 = this;
+
+            axios.post('/axios/save-comment', {
+                manga_id: this.manga.id,
+                comment: comment
+            }).then(function (response) {
+                _this3.comments.unshift(response.data);
+                _this3.totalComments++;
+            }).catch(function (error) {});
         }
     },
     components: {
@@ -394,6 +408,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -409,6 +424,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         totalComments: {
             type: Number,
             default: 0
+        },
+        isPage: {
+            type: Boolean,
+            default: false
         }
     },
     mounted: function mounted() {
@@ -522,6 +541,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -538,14 +563,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             comments: [],
-            isReply: false
+            isReply: false,
+            content: '',
+            isEmpty: false,
+            isPassTime: true,
+            isSpam: false
         };
     },
     mounted: function mounted() {
         this.childComments();
     },
 
-    computed: {},
     methods: {
         childComments: function childComments() {
             var _this = this;
@@ -563,6 +591,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         reply: function reply() {
             this.isReply = !this.isReply;
+        },
+        postComment: function postComment() {
+            var tmp = this;
+            event.preventDefault();
+
+            if (!tmp.isPassTime) {
+                tmp.isSpam = true;
+                return;
+            }
+
+            if (tmp.content == '') {
+                tmp.isEmpty = true;
+                return false;
+            }
+
+            tmp.isPassTime = false;
+            setTimeout(function () {
+                tmp.isPassTime = true;tmp.isSpam = false;
+            }, 5000);
+            tmp.content = '';
         }
     },
     components: {
@@ -805,7 +853,77 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm.isReply ? _c("div", { staticClass: "row" }, [_vm._m(0)]) : _vm._e()
+        _vm.isReply
+          ? _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-11 col-md-push-1" }, [
+                _c("div", { staticClass: "post__comments-respond" }, [
+                  _c("form", { attrs: { action: "", method: "post" } }, [
+                    _c("p", { staticClass: "post__comments-respond-comment" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.content,
+                            expression: "content"
+                          }
+                        ],
+                        attrs: {
+                          id: "comment",
+                          name: "comment",
+                          cols: "30",
+                          "aria-required": "true"
+                        },
+                        domProps: { value: _vm.content },
+                        on: {
+                          focus: function($event) {
+                            _vm.isEmpty = false
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.content = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.isEmpty
+                        ? _c("span", { staticClass: "text-danger" }, [
+                            _c("strong", [
+                              _vm._v("Bình luận không được để trống")
+                            ])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isSpam
+                        ? _c("span", { staticClass: "text-danger" }, [
+                            _c("strong", [
+                              _vm._v(
+                                "Để tránh spam vui lòng bình luận lại sau 5 giây"
+                              )
+                            ])
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "post__comments-respond-submit" }, [
+                      _c("input", {
+                        attrs: {
+                          id: "submit",
+                          type: "submit",
+                          name: "submit",
+                          size: "30",
+                          value: "Đăng"
+                        },
+                        on: { click: _vm.postComment }
+                      })
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("hr"),
@@ -821,41 +939,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-11 col-md-push-1" }, [
-      _c("div", { staticClass: "post__comments-respond" }, [
-        _c("form", { attrs: { action: "", method: "post" } }, [
-          _c("p", { staticClass: "post__comments-respond-comment" }, [
-            _c("textarea", {
-              attrs: {
-                id: "comment",
-                name: "comment",
-                cols: "30",
-                "aria-required": "true"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "post__comments-respond-submit" }, [
-            _c("input", {
-              attrs: {
-                id: "submit",
-                type: "submit",
-                name: "submit",
-                size: "30",
-                value: "Đăng"
-              }
-            })
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -875,13 +959,17 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h5", [_vm._v(_vm._s(_vm.totalComments) + " Bình luận")]),
+    _vm.comments.length > 0
+      ? _c("h5", [_vm._v(_vm._s(_vm.totalComments) + " Bình luận")])
+      : _c("h5", { staticClass: "text-center" }, [
+          _c("b", [_vm._v("Không có bình luận nào")])
+        ]),
     _vm._v(" "),
     _c(
       "ul",
       { staticClass: "post__comments-list", attrs: { id: "commnent" } },
       [
-        _vm.comments.length == 0
+        _vm.comments.length == 0 && _vm.isPage
           ? _c("div", { staticClass: "text-center" }, [_vm._v("Đang tải...")])
           : _vm._e(),
         _vm._v(" "),
@@ -1231,6 +1319,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -1239,9 +1333,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             default: null
         }
     },
+    data: function data() {
+        return {
+            comment: '',
+            isCommentEmpty: false,
+            isPassTime: true,
+            isSpam: false
+        };
+    },
     mounted: function mounted() {},
 
-    methods: {}
+    methods: {
+        postComment: function postComment() {
+            var tmp = this;
+            event.preventDefault();
+            if (!this.isPassTime) {
+                this.isSpam = true;
+                return;
+            }
+
+            if (this.comment == '') {
+                this.isCommentEmpty = true;
+                return;
+            }
+
+            this.isPassTime = false;
+            this.$emit('postComment', this.comment);
+            setTimeout(function () {
+                tmp.isPassTime = true;tmp.isSpam = false;
+            }, 5000);
+            this.comment = '';
+        }
+    }
 });
 
 /***/ }),
@@ -1258,55 +1381,81 @@ var render = function() {
       _c("h5", [_vm._v("Viết bình luận của bạn")]),
       _vm._v(" "),
       _vm.user
-        ? _c(
-            "form",
-            {
-              attrs: {
-                action: "http://feelman.info/html/leopold/post.html",
-                method: "post"
-              }
-            },
-            [_vm._m(0), _vm._v(" "), _vm._m(1)]
-          )
+        ? _c("form", { attrs: { action: "", method: "post" } }, [
+            _c("p", { staticClass: "post__comments-respond-comment" }, [
+              _c("label", { attrs: { for: "comment" } }, [_vm._v("Comment")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.comment,
+                    expression: "comment"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  id: "comment",
+                  name: "comment",
+                  cols: "45",
+                  "aria-required": "true"
+                },
+                domProps: { value: _vm.comment },
+                on: {
+                  focus: function($event) {
+                    _vm.isCommentEmpty = false
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.comment = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.isCommentEmpty
+                ? _c(
+                    "span",
+                    { staticClass: "text-danger", attrs: { role: "alert" } },
+                    [_c("strong", [_vm._v("Bình luận không được để trống")])]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isSpam
+                ? _c(
+                    "span",
+                    { staticClass: "text-danger", attrs: { role: "alert" } },
+                    [
+                      _c("strong", [
+                        _vm._v(
+                          "Để tránh spam vui lòng bình luận lại sau 5 giây"
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "post__comments-respond-submit" }, [
+              _c("input", {
+                attrs: {
+                  id: "submit",
+                  type: "submit",
+                  name: "submit",
+                  size: "30",
+                  value: "Đăng"
+                },
+                on: { click: _vm.postComment }
+              })
+            ])
+          ])
         : _c("div", [_c("b", [_vm._v("Vui lòng đăng nhập để viết bình luận")])])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "post__comments-respond-comment" }, [
-      _c("label", { attrs: { for: "comment" } }, [_vm._v("Comment")]),
-      _vm._v(" "),
-      _c("textarea", {
-        attrs: {
-          id: "comment",
-          name: "comment",
-          cols: "45",
-          "aria-required": "true"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "post__comments-respond-submit" }, [
-      _c("input", {
-        attrs: {
-          id: "submit",
-          type: "submit",
-          name: "submit",
-          size: "30",
-          value: "Đăng"
-        }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -1337,7 +1486,8 @@ var render = function() {
         attrs: {
           comments: _vm.comments,
           url: _vm.url,
-          totalComments: _vm.totalComments
+          totalComments: _vm.totalComments,
+          isPage: _vm.isPage
         }
       }),
       _vm._v(" "),
@@ -1350,7 +1500,10 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("write-comment", { attrs: { user: _vm.user } })
+      _c("write-comment", {
+        attrs: { user: _vm.user },
+        on: { postComment: _vm.postComment }
+      })
     ],
     1
   )

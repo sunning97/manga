@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Site;
 
 use App\Models\Comment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Manga;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AxiosController extends Controller
@@ -44,5 +46,23 @@ class AxiosController extends Controller
         }
         return response('no child comment',404);
 
+    }
+
+    public function saveComment(Request$request)
+    {
+        $manga = Manga::findOrFail($request->manga_id);
+
+        $comment = new Comment();
+        $comment->user_id = Auth::guard('site')->user()->id;
+        $comment->manga_id = $manga->id;
+        $comment->content = $request->comment;
+        $comment->created_at = Carbon::now()->toDateTimeString();
+        $comment->save();
+
+        $comment->avatar = Auth::guard('site')->user()->avatar;
+        $comment->f_name = Auth::guard('site')->user()->f_name;
+        $comment->l_name = Auth::guard('site')->user()->l_name;
+
+        return response()->json($comment,200);
     }
 }

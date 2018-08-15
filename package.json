@@ -23,6 +23,6 @@
         "echo": "^0.1.9",
         "laravel": "0.0.1",
         "laravel-echo": "^1.4.0",
-        "pusher-js": "^4.2.2"
+        "pusher-js": "^4.3.0"
     }
 }

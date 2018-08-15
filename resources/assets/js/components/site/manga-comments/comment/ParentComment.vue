@@ -25,10 +25,16 @@
                     <div class="post__comments-respond">
                         <form action="" method="post">
                             <p class="post__comments-respond-comment">
-                                <textarea id="comment" name="comment" cols="30" aria-required="true"></textarea>
+                                <textarea id="comment" name="comment" cols="30" aria-required="true" v-model="content" @focus="isEmpty = false"></textarea>
+                                <span class="text-danger" v-if="isEmpty">
+                                    <strong>Bình luận không được để trống</strong>
+                                </span>
+                                <span class="text-danger" v-if="isSpam">
+                                    <strong>Để tránh spam vui lòng bình luận lại sau 5 giây</strong>
+                                </span>
                             </p>
                             <p class="post__comments-respond-submit">
-                                <input id="submit" type="submit" name="submit" size="30" value="Đăng">
+                                <input id="submit" type="submit" name="submit" size="30" value="Đăng" @click="postComment">
                             </p>
                         </form>
                     </div>
@@ -56,14 +62,15 @@
         data(){
           return{
               comments:[],
-              isReply:false
+              isReply:false,
+              content:'',
+              isEmpty:false,
+              isPassTime:true,
+              isSpam:false
           }
         },
         mounted(){
             this.childComments();
-        },
-        computed:{
-
         },
         methods:{
             childComments:function () {
@@ -80,6 +87,25 @@
             },
             reply:function () {
                 this.isReply = !this.isReply;
+            },
+            postComment:function () {
+                var tmp = this;
+                event.preventDefault();
+
+                if(!tmp.isPassTime)
+                {
+                    tmp.isSpam = true;
+                    return;
+                }
+
+                if(tmp.content == '') {
+                    tmp.isEmpty = true;
+                    return false;
+                }
+
+                tmp.isPassTime = false;
+                setTimeout(function(){ tmp.isPassTime = true; tmp.isSpam = false }, 5000);
+                tmp.content = '';
             }
         },
         components:{

@@ -90,10 +90,10 @@
                                         @if($editors->all())
                                             @for($i = 0;$i< count($editors);$i++)
                                                 @if($i == (count($editors)-1))
-                                                    <a href="{{ route('admins.show',$editors[$i]->id) }}"><b>{{ $editors[$i]->f_name.' '.$editors[$i]->l_name }}</b></a>
+                                                    <a href="{{ route('admins.show',[$editors[$i]->getNameSlug($editors[$i]->id),$editors[$i]->id]) }}"><b>{{ $editors[$i]->f_name.' '.$editors[$i]->l_name }}</b></a>
                                                     @break
                                                 @endif
-                                                <a href="{{ route('admins.show',$editors[$i]->id) }}"><b>{{ $editors[$i]->f_name.' '.$editors[$i]->l_name }}</b></a><b> , </b>
+                                                <a href="{{ route('admins.show',[$editors[$i]->getNameSlug($editors[$i]->id),$editors[$i]->id]) }}"><b>{{ $editors[$i]->f_name.' '.$editors[$i]->l_name }}</b></a><b> , </b>
                                             @endfor
                                         @else
                                             <span>Không có ai</span>

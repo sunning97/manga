@@ -40,4 +40,9 @@ class Admin extends Authenticatable
     {
         return Admin::findOrFail($id)->f_name.' '.Admin::findOrFail($id)->l_name;
     }
+
+    public function getNameSlug($id)
+    {
+        return str_slug(Admin::findOrFail($id)->f_name. " " .Admin::findOrFail($id)->l_name);
+    }
 }
