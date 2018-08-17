@@ -179,6 +179,7 @@ class MangaController extends Controller
         $poster = Admin::find($manga->post_by);
         $editors = $manga->admins;
         $genres = $manga->genres;
+        
         return view('admin.mangas.show')->withManga($manga)->withChaps($chaps)->withPoster($poster)->withEditors($editors);
     }
 
