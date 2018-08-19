@@ -24,7 +24,7 @@ class AdminRoleTableSeeder extends Seeder
         DB::table('admin_role')->insert([
             ['admin_id'=>'51','role_id'=>'1'],
             ['admin_id'=>'52','role_id'=>'2'],
-            ['admin_id'=>'33','role_id'=>'3'],
+            ['admin_id'=>'53','role_id'=>'3'],
         ]);
     }
 }
