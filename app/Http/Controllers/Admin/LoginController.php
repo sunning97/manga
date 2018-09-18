@@ -38,10 +38,10 @@ class LoginController extends Controller
             'email'=>'required|email',
             'password' => 'required|min:6'
         ],[
-            'email.required' => 'Email không được để trống',
-            'email.email' => 'Email không đúng định dạng',
-            'password.required' => 'Password không được để trống',
-            'password.min'=>'Password không được ngắn hơn 6 kí tự'
+            'email.required' => 'Email không được để trống!',
+            'email.email' => 'Email không đúng định dạng!',
+            'password.required' => 'Password không được để trống!',
+            'password.min'=>'Password không được ngắn hơn 6 kí tự!'
         ]);
 
         if($this->checkEmail($request->email))
